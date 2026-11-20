@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#26463B" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Pusula" />
   <title>Pusula — Kişisel Yaşam, Gündem ve Üretkenlik Merkezi</title>
   <meta name="description" content="Günlük planlama, canlı piyasa ve haber akışı, bütçe-abonelik takibi, odak müziği ve Excel/PDF ofis araçları tek sade merkezde." />
   <meta property="og:title" content="Pusula — Kişisel Yaşam, Gündem ve Üretkenlik Merkezi" />
@@ -144,6 +148,8 @@
       body.printing-doc #office-doc-printable { border: none !important; padding: 0 !important; }
     }
   </style>
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="apple-touch-icon" href="./icon-192.png" />
   <script src="./config.js"></script>
 </head>
 <body class="min-h-screen flex flex-col lg:flex-row overflow-x-hidden">
@@ -290,6 +296,13 @@
           <span class="nav-indicator opacity-0 absolute left-0 top-2 bottom-2 w-0.5 bg-forest rounded-r"></span>
           <i data-lucide="file-spreadsheet" class="w-4 h-4 shrink-0"></i>
           <span>Ofis, Excel &amp; PDF</span>
+        </button>
+
+        <button type="button" data-view="mobile" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-muted hover:bg-stonewarm/60 hover:text-ink relative text-left">
+          <span class="nav-indicator opacity-0 absolute left-0 top-2 bottom-2 w-0.5 bg-forest rounded-r"></span>
+          <i data-lucide="smartphone" class="w-4 h-4 shrink-0"></i>
+          <span>Mobil Uygulama</span>
+          <span class="ml-auto text-[10px] px-1.5 py-0.5 rounded bg-forestLight text-forest font-medium">Kur</span>
         </button>
       </nav>
 
@@ -1506,6 +1519,93 @@
         </div>
       </section>
 
+      <!-- ========================================================= -->
+      <!-- VIEW: MOBİL UYGULAMA (ANDROID & IOS KURULUM)              -->
+      <!-- ========================================================= -->
+      <section id="view-mobile" class="view-panel space-y-7">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-4 border-b border-hairline">
+          <div>
+            <p class="text-xs uppercase tracking-widest text-muted mb-1">Her Cihazda Tam Ekran Deneyim</p>
+            <h2 class="font-editorial text-3xl font-normal text-ink">Pusula Mobil Uygulama (Android &amp; iOS)</h2>
+          </div>
+          <span id="pwa-install-status-badge" class="text-xs px-3 py-1.5 rounded-full bg-forestLight text-forest font-medium self-start sm:self-auto">Kuruluma Hazır</span>
+        </div>
+
+        <!-- Editorial Benefits Strip -->
+        <div class="editorial-card p-5 grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-hairline">
+          <div class="pr-4 py-2 sm:py-0">
+            <p class="text-xs text-muted">Kurulum Boyutu</p>
+            <p class="font-editorial text-2xl text-ink mt-0.5">&lt; 2 MB</p>
+            <p class="text-xs text-muted mt-0.5">Telefon hafızasını yormaz, anında açılır</p>
+          </div>
+          <div class="sm:px-6 py-2 sm:py-0">
+            <p class="text-xs text-muted">Uygulama Deneyimi</p>
+            <p class="font-editorial text-2xl text-ink mt-0.5">Tam Ekran</p>
+            <p class="text-xs text-muted mt-0.5">Adres çubuğu olmadan gerçek uygulama görünümü</p>
+          </div>
+          <div class="sm:pl-6 py-2 sm:py-0">
+            <p class="text-xs text-muted">Bulut Eşitleme</p>
+            <p class="font-editorial text-2xl text-forest mt-0.5">Otomatik</p>
+            <p class="text-xs text-muted mt-0.5">Bilgisayardaki tüm not ve görevleriniz telefonda</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <!-- Android Card -->
+          <div class="editorial-card p-6 flex flex-col justify-between space-y-5">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="px-2.5 py-1 rounded-md bg-forestLight text-forest text-xs font-semibold">Android (Chrome / Edge)</span>
+                <i data-lucide="smartphone" class="w-5 h-5 text-forest"></i>
+              </div>
+              <h3 class="font-editorial text-2xl text-ink">Android Telefonlara Tek Tıkla Kur</h3>
+              <p class="text-xs text-muted leading-relaxed">
+                Play Store beklemeden veya "bilinmeyen kaynak" uyarısı almadan Pusula’yı ana ekranınıza gerçek bir Android uygulaması olarak kurabilirsiniz.
+              </p>
+              <ol class="text-xs text-ink space-y-1.5 list-decimal pl-4 pt-1">
+                <li>Aşağıdaki <strong>Android’e Uygulama Olarak Yükle</strong> düğmesine basın.</li>
+                <li>Açılan pencerede <strong>Yükle (Install)</strong> seçeneğini onaylayın.</li>
+                <li>Pusula ikonu 2 saniye içinde telefonunuzun uygulama menüsüne eklenir.</li>
+              </ol>
+            </div>
+            <div class="space-y-2.5 pt-2">
+              <button id="pwa-android-install-btn" type="button" class="w-full py-2.5 rounded-lg bg-forest hover:bg-forest/90 text-paper text-xs font-medium transition flex items-center justify-center gap-2">
+                <i data-lucide="download" class="w-4 h-4"></i> Android’e Uygulama Olarak Yükle
+              </button>
+              <a id="android-apk-download-btn" href="#" target="_blank" rel="noopener noreferrer" class="hidden w-full py-2 rounded-lg border border-forest/40 bg-paper hover:bg-forestLight text-forest text-xs font-medium text-center transition">
+                Doğrudan APK Dosyasını İndir (.apk)
+              </a>
+              <p id="android-manual-hint" class="text-[11px] text-muted text-center">Düğme pencere açmazsa Chrome sağ üst menü (⋮) → <strong>Uygulamayı Yükle</strong> seçebilirsiniz.</p>
+            </div>
+          </div>
+
+          <!-- iOS (iPhone / iPad) Card -->
+          <div class="editorial-card p-6 flex flex-col justify-between space-y-5">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="px-2.5 py-1 rounded-md bg-stonewarm text-ink text-xs font-semibold">iOS (iPhone &amp; iPad Safari)</span>
+                <i data-lucide="tablet-smartphone" class="w-5 h-5 text-ink"></i>
+              </div>
+              <h3 class="font-editorial text-2xl text-ink">iPhone &amp; iPad’e Uygulama Olarak Ekle</h3>
+              <p class="text-xs text-muted leading-relaxed">
+                Apple iOS cihazlarda Safari üzerinden 3 dokunuşla Pusula’yı ana ekranınıza tam ekran uygulama olarak ekleyebilirsiniz.
+              </p>
+              <ol class="text-xs text-ink space-y-2 list-decimal pl-4 pt-1">
+                <li>Bu adresi iPhone’unuzda <strong>Safari</strong> tarayıcısıyla açın.</li>
+                <li>Ekranın alt ortasındaki <strong>Paylaş (kare içinden yukarı ok ⬆️)</strong> simgesine dokunun.</li>
+                <li>Aşağı kaydırıp <strong>Ana Ekrana Ekle (Add to Home Screen)</strong> → <strong>Ekle</strong> deyin.</li>
+              </ol>
+            </div>
+            <div class="space-y-2.5 pt-2">
+              <button id="copy-mobile-link-btn" type="button" class="w-full py-2.5 rounded-lg bg-ink hover:bg-ink/90 text-paper text-xs font-medium transition flex items-center justify-center gap-2">
+                <i data-lucide="copy" class="w-4 h-4"></i> Mobil Kurulum Linkini Kopyala
+              </button>
+              <p class="text-[11px] text-muted text-center">Linki WhatsApp’tan kendinize gönderip telefonda açarak hemen kurabilirsiniz.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
     </div>
   </main>
 
@@ -2225,7 +2325,8 @@
         music: 'Müzik & Odak',
         media: 'TV, Film & Kültür',
         social: 'Sosyal & Şehir',
-        office: 'Ofis, Excel & PDF'
+        office: 'Ofis, Excel & PDF',
+        mobile: 'Mobil Uygulama (Android & iOS)'
       };
 
       function switchView(viewId) {
@@ -3227,7 +3328,12 @@
           grand += t;
           html += `<tr><td>${escapeHtml(r.item)}</td><td>${escapeHtml(r.cat)}</td><td>${r.qty}</td><td>${r.price}</td><td>${t}</td></tr>`;
         });
-        html += `<tr><td colspan="4"><strong>GENEL TOPLAM</strong></td><td><strong>${grand}</strong></td></tr></table></body></html>`;
+        html += `<tr><td colspan="4"><strong>GENEL TOPLAM</strong></td><td><strong>${grand}</strong></td></tr></table><script>
+    if ('serviceWorker' in navigator && location.protocol === 'https:') {
+      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
+    }
+  </script>
+</body></html>`;
         triggerDownload('pusula-tablo.xls', html, 'application/vnd.ms-excel;charset=utf-8;');
         showToast('Excel (.xls) dosyası indirildi.');
       }
@@ -3367,6 +3473,7 @@
           { label: 'Müzik & Odak Stüdyosu', sub: 'Ortam sesleri ve kişisel listeler', view: 'music' },
           { label: 'TV, Film & Kültür', sub: 'İzleme listesi ve akşam önerisi', view: 'media' },
           { label: 'Sosyal & Şehir Hayatı', sub: 'İstanbul kültür-sanat etkinlikleri', view: 'social' },
+          { label: 'Mobil Uygulama (Android & iOS)', sub: 'Telefonunuza uygulama olarak tek tıkla kurun', view: 'mobile' },
           { label: 'Ofis, Excel & PDF Stüdyosu', sub: 'Canlı tablo, Excel (.xls) ve PDF baskı', view: 'office' }
         ];
         const filtered = items.filter(i => !term || i.label.toLowerCase().includes(term) || i.sub.toLowerCase().includes(term));
@@ -4664,6 +4771,47 @@
       updateInflationCalc();
       initWordle(false);
       updateCvPreview();
+
+      // =====================================================
+      // PWA INSTALL (ANDROID 1-CLICK + IOS + OPTIONAL APK)
+      // =====================================================
+      let deferredInstallPrompt = null;
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredInstallPrompt = e;
+        document.getElementById('pwa-install-status-badge').textContent = 'Tek Tıkla Kuruluma Hazır ✓';
+      });
+      window.addEventListener('appinstalled', () => {
+        deferredInstallPrompt = null;
+        document.getElementById('pwa-install-status-badge').textContent = 'Cihazınıza Kuruldu ✓';
+        showToast('Pusula cihazınıza uygulama olarak kuruldu!');
+      });
+
+      document.getElementById('pwa-android-install-btn').addEventListener('click', async () => {
+        if (deferredInstallPrompt) {
+          deferredInstallPrompt.prompt();
+          const { outcome } = await deferredInstallPrompt.userChoice;
+          if (outcome === 'accepted') showToast('Pusula kuruluyor...');
+          deferredInstallPrompt = null;
+        } else {
+          showToast('Chrome sağ üst menüden (⋮) "Uygulamayı Yükle" veya "Ana Ekrana Ekle" seçeneğine dokunun.');
+        }
+      });
+
+      document.getElementById('copy-mobile-link-btn').addEventListener('click', () => {
+        const url = window.location.href.startsWith('http') ? window.location.href : 'https://pusula-web-opal.vercel.app';
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(url).then(() => showToast('Mobil kurulum adresi kopyalandı!'));
+        } else {
+          showToast(url);
+        }
+      });
+
+      if (cfg.ANDROID_APK_URL && cfg.ANDROID_APK_URL.startsWith('http')) {
+        const apkBtn = document.getElementById('android-apk-download-btn');
+        apkBtn.href = cfg.ANDROID_APK_URL;
+        apkBtn.classList.remove('hidden');
+      }
 
       // =====================================================
       // INITIAL RENDER & AUTO-POLLING TIMERS
