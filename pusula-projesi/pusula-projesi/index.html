@@ -3,12 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#26463B" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Pusula" />
   <title>Pusula — Kişisel Yaşam, Gündem ve Üretkenlik Merkezi</title>
   <meta name="description" content="Günlük planlama, canlı piyasa ve haber akışı, bütçe-abonelik takibi, odak müziği ve Excel/PDF ofis araçları tek sade merkezde." />
   <meta property="og:title" content="Pusula — Kişisel Yaşam, Gündem ve Üretkenlik Merkezi" />
   <meta property="og:description" content="Haber, piyasa, günlük plan, odak müziği, bütçe ve Excel/PDF araçlarını tek çatı altında toplayan kişisel çalışma alanınız." />
   <meta property="og:type" content="website" />
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.47.10/dist/umd/supabase.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.15/dist/hls.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet" />
@@ -143,6 +148,8 @@
       body.printing-doc #office-doc-printable { border: none !important; padding: 0 !important; }
     }
   </style>
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="apple-touch-icon" href="./icon-192.png" />
   <script src="./config.js"></script>
 </head>
 <body class="min-h-screen flex flex-col lg:flex-row overflow-x-hidden">
@@ -231,9 +238,29 @@
           <span>Bütçe &amp; Abonelikler</span>
         </button>
 
+        <button type="button" data-view="simulator" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-muted hover:bg-stonewarm/60 hover:text-ink relative text-left">
+          <span class="nav-indicator opacity-0 absolute left-0 top-2 bottom-2 w-0.5 bg-forest rounded-r"></span>
+          <i data-lucide="calculator" class="w-4 h-4 shrink-0"></i>
+          <span>Finansal Simülatör</span>
+          <span class="ml-auto text-[10px] px-1.5 py-0.5 rounded bg-forestLight text-forest font-medium">Pro</span>
+        </button>
+
         <div class="pt-3 pb-1">
           <p class="px-3 pb-1.5 text-[11px] uppercase tracking-wider text-muted font-medium">Kültür ve Dinlenme</p>
         </div>
+
+        <button type="button" data-view="radio" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-muted hover:bg-stonewarm/60 hover:text-ink relative text-left">
+          <span class="nav-indicator opacity-0 absolute left-0 top-2 bottom-2 w-0.5 bg-forest rounded-r"></span>
+          <i data-lucide="radio" class="w-4 h-4 shrink-0"></i>
+          <span>Canlı Radyolar &amp; MP3</span>
+          <span id="sidebar-radio-dot" class="hidden ml-auto w-2 h-2 rounded-full bg-forest live-dot"></span>
+        </button>
+
+        <button type="button" data-view="tv" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-muted hover:bg-stonewarm/60 hover:text-ink relative text-left">
+          <span class="nav-indicator opacity-0 absolute left-0 top-2 bottom-2 w-0.5 bg-forest rounded-r"></span>
+          <i data-lucide="tv" class="w-4 h-4 shrink-0"></i>
+          <span>Canlı TV Kanalları</span>
+        </button>
 
         <button type="button" data-view="music" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-muted hover:bg-stonewarm/60 hover:text-ink relative text-left">
           <span class="nav-indicator opacity-0 absolute left-0 top-2 bottom-2 w-0.5 bg-forest rounded-r"></span>
@@ -254,6 +281,13 @@
           <span>Sosyal &amp; Şehir</span>
         </button>
 
+        <button type="button" data-view="games" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-muted hover:bg-stonewarm/60 hover:text-ink relative text-left">
+          <span class="nav-indicator opacity-0 absolute left-0 top-2 bottom-2 w-0.5 bg-forest rounded-r"></span>
+          <i data-lucide="puzzle" class="w-4 h-4 shrink-0"></i>
+          <span>Zihin Molası &amp; Oyun</span>
+          <span class="ml-auto text-[10px] px-1.5 py-0.5 rounded bg-terracottaLight text-terracotta font-medium">Yeni</span>
+        </button>
+
         <div class="pt-3 pb-1">
           <p class="px-3 pb-1.5 text-[11px] uppercase tracking-wider text-muted font-medium">Üretim Araçları</p>
         </div>
@@ -262,6 +296,13 @@
           <span class="nav-indicator opacity-0 absolute left-0 top-2 bottom-2 w-0.5 bg-forest rounded-r"></span>
           <i data-lucide="file-spreadsheet" class="w-4 h-4 shrink-0"></i>
           <span>Ofis, Excel &amp; PDF</span>
+        </button>
+
+        <button type="button" data-view="mobile" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-muted hover:bg-stonewarm/60 hover:text-ink relative text-left">
+          <span class="nav-indicator opacity-0 absolute left-0 top-2 bottom-2 w-0.5 bg-forest rounded-r"></span>
+          <i data-lucide="smartphone" class="w-4 h-4 shrink-0"></i>
+          <span>Mobil Uygulama</span>
+          <span class="ml-auto text-[10px] px-1.5 py-0.5 rounded bg-forestLight text-forest font-medium">Kur</span>
         </button>
       </nav>
 
@@ -834,6 +875,172 @@
       </section>
 
       <!-- ========================================================= -->
+      <!-- VIEW: CANLI RADYOLAR & MP3 OYNATICI (RADIO)               -->
+      <!-- ========================================================= -->
+      <section id="view-radio" class="view-panel space-y-7">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-4 border-b border-hairline">
+          <div>
+            <p class="text-xs uppercase tracking-widest text-muted mb-1">Kesintisiz Müzik &amp; Yayın</p>
+            <h2 class="font-editorial text-3xl font-normal text-ink">Canlı Radyo Kanalları &amp; MP3 Çalar</h2>
+          </div>
+          <form id="radio-search-form" class="flex gap-2 w-full md:w-auto">
+            <input id="radio-search-input" type="text" placeholder="Radyo ara (Örn: Power, Kral, TRT, Caz)..." class="flex-1 md:w-64 bg-surface border border-hairline rounded-lg px-3 py-2 text-xs text-ink focus:outline-none focus:border-forest" />
+            <button type="submit" class="px-3.5 py-2 rounded-lg bg-forest text-paper text-xs font-medium hover:bg-forest/90 transition">Ara</button>
+          </form>
+        </div>
+
+        <!-- Active Live Radio Player Bar -->
+        <div class="editorial-card p-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="flex items-center gap-3.5 min-w-0">
+            <div class="w-11 h-11 rounded-full bg-forestLight text-forest flex items-center justify-center shrink-0">
+              <i data-lucide="radio" class="w-5 h-5"></i>
+            </div>
+            <div class="min-w-0">
+              <p class="text-[11px] uppercase tracking-wider text-muted" id="radio-now-status">Hazır · İstasyon seçin</p>
+              <h3 id="radio-now-title" class="font-editorial text-xl text-ink truncate">Bir radyo kanalı seçip dinlemeye başlayın</h3>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 shrink-0">
+            <button id="radio-play-pause-btn" type="button" class="px-4 py-2 rounded-full bg-forest hover:bg-forest/90 text-paper text-xs font-medium flex items-center gap-1.5 transition">
+              <i data-lucide="play" class="w-3.5 h-3.5 fill-current" id="radio-play-icon"></i>
+              <span id="radio-play-text">Oynat</span>
+            </button>
+            <select id="radio-sleep-select" class="bg-paper border border-hairline rounded-lg px-2.5 py-1.5 text-xs text-ink focus:outline-none focus:border-forest" title="Uyku zamanlayıcısı">
+              <option value="0">Uyku: Kapalı</option>
+              <option value="15">15 dk sonra kapat</option>
+              <option value="30">30 dk sonra kapat</option>
+              <option value="60">60 dk sonra kapat</option>
+            </select>
+            <div class="flex items-center gap-2">
+              <i data-lucide="volume-2" class="w-4 h-4 text-muted"></i>
+              <input id="radio-volume" type="range" min="0" max="100" value="75" class="w-24 accent-forest" aria-label="Radyo ses seviyesi" />
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <!-- Left 7 Cols: Live Radio Stations Directory -->
+          <div class="lg:col-span-7 space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div class="flex flex-wrap gap-1.5" id="radio-cat-bar">
+                <button type="button" data-radio-tag="" class="radio-cat-btn px-3 py-1 rounded-full text-xs font-medium bg-ink text-paper">Türkiye Popüler</button>
+                <button type="button" data-radio-tag="pop" class="radio-cat-btn px-3 py-1 rounded-full text-xs font-medium bg-surface border border-hairline text-muted hover:text-ink">Pop</button>
+                <button type="button" data-radio-tag="turkish" class="radio-cat-btn px-3 py-1 rounded-full text-xs font-medium bg-surface border border-hairline text-muted hover:text-ink">Türkçe</button>
+                <button type="button" data-radio-tag="jazz" class="radio-cat-btn px-3 py-1 rounded-full text-xs font-medium bg-surface border border-hairline text-muted hover:text-ink">Caz &amp; Lounge</button>
+                <button type="button" data-radio-tag="rock" class="radio-cat-btn px-3 py-1 rounded-full text-xs font-medium bg-surface border border-hairline text-muted hover:text-ink">Rock</button>
+                <button type="button" data-radio-tag="classical" class="radio-cat-btn px-3 py-1 rounded-full text-xs font-medium bg-surface border border-hairline text-muted hover:text-ink">Klasik</button>
+              </div>
+              <span id="radio-count-label" class="text-[11px] text-muted">Yükleniyor...</span>
+            </div>
+
+            <div id="radio-stations-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[520px] overflow-y-auto pr-1"></div>
+          </div>
+
+          <!-- Right 5 Cols: Personal MP3 / Audio File Player Card -->
+          <div class="lg:col-span-5 editorial-card p-5 h-fit space-y-4">
+            <div class="flex items-start justify-between gap-2">
+              <div>
+                <h3 class="font-editorial text-xl font-medium text-ink">Kişisel MP3 &amp; Müzik Çalar</h3>
+                <p class="text-xs text-muted mt-0.5">Bilgisayarınızdan veya telefonunuzdan MP3 dosyalarınızı seçip çalışırken arka planda dinleyin.</p>
+              </div>
+              <label class="px-3 py-1.5 rounded-lg bg-ink text-paper text-xs font-medium hover:bg-ink/90 cursor-pointer shrink-0 transition">
+                + MP3 Seç
+                <input id="mp3-file-input" type="file" accept="audio/*" multiple class="hidden" />
+              </label>
+            </div>
+
+            <!-- MP3 Active Track Controls -->
+            <div class="p-4 rounded-xl bg-paper border border-hairline space-y-3">
+              <div class="flex items-center justify-between gap-2">
+                <p id="mp3-current-title" class="text-sm font-medium text-ink truncate">Henüz MP3 seçilmedi</p>
+                <span id="mp3-time-label" class="text-[11px] text-muted tabular shrink-0">00:00 / 00:00</span>
+              </div>
+              <input id="mp3-seek" type="range" min="0" max="100" value="0" class="w-full accent-forest" aria-label="Parça konumu" />
+              <div class="flex items-center justify-center gap-3 pt-1">
+                <button id="mp3-prev-btn" type="button" class="p-2 rounded-full border border-hairline bg-surface hover:border-ink/30 text-ink" aria-label="Önceki parça">
+                  <i data-lucide="skip-back" class="w-4 h-4"></i>
+                </button>
+                <button id="mp3-toggle-btn" type="button" class="w-10 h-10 rounded-full bg-forest text-paper flex items-center justify-center hover:bg-forest/90 transition" aria-label="Oynat veya duraklat">
+                  <i data-lucide="play" class="w-4 h-4 fill-current" id="mp3-play-icon"></i>
+                </button>
+                <button id="mp3-next-btn" type="button" class="p-2 rounded-full border border-hairline bg-surface hover:border-ink/30 text-ink" aria-label="Sonraki parça">
+                  <i data-lucide="skip-forward" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- MP3 Playlist -->
+            <div id="mp3-playlist" class="divide-y divide-hairline max-h-56 overflow-y-auto text-xs">
+              <p class="py-4 text-center text-muted">Birden fazla MP3 seçerek kendi çalma listenizi oluşturabilirsiniz.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================= -->
+      <!-- VIEW: CANLI TV KANALLARI (TV)                             -->
+      <!-- ========================================================= -->
+      <section id="view-tv" class="view-panel space-y-6">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-4 border-b border-hairline">
+          <div>
+            <p class="text-xs uppercase tracking-widest text-muted mb-1">Resmi Canlı Yayınlar</p>
+            <h2 class="font-editorial text-3xl font-normal text-ink">Canlı TV Kanalları</h2>
+          </div>
+          <form id="custom-tv-form" class="flex gap-2 w-full md:w-auto">
+            <input id="custom-tv-url" type="url" required placeholder="Herhangi bir YouTube canlı / video linki yapıştır..." class="flex-1 md:w-72 bg-surface border border-hairline rounded-lg px-3 py-2 text-xs text-ink focus:outline-none focus:border-forest" />
+            <button type="submit" class="px-3.5 py-2 rounded-lg bg-ink text-paper text-xs font-medium hover:bg-ink/90 transition shrink-0">Ekranda Aç</button>
+          </form>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <!-- Main 16:9 TV Screen (100% Site İçi Oynatıcı) -->
+          <div class="lg:col-span-8 editorial-card overflow-hidden flex flex-col">
+            <div class="relative w-full aspect-video bg-ink">
+              <video id="tv-hls-video" controls autoplay playsinline class="w-full h-full object-contain bg-black"></video>
+              <iframe id="tv-player-iframe" src="" title="Canlı TV Yayını" class="hidden w-full h-full border-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe>
+            </div>
+            <div class="p-4 flex flex-wrap items-center justify-between gap-3 bg-surface border-t border-hairline">
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-terracotta live-dot"></span>
+                  <span class="text-[11px] uppercase tracking-wider text-forest font-medium" id="tv-active-cat">Ulusal · Site İçi Canlı Yayın</span>
+                </div>
+                <h3 id="tv-active-title" class="font-editorial text-xl text-ink mt-0.5">TRT 1 Canlı</h3>
+              </div>
+              <div class="flex items-center gap-2">
+                <button id="tv-pip-btn" type="button" class="px-3 py-1.5 rounded-lg border border-hairline bg-paper hover:border-forest text-xs font-medium text-ink flex items-center gap-1.5 transition" title="Diğer sayfalarda gezerken TV'yi küçük pencerede izle">
+                  <i data-lucide="picture-in-picture-2" class="w-3.5 h-3.5 text-forest"></i> Küçük Ekran
+                </button>
+                <span id="tv-stream-mode-badge" class="text-[11px] px-2.5 py-1 rounded-full bg-forestLight text-forest font-medium">Site İçi HD</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Channel List (Expanded with Categories + M3U Import) -->
+          <div class="lg:col-span-4 editorial-card p-5 space-y-3 h-fit">
+            <div class="flex items-center justify-between gap-2">
+              <div>
+                <h3 class="font-editorial text-xl font-medium text-ink">Kanal Listesi</h3>
+                <p id="tv-channel-count" class="text-[11px] text-muted">Canlı kanallar yükleniyor...</p>
+              </div>
+              <label class="px-2.5 py-1 rounded-lg border border-hairline bg-paper hover:border-forest text-[11px] font-medium text-ink cursor-pointer shrink-0">
+                + M3U Yükle
+                <input id="tv-m3u-upload" type="file" accept=".m3u,.m3u8,text/plain" class="hidden" />
+              </label>
+            </div>
+            <div class="flex flex-wrap gap-1.5" id="tv-cat-bar">
+              <button type="button" data-tv-cat="Tümü" class="tv-cat-btn px-2.5 py-1 rounded-full text-[11px] font-medium bg-ink text-paper">Tümü</button>
+              <button type="button" data-tv-cat="Ulusal" class="tv-cat-btn px-2.5 py-1 rounded-full text-[11px] font-medium bg-paper border border-hairline text-muted">Ulusal</button>
+              <button type="button" data-tv-cat="Haber" class="tv-cat-btn px-2.5 py-1 rounded-full text-[11px] font-medium bg-paper border border-hairline text-muted">Haber</button>
+              <button type="button" data-tv-cat="Spor" class="tv-cat-btn px-2.5 py-1 rounded-full text-[11px] font-medium bg-paper border border-hairline text-muted">Spor</button>
+              <button type="button" data-tv-cat="Belgesel" class="tv-cat-btn px-2.5 py-1 rounded-full text-[11px] font-medium bg-paper border border-hairline text-muted">Kültür &amp; Müzik</button>
+            </div>
+            <div id="tv-channels-list" class="space-y-2 max-h-[420px] overflow-y-auto pr-1"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================= -->
       <!-- VIEW 5: MÜZİK & ODAK STÜDYOSU (MUSIC)                     -->
       <!-- ========================================================= -->
       <section id="view-music" class="view-panel space-y-7">
@@ -1004,6 +1211,181 @@
       </section>
 
       <!-- ========================================================= -->
+      <!-- VIEW: FİNANSAL ÖZGÜRLÜK & KARAR SİMÜLATÖRÜ (SIMULATOR)    -->
+      <!-- ========================================================= -->
+      <section id="view-simulator" class="view-panel space-y-7">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-4 border-b border-hairline">
+          <div>
+            <p class="text-xs uppercase tracking-widest text-muted mb-1">Akıllı Finansal Planlama</p>
+            <h2 class="font-editorial text-3xl font-normal text-ink">Finansal Özgürlük, Birikim &amp; Kredi Simülatörü</h2>
+          </div>
+          <button type="button" id="sim-export-loan-csv" class="px-3.5 py-2 rounded-lg border border-hairline bg-surface hover:border-ink/30 text-xs font-medium text-ink flex items-center gap-1.5 self-start sm:self-auto">
+            <i data-lucide="sheet" class="w-3.5 h-3.5 text-forest"></i> Ödeme Planını Excel’e Aktar
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <!-- Compound Savings Simulator -->
+          <div class="lg:col-span-7 editorial-card p-6 space-y-5">
+            <div>
+              <h3 class="font-editorial text-2xl font-medium text-ink">Bileşik Birikim &amp; Gelecek Simülatörü</h3>
+              <p class="text-xs text-muted mt-0.5">Düzenli aylık birikiminizin yıllar içinde bileşik getiriyle nasıl büyüdüğünü canlı görün.</p>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+              <div>
+                <label for="sim-initial" class="block text-muted mb-1">Başlangıç (₺)</label>
+                <input id="sim-initial" type="number" min="0" value="50000" class="w-full bg-paper border border-hairline rounded-lg px-2.5 py-2 tabular text-ink focus:outline-none focus:border-forest" />
+              </div>
+              <div>
+                <label for="sim-monthly" class="block text-muted mb-1">Aylık Birikim (₺)</label>
+                <input id="sim-monthly" type="number" min="0" value="10000" class="w-full bg-paper border border-hairline rounded-lg px-2.5 py-2 tabular text-ink focus:outline-none focus:border-forest" />
+              </div>
+              <div>
+                <label for="sim-rate" class="block text-muted mb-1">Yıllık Getiri (%)</label>
+                <input id="sim-rate" type="number" min="0" max="200" value="35" class="w-full bg-paper border border-hairline rounded-lg px-2.5 py-2 tabular text-ink focus:outline-none focus:border-forest" />
+              </div>
+              <div>
+                <label for="sim-years" class="block text-muted mb-1">Süre (Yıl)</label>
+                <input id="sim-years" type="number" min="1" max="30" value="5" class="w-full bg-paper border border-hairline rounded-lg px-2.5 py-2 tabular text-ink focus:outline-none focus:border-forest" />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-3 p-4 rounded-xl bg-paper border border-hairline text-center">
+              <div>
+                <p class="text-[11px] text-muted">Yatırılan Ana Para</p>
+                <p id="sim-out-principal" class="font-editorial text-xl text-ink tabular mt-0.5">0 ₺</p>
+              </div>
+              <div>
+                <p class="text-[11px] text-muted">Bileşik Kazanç</p>
+                <p id="sim-out-profit" class="font-editorial text-xl text-forest tabular mt-0.5">0 ₺</p>
+              </div>
+              <div>
+                <p class="text-[11px] text-muted">Vade Sonu Toplam</p>
+                <p id="sim-out-total" class="font-editorial text-xl text-terracotta tabular font-medium mt-0.5">0 ₺</p>
+              </div>
+            </div>
+
+            <div class="relative h-60">
+              <canvas id="compoundChart"></canvas>
+            </div>
+          </div>
+
+          <!-- Loan / Installment & Inflation Purchasing Power -->
+          <div class="lg:col-span-5 space-y-6">
+            <div class="editorial-card p-6 space-y-4">
+              <div>
+                <h3 class="font-editorial text-xl font-medium text-ink">Kredi &amp; Taksit Hesaplayıcı</h3>
+                <p class="text-xs text-muted mt-0.5">Aylık taksit ve toplam faiz maliyetini anında görün.</p>
+              </div>
+              <div class="grid grid-cols-3 gap-2.5 text-xs">
+                <div>
+                  <label for="loan-amount" class="block text-muted mb-1">Tutar (₺)</label>
+                  <input id="loan-amount" type="number" min="1000" value="250000" class="w-full bg-paper border border-hairline rounded-lg px-2.5 py-2 tabular text-ink" />
+                </div>
+                <div>
+                  <label for="loan-months" class="block text-muted mb-1">Vade (Ay)</label>
+                  <input id="loan-months" type="number" min="1" max="120" value="24" class="w-full bg-paper border border-hairline rounded-lg px-2.5 py-2 tabular text-ink" />
+                </div>
+                <div>
+                  <label for="loan-rate" class="block text-muted mb-1">Aylık Faiz (%)</label>
+                  <input id="loan-rate" type="number" step="0.05" min="0" value="3.49" class="w-full bg-paper border border-hairline rounded-lg px-2.5 py-2 tabular text-ink" />
+                </div>
+              </div>
+              <div class="p-3.5 rounded-xl bg-paper border border-hairline space-y-1.5 text-xs">
+                <div class="flex justify-between"><span class="text-muted">Aylık Taksit:</span><strong id="loan-out-monthly" class="text-ink tabular text-sm">0 ₺</strong></div>
+                <div class="flex justify-between"><span class="text-muted">Toplam Geri Ödeme:</span><span id="loan-out-total" class="text-ink tabular">0 ₺</span></div>
+                <div class="flex justify-between"><span class="text-muted">Toplam Faiz Maliyeti:</span><span id="loan-out-interest" class="text-terracotta tabular font-medium">0 ₺</span></div>
+              </div>
+            </div>
+
+            <div class="editorial-card p-6 space-y-4">
+              <div>
+                <h3 class="font-editorial text-xl font-medium text-ink">Alım Gücü &amp; Enflasyon Testi</h3>
+                <p class="text-xs text-muted mt-0.5">Gelir artışınız enflasyon karşısında reel olarak ne durumda?</p>
+              </div>
+              <div class="grid grid-cols-3 gap-2.5 text-xs">
+                <div>
+                  <label for="inf-old" class="block text-muted mb-1">Eski Gelir (₺)</label>
+                  <input id="inf-old" type="number" min="1" value="40000" class="w-full bg-paper border border-hairline rounded-lg px-2.5 py-2 tabular text-ink" />
+                </div>
+                <div>
+                  <label for="inf-new" class="block text-muted mb-1">Yeni Gelir (₺)</label>
+                  <input id="inf-new" type="number" min="1" value="55000" class="w-full bg-paper border border-hairline rounded-lg px-2.5 py-2 tabular text-ink" />
+                </div>
+                <div>
+                  <label for="inf-rate" class="block text-muted mb-1">Enflasyon (%)</label>
+                  <input id="inf-rate" type="number" min="0" value="32" class="w-full bg-paper border border-hairline rounded-lg px-2.5 py-2 tabular text-ink" />
+                </div>
+              </div>
+              <p id="inf-result-text" class="text-xs p-3 rounded-lg bg-forestLight/70 text-forest font-medium"></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================= -->
+      <!-- VIEW: ZİHİN MOLASI & GÜNLÜK OYUNLAR (GAMES)               -->
+      <!-- ========================================================= -->
+      <section id="view-games" class="view-panel space-y-7">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-4 border-b border-hairline">
+          <div>
+            <p class="text-xs uppercase tracking-widest text-muted mb-1">Günlük Zihin Egzersizi</p>
+            <h2 class="font-editorial text-3xl font-normal text-ink">Zihin Molası &amp; Günün Kelimesi</h2>
+          </div>
+          <div class="flex items-center gap-2">
+            <button id="wordle-new-btn" type="button" class="px-3.5 py-2 rounded-lg border border-hairline bg-surface hover:border-forest text-xs font-medium text-ink transition">Yeni Kelime</button>
+            <button id="wordle-share-btn" type="button" class="px-3.5 py-2 rounded-lg bg-forest text-paper text-xs font-medium hover:bg-forest/90 transition flex items-center gap-1.5">
+              <i data-lucide="share-2" class="w-3.5 h-3.5"></i> Skoru Paylaş
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <!-- Turkish 5-Letter Wordle Game -->
+          <div class="lg:col-span-7 editorial-card p-6 space-y-5">
+            <div class="flex items-center justify-between">
+              <div>
+                <h3 class="font-editorial text-2xl font-medium text-ink">Pusula 5 Harfli Kelime Bulmaca</h3>
+                <p class="text-xs text-muted">6 denemede gizli 5 harfli Türkçe kelimeyi bulun. Yeşil: doğru yer, Sarı: kelime içinde var.</p>
+              </div>
+              <span id="wordle-streak-badge" class="text-xs px-2.5 py-1 rounded-full bg-forestLight text-forest font-medium tabular shrink-0">Seri: 0</span>
+            </div>
+
+            <div id="wordle-board" class="grid grid-rows-6 gap-2 max-w-xs mx-auto"></div>
+            <p id="wordle-status" class="text-center text-xs font-medium text-forest min-h-[18px]"></p>
+            <div id="wordle-keyboard" class="space-y-1.5 max-w-md mx-auto"></div>
+          </div>
+
+          <!-- Quick Memory Sequence Trainer -->
+          <div class="lg:col-span-5 editorial-card p-6 flex flex-col justify-between space-y-5">
+            <div>
+              <div class="flex items-center justify-between">
+                <h3 class="font-editorial text-2xl font-medium text-ink">Hızlı Hafıza Testi</h3>
+                <span id="mem-best-badge" class="text-xs px-2.5 py-1 rounded-full bg-paper border border-hairline text-ink tabular">Rekor: 0</span>
+              </div>
+              <p class="text-xs text-muted mt-1">Ekranda kısa süre görünen sayı dizisini aklınızda tutun ve doğru yazın. Her doğru cevapta dizi 1 basamak uzar.</p>
+            </div>
+
+            <div class="p-6 rounded-xl bg-paper border border-hairline text-center space-y-4">
+              <p id="mem-level-label" class="text-xs uppercase tracking-wider text-muted">Seviye 1 · 3 Basamak</p>
+              <div id="mem-number-display" class="font-editorial text-5xl tracking-widest text-ink tabular min-h-[56px] flex items-center justify-center">---</div>
+              <form id="mem-answer-form" class="hidden space-y-2.5">
+                <input id="mem-answer-input" type="text" inputmode="numeric" autocomplete="off" placeholder="Sayıyı yazın..." class="w-full text-center text-lg tracking-widest tabular bg-surface border border-hairline rounded-lg px-3 py-2 text-ink focus:outline-none focus:border-forest" />
+                <button type="submit" class="w-full py-2 rounded-lg bg-forest text-paper text-xs font-medium hover:bg-forest/90">Kontrol Et</button>
+              </form>
+              <button id="mem-start-btn" type="button" class="px-5 py-2.5 rounded-lg bg-ink text-paper text-xs font-medium hover:bg-ink/90 transition">Testi Başlat</button>
+              <p id="mem-feedback" class="text-xs text-muted min-h-[16px]"></p>
+            </div>
+
+            <div class="p-3.5 rounded-lg bg-forestLight/60 border border-forest/20 text-xs text-ink">
+              İpucu: Kelime bulmacayı bitirdiğinizde <strong>Skoru Paylaş</strong> düğmesiyle sonucunuzu WhatsApp veya X'te paylaşabilirsiniz — arkadaşlarınız tek tıkla Pusula'da aynı kelimeyi çözebilir.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================= -->
       <!-- VIEW 8: OFİS, EXCEL & PDF STÜDYOSU (OFFICE)               -->
       <!-- ========================================================= -->
       <section id="view-office" class="view-panel space-y-7">
@@ -1088,6 +1470,137 @@
             <div class="flex items-center justify-between text-xs text-muted no-print">
               <span id="doc-word-count">0 kelime · 0 karakter</span>
               <span>PDF için "PDF Kaydet / Yazdır" penceresinde Hedef olarak "PDF olarak kaydet" seçebilirsiniz.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Professional CV / Resume PDF Generator (High-Value Pro Tool) -->
+        <div id="office-cv-section" class="editorial-card p-6 space-y-5 no-print">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-hairline">
+            <div>
+              <span class="text-[11px] uppercase tracking-wider text-forest font-semibold">Pusula Pro Aracı</span>
+              <h3 class="font-editorial text-2xl font-medium text-ink">1-Tıkla Profesyonel CV (Özgeçmiş) Oluşturucu</h3>
+              <p class="text-xs text-muted">Bilgilerinizi doldurun, modern editöryal tasarımlı CV'nizi anında PDF olarak kaydedin.</p>
+            </div>
+            <button id="cv-export-pdf-btn" type="button" class="px-4 py-2 rounded-lg bg-forest text-paper text-xs font-medium hover:bg-forest/90 flex items-center gap-1.5 self-start sm:self-auto">
+              <i data-lucide="file-down" class="w-3.5 h-3.5"></i> CV’yi PDF / Yazdır Olarak Al
+            </button>
+          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+            <div class="lg:col-span-5 space-y-2.5 text-xs">
+              <input id="cv-name" type="text" value="Ahmet Yılmaz" placeholder="Ad Soyad" class="w-full bg-paper border border-hairline rounded-lg px-3 py-2 text-ink" />
+              <input id="cv-role" type="text" value="Dijital Ürün & Proje Uzmanı" placeholder="Ünvan / Meslek" class="w-full bg-paper border border-hairline rounded-lg px-3 py-2 text-ink" />
+              <input id="cv-contact" type="text" value="İstanbul · ornek@eposta.com · 0555 000 00 00" placeholder="Şehir · E-posta · Telefon" class="w-full bg-paper border border-hairline rounded-lg px-3 py-2 text-ink" />
+              <textarea id="cv-summary" rows="2" placeholder="Kısa profesyonel özet" class="w-full bg-paper border border-hairline rounded-lg px-3 py-2 text-ink">Kullanıcı odaklı dijital projeler geliştirme, süreç optimizasyonu ve veri analizi alanlarında 5+ yıl deneyim.</textarea>
+              <textarea id="cv-exp" rows="3" placeholder="İş Deneyimi (her satır bir madde)" class="w-full bg-paper border border-hairline rounded-lg px-3 py-2 text-ink">Proje Yöneticisi — Dijital Stüdyo (2023–2026): 12+ web projesinin uçtan uca yönetimi.
+İş Analisti — Teknoloji A.Ş. (2021–2023): Raporlama, Excel otomasyonu ve müşteri süreçleri.</textarea>
+              <input id="cv-skills" type="text" value="Proje Yönetimi, Excel & Veri Analizi, Dijital Pazarlama, İngilizce (B2)" placeholder="Yetenekler (virgülle ayırın)" class="w-full bg-paper border border-hairline rounded-lg px-3 py-2 text-ink" />
+            </div>
+            <div id="cv-live-preview" class="lg:col-span-7 p-6 rounded-xl bg-surface border border-hairline space-y-4">
+              <div class="border-b border-hairline pb-3">
+                <h4 id="cv-prev-name" class="font-editorial text-2xl text-ink">Ahmet Yılmaz</h4>
+                <p id="cv-prev-role" class="text-xs font-medium text-forest mt-0.5">Dijital Ürün &amp; Proje Uzmanı</p>
+                <p id="cv-prev-contact" class="text-[11px] text-muted mt-1">İstanbul · ornek@eposta.com · 0555 000 00 00</p>
+              </div>
+              <div>
+                <p class="text-[10px] uppercase tracking-widest text-muted font-semibold mb-1">Özet</p>
+                <p id="cv-prev-summary" class="text-xs text-ink/90 leading-relaxed"></p>
+              </div>
+              <div>
+                <p class="text-[10px] uppercase tracking-widest text-muted font-semibold mb-1">Deneyim</p>
+                <ul id="cv-prev-exp" class="text-xs text-ink/90 space-y-1 list-disc pl-4"></ul>
+              </div>
+              <div>
+                <p class="text-[10px] uppercase tracking-widest text-muted font-semibold mb-1">Yetenekler</p>
+                <div id="cv-prev-skills" class="flex flex-wrap gap-1.5"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================= -->
+      <!-- VIEW: MOBİL UYGULAMA (ANDROID & IOS KURULUM)              -->
+      <!-- ========================================================= -->
+      <section id="view-mobile" class="view-panel space-y-7">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-4 border-b border-hairline">
+          <div>
+            <p class="text-xs uppercase tracking-widest text-muted mb-1">Her Cihazda Tam Ekran Deneyim</p>
+            <h2 class="font-editorial text-3xl font-normal text-ink">Pusula Mobil Uygulama (Android &amp; iOS)</h2>
+          </div>
+          <span id="pwa-install-status-badge" class="text-xs px-3 py-1.5 rounded-full bg-forestLight text-forest font-medium self-start sm:self-auto">Kuruluma Hazır</span>
+        </div>
+
+        <!-- Editorial Benefits Strip -->
+        <div class="editorial-card p-5 grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-hairline">
+          <div class="pr-4 py-2 sm:py-0">
+            <p class="text-xs text-muted">Kurulum Boyutu</p>
+            <p class="font-editorial text-2xl text-ink mt-0.5">&lt; 2 MB</p>
+            <p class="text-xs text-muted mt-0.5">Telefon hafızasını yormaz, anında açılır</p>
+          </div>
+          <div class="sm:px-6 py-2 sm:py-0">
+            <p class="text-xs text-muted">Uygulama Deneyimi</p>
+            <p class="font-editorial text-2xl text-ink mt-0.5">Tam Ekran</p>
+            <p class="text-xs text-muted mt-0.5">Adres çubuğu olmadan gerçek uygulama görünümü</p>
+          </div>
+          <div class="sm:pl-6 py-2 sm:py-0">
+            <p class="text-xs text-muted">Bulut Eşitleme</p>
+            <p class="font-editorial text-2xl text-forest mt-0.5">Otomatik</p>
+            <p class="text-xs text-muted mt-0.5">Bilgisayardaki tüm not ve görevleriniz telefonda</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <!-- Android Card -->
+          <div class="editorial-card p-6 flex flex-col justify-between space-y-5">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="px-2.5 py-1 rounded-md bg-forestLight text-forest text-xs font-semibold">Android (Chrome / Edge)</span>
+                <i data-lucide="smartphone" class="w-5 h-5 text-forest"></i>
+              </div>
+              <h3 class="font-editorial text-2xl text-ink">Android Telefonlara Tek Tıkla Kur</h3>
+              <p class="text-xs text-muted leading-relaxed">
+                Play Store beklemeden veya "bilinmeyen kaynak" uyarısı almadan Pusula’yı ana ekranınıza gerçek bir Android uygulaması olarak kurabilirsiniz.
+              </p>
+              <ol class="text-xs text-ink space-y-1.5 list-decimal pl-4 pt-1">
+                <li>Aşağıdaki <strong>Android’e Uygulama Olarak Yükle</strong> düğmesine basın.</li>
+                <li>Açılan pencerede <strong>Yükle (Install)</strong> seçeneğini onaylayın.</li>
+                <li>Pusula ikonu 2 saniye içinde telefonunuzun uygulama menüsüne eklenir.</li>
+              </ol>
+            </div>
+            <div class="space-y-2.5 pt-2">
+              <button id="pwa-android-install-btn" type="button" class="w-full py-2.5 rounded-lg bg-forest hover:bg-forest/90 text-paper text-xs font-medium transition flex items-center justify-center gap-2">
+                <i data-lucide="download" class="w-4 h-4"></i> Android’e Uygulama Olarak Yükle
+              </button>
+              <a id="android-apk-download-btn" href="#" target="_blank" rel="noopener noreferrer" class="hidden w-full py-2 rounded-lg border border-forest/40 bg-paper hover:bg-forestLight text-forest text-xs font-medium text-center transition">
+                Doğrudan APK Dosyasını İndir (.apk)
+              </a>
+              <p id="android-manual-hint" class="text-[11px] text-muted text-center">Düğme pencere açmazsa Chrome sağ üst menü (⋮) → <strong>Uygulamayı Yükle</strong> seçebilirsiniz.</p>
+            </div>
+          </div>
+
+          <!-- iOS (iPhone / iPad) Card -->
+          <div class="editorial-card p-6 flex flex-col justify-between space-y-5">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="px-2.5 py-1 rounded-md bg-stonewarm text-ink text-xs font-semibold">iOS (iPhone &amp; iPad Safari)</span>
+                <i data-lucide="tablet-smartphone" class="w-5 h-5 text-ink"></i>
+              </div>
+              <h3 class="font-editorial text-2xl text-ink">iPhone &amp; iPad’e Uygulama Olarak Ekle</h3>
+              <p class="text-xs text-muted leading-relaxed">
+                Apple iOS cihazlarda Safari üzerinden 3 dokunuşla Pusula’yı ana ekranınıza tam ekran uygulama olarak ekleyebilirsiniz.
+              </p>
+              <ol class="text-xs text-ink space-y-2 list-decimal pl-4 pt-1">
+                <li>Bu adresi iPhone’unuzda <strong>Safari</strong> tarayıcısıyla açın.</li>
+                <li>Ekranın alt ortasındaki <strong>Paylaş (kare içinden yukarı ok ⬆️)</strong> simgesine dokunun.</li>
+                <li>Aşağı kaydırıp <strong>Ana Ekrana Ekle (Add to Home Screen)</strong> → <strong>Ekle</strong> deyin.</li>
+              </ol>
+            </div>
+            <div class="space-y-2.5 pt-2">
+              <button id="copy-mobile-link-btn" type="button" class="w-full py-2.5 rounded-lg bg-ink hover:bg-ink/90 text-paper text-xs font-medium transition flex items-center justify-center gap-2">
+                <i data-lucide="copy" class="w-4 h-4"></i> Mobil Kurulum Linkini Kopyala
+              </button>
+              <p class="text-[11px] text-muted text-center">Linki WhatsApp’tan kendinize gönderip telefonda açarak hemen kurabilirsiniz.</p>
             </div>
           </div>
         </div>
@@ -1187,6 +1700,49 @@
             <i data-lucide="credit-card" class="w-3.5 h-3.5"></i> Pusula Pro’ya Geç
           </button>
         </div>
+      </div>
+
+      <!-- IBAN / EFT Payment & Receipt Notification Panel -->
+      <div id="pro-iban-panel" class="hidden p-4 rounded-xl bg-paper border border-forest/30 space-y-3.5 text-xs">
+        <div class="flex items-center justify-between">
+          <span class="font-semibold text-sm text-forest flex items-center gap-1.5">
+            <i data-lucide="landmark" class="w-4 h-4"></i> Havale / EFT ile Ödeme Bilgileri
+          </span>
+          <span id="iban-selected-plan-badge" class="px-2 py-0.5 rounded bg-forestLight text-forest font-medium">Aylık · 149 ₺</span>
+        </div>
+
+        <div class="p-3 rounded-lg bg-surface border border-hairline space-y-1.5">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-muted">Alıcı:</span>
+            <span id="iban-holder-display" class="font-medium text-ink">Hesap sahibi bilgisi (config.js)</span>
+          </div>
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-muted">IBAN:</span>
+            <div class="flex items-center gap-2">
+              <span id="iban-number-display" class="font-mono font-medium text-ink select-all">TR00 0000 0000 0000 0000 0000 00</span>
+              <button type="button" id="copy-iban-btn" class="px-2 py-0.5 rounded bg-forest text-paper text-[11px] hover:bg-forest/90 transition">Kopyala</button>
+            </div>
+          </div>
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-muted">Açıklama:</span>
+            <span id="iban-ref-display" class="font-medium text-forest">Pusula Pro (e-postanız)</span>
+          </div>
+        </div>
+
+        <form id="iban-receipt-form" class="space-y-2.5">
+          <p class="font-medium text-ink">Ödemeyi yaptıktan sonra bildirim gönderin (onaylanınca Pro otomatik açılır):</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <input id="receipt-sender" type="text" required placeholder="Gönderen Ad Soyad" class="bg-surface border border-hairline rounded-lg px-3 py-2 text-xs text-ink focus:outline-none focus:border-forest" />
+            <input id="receipt-email" type="email" required placeholder="Pusula hesap e-postanız" class="bg-surface border border-hairline rounded-lg px-3 py-2 text-xs text-ink focus:outline-none focus:border-forest" />
+          </div>
+          <input id="receipt-note" type="text" placeholder="Dekont / İşlem saati veya kısa not (isteğe bağlı)" class="w-full bg-surface border border-hairline rounded-lg px-3 py-2 text-xs text-ink focus:outline-none focus:border-forest" />
+          <div class="flex flex-col sm:flex-row gap-2">
+            <button type="submit" id="receipt-submit-btn" class="flex-1 py-2 rounded-lg bg-forest hover:bg-forest/90 text-paper font-medium transition">Ödeme Bildirimini Gönder</button>
+            <a id="receipt-whatsapp-btn" href="#" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex items-center justify-center px-3.5 py-2 rounded-lg border border-forest/40 bg-surface text-forest font-medium hover:bg-forestLight transition">WhatsApp’tan Dekont At</a>
+            <a id="receipt-email-btn" href="#" class="hidden sm:inline-flex items-center justify-center px-3.5 py-2 rounded-lg border border-forest/40 bg-surface text-forest font-medium hover:bg-forestLight transition">E-posta ile Dekont Gönder</a>
+          </div>
+          <p id="receipt-status-msg" class="hidden text-xs text-forest font-medium"></p>
+        </form>
       </div>
 
       <form id="pro-signup-form" class="space-y-2 pt-3 border-t border-hairline">
@@ -1323,6 +1879,13 @@
         <button id="save-customize-btn" type="button" class="px-4 py-2 rounded-lg bg-forest text-paper text-xs font-medium hover:bg-forest/90">Tamam</button>
       </div>
     </div>
+  </div>
+
+  <!-- Persistent Floating Mini Radio/MP3 Bar -->
+  <div id="floating-media-bar" class="fixed bottom-4 left-4 lg:left-72 z-40 hidden items-center gap-3 bg-ink text-paper px-4 py-2.5 rounded-full shadow-lg max-w-sm no-print">
+    <span class="w-2 h-2 rounded-full bg-terracotta live-dot shrink-0"></span>
+    <span id="floating-media-title" class="text-xs font-medium truncate">Çalıyor...</span>
+    <button id="floating-media-stop" type="button" class="text-[11px] px-2 py-0.5 rounded bg-paper/15 hover:bg-paper/25 text-paper shrink-0">Durdur</button>
   </div>
 
   <!-- Toast Notification -->
@@ -1755,10 +2318,15 @@
         news: 'Haberler & Gündem',
         markets: 'Piyasalar & Analiz',
         budget: 'Bütçe & Abonelikler',
+        simulator: 'Finansal Simülatör',
+        games: 'Zihin Molası & Oyun',
+        radio: 'Canlı Radyolar & MP3',
+        tv: 'Canlı TV Kanalları',
         music: 'Müzik & Odak',
         media: 'TV, Film & Kültür',
         social: 'Sosyal & Şehir',
-        office: 'Ofis, Excel & PDF'
+        office: 'Ofis, Excel & PDF',
+        mobile: 'Mobil Uygulama (Android & iOS)'
       };
 
       function switchView(viewId) {
@@ -1778,6 +2346,9 @@
 
         if (viewId === 'markets') {
           setTimeout(initOrUpdateMarketCharts, 50);
+        }
+        if (viewId === 'simulator') {
+          setTimeout(updateCompoundSim, 50);
         }
       }
 
@@ -2889,10 +3460,15 @@
           { label: 'Günlük Plan, Odak & Fikirler', sub: 'Görevler, Pomodoro, Problem Panosu', view: 'daily' },
           { label: 'Haberler & Dünya Gündemi', sub: 'Otomatik canlı akış', view: 'news' },
           { label: 'Piyasalar & Analiz', sub: 'Canlı USD, EUR, Altın, Bitcoin ve Hesaplayıcı', view: 'markets' },
+          { label: 'Finansal Özgürlük & Kredi Simülatörü', sub: 'Bileşik birikim, kredi taksit ve enflasyon hesabı', view: 'simulator' },
+          { label: 'Zihin Molası & Günün Kelimesi', sub: '5 harfli Türkçe kelime bulmaca ve hafıza testi', view: 'games' },
           { label: 'Bütçe & Abonelik Takipçisi', sub: 'Aylık ve yıllık abonelik maliyeti', view: 'budget' },
+          { label: 'Canlı Radyolar & MP3 Çalar', sub: 'Türkiye ve dünya radyoları, kişisel MP3 oynatıcı', view: 'radio' },
+          { label: 'Canlı TV Kanalları', sub: 'TRT Haber, Bloomberg HT, Habertürk TV, TRT 1/2/Belgesel', view: 'tv' },
           { label: 'Müzik & Odak Stüdyosu', sub: 'Ortam sesleri ve kişisel listeler', view: 'music' },
           { label: 'TV, Film & Kültür', sub: 'İzleme listesi ve akşam önerisi', view: 'media' },
           { label: 'Sosyal & Şehir Hayatı', sub: 'İstanbul kültür-sanat etkinlikleri', view: 'social' },
+          { label: 'Mobil Uygulama (Android & iOS)', sub: 'Telefonunuza uygulama olarak tek tıkla kurun', view: 'mobile' },
           { label: 'Ofis, Excel & PDF Stüdyosu', sub: 'Canlı tablo, Excel (.xls) ve PDF baskı', view: 'office' }
         ];
         const filtered = items.filter(i => !term || i.label.toLowerCase().includes(term) || i.sub.toLowerCase().includes(term));
@@ -3173,16 +3749,46 @@
         document.getElementById('bill-monthly-btn').className = 'px-3.5 py-1.5 rounded-md bg-ink text-paper font-medium transition';
         document.getElementById('bill-yearly-btn').className = 'px-3.5 py-1.5 rounded-md text-muted hover:text-ink font-medium transition flex items-center gap-1.5';
         document.getElementById('pro-price-display').textContent = '149 ₺';
-        document.getElementById('pro-period-display').textContent = '/ ay';
+        document.getElementById('pro-period-display').textContent = '/ ay'; refreshIbanPanel();
       });
       document.getElementById('bill-yearly-btn').addEventListener('click', () => {
         billingCycle = 'yearly';
         document.getElementById('bill-yearly-btn').className = 'px-3.5 py-1.5 rounded-md bg-ink text-paper font-medium transition flex items-center gap-1.5';
         document.getElementById('bill-monthly-btn').className = 'px-3.5 py-1.5 rounded-md text-muted hover:text-ink font-medium transition';
         document.getElementById('pro-price-display').textContent = '1.340 ₺';
-        document.getElementById('pro-period-display').textContent = '/ yıl';
+        document.getElementById('pro-period-display').textContent = '/ yıl'; refreshIbanPanel();
       });
       document.getElementById('pro-free-continue-btn').addEventListener('click', closeProModal);
+      function refreshIbanPanel() {
+        const amountLabel = billingCycle === 'yearly' ? 'Yıllık · 1.340 ₺' : 'Aylık · 149 ₺';
+        document.getElementById('iban-selected-plan-badge').textContent = amountLabel;
+        document.getElementById('iban-holder-display').textContent = cfg.IBAN_HOLDER || 'Alıcı adı (config.js içinden ekleyin)';
+        document.getElementById('iban-number-display').textContent = cfg.IBAN_NUMBER || 'IBAN henüz eklenmedi (config.js)';
+        const userMail = currentUser ? currentUser.email : 'hesap e-postanız';
+        document.getElementById('iban-ref-display').textContent = 'Pusula Pro - ' + userMail;
+        if (currentUser && !document.getElementById('receipt-email').value) {
+          document.getElementById('receipt-email').value = currentUser.email;
+        }
+        const waBtn = document.getElementById('receipt-whatsapp-btn');
+        if (cfg.WHATSAPP_PHONE) {
+          const cleanPhone = String(cfg.WHATSAPP_PHONE).replace(/\D/g, '');
+          const waText = `Merhaba, Pusula Pro (${amountLabel}) için havale yaptım. Hesap e-postam: ${userMail}. Dekontu ekliyorum.`;
+          waBtn.href = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(waText)}`;
+          waBtn.classList.remove('hidden');
+        } else {
+          waBtn.classList.add('hidden');
+        }
+        const mailBtn = document.getElementById('receipt-email-btn');
+        if (cfg.RECEIPT_EMAIL) {
+          const subj = `Pusula Pro Dekont Bildirimi (${amountLabel})`;
+          const body = `Merhaba,\n\nPusula Pro (${amountLabel}) için havale/EFT yaptım.\nHesap e-postam: ${userMail}\n\nDekontu ekte paylaşıyorum.`;
+          mailBtn.href = `mailto:${encodeURIComponent(cfg.RECEIPT_EMAIL)}?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`;
+          mailBtn.classList.remove('hidden');
+        } else {
+          mailBtn.classList.add('hidden');
+        }
+      }
+
       document.getElementById('pro-checkout-btn').addEventListener('click', () => {
         const url = billingCycle === 'yearly' && cfg.PRO_CHECKOUT_URL_YEARLY
           ? cfg.PRO_CHECKOUT_URL_YEARLY
@@ -3192,8 +3798,54 @@
           const finalUrl = currentUser ? `${url}${sep}email=${encodeURIComponent(currentUser.email)}` : url;
           window.open(finalUrl, '_blank', 'noopener,noreferrer');
         } else {
-          showToast('Ödeme linki henüz eklenmedi. config.js dosyasındaki PRO_CHECKOUT_URL alanına iyzico/Lemon Squeezy linkinizi yapıştırın.');
+          refreshIbanPanel();
+          const panel = document.getElementById('pro-iban-panel');
+          panel.classList.remove('hidden');
+          panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          lucide.createIcons();
         }
+      });
+
+      document.getElementById('copy-iban-btn').addEventListener('click', () => {
+        const iban = cfg.IBAN_NUMBER || document.getElementById('iban-number-display').textContent;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(iban).then(() => showToast('IBAN kopyalandı!'));
+        } else {
+          showToast('IBAN: ' + iban);
+        }
+      });
+
+      document.getElementById('iban-receipt-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const sender = document.getElementById('receipt-sender').value.trim();
+        const email = document.getElementById('receipt-email').value.trim();
+        const note = document.getElementById('receipt-note').value.trim();
+        const plan = billingCycle === 'yearly' ? 'Yıllık (1.340 TL)' : 'Aylık (149 TL)';
+        const statusEl = document.getElementById('receipt-status-msg');
+
+        if (sbClient) {
+          try {
+            const { error } = await sbClient.from('payment_requests').insert({
+              user_id: currentUser && currentUser.id !== 'local' ? currentUser.id : null,
+              email,
+              sender_name: sender,
+              plan,
+              note,
+              status: 'bekliyor'
+            });
+            if (error) {
+              statusEl.textContent = 'Bildirim kaydedilirken hata oluştu: ' + error.message;
+              statusEl.className = 'text-xs text-terracotta font-medium';
+              statusEl.classList.remove('hidden');
+              return;
+            }
+          } catch (err) { /* ignore */ }
+        }
+        statusEl.textContent = 'Ödeme bildiriminiz alındı! Dekont kontrol edilince Pusula Pro hesabınız aktif edilecektir.';
+        statusEl.className = 'text-xs text-forest font-medium';
+        statusEl.classList.remove('hidden');
+        e.target.reset();
+        showToast('Ödeme bildiriminiz başarıyla iletildi.');
       });
 
       // Share Modal
@@ -3227,6 +3879,936 @@
       updateAuthUI();
 
       // =====================================================
+      // LIVE RADIO DIRECTORY (RADIO BROWSER API) & MP3 PLAYER
+      // =====================================================
+      const radioAudio = new Audio();
+      radioAudio.crossOrigin = 'anonymous';
+      radioAudio.volume = 0.75;
+
+      const mp3Audio = new Audio();
+      const radioState = {
+        stations: [],
+        activeStation: null,
+        playing: false,
+        tag: '',
+        mp3Files: [],
+        mp3Index: -1,
+        mp3Playing: false
+      };
+
+      const FALLBACK_RADIOS = [
+        { stationuuid: 'f1', name: 'TRT FM', tags: 'turkish,pop', countrycode: 'TR', url_resolved: 'https://radio-trtfm.live.trt.com.tr/master.m3u8', homepage: 'https://www.trtdinle.com/radyolar/trt-fm' },
+        { stationuuid: 'f2', name: 'TRT Radyo 3', tags: 'classical,jazz', countrycode: 'TR', url_resolved: 'https://radio-trtradyo3.live.trt.com.tr/master.m3u8', homepage: 'https://www.trtdinle.com/radyolar/radyo-3' },
+        { stationuuid: 'f3', name: 'PowerTürk FM', tags: 'turkish,pop', countrycode: 'TR', url_resolved: 'https://live.powerapp.com.tr/powerturk/mpeg/icecast.audio', homepage: 'https://www.powerapp.com.tr/' },
+        { stationuuid: 'f4', name: 'Power FM', tags: 'pop,hits', countrycode: 'TR', url_resolved: 'https://live.powerapp.com.tr/powerfm/mpeg/icecast.audio', homepage: 'https://www.powerapp.com.tr/' },
+        { stationuuid: 'f5', name: 'Power Love', tags: 'slow,love', countrycode: 'TR', url_resolved: 'https://live.powerapp.com.tr/powerlove/mpeg/icecast.audio', homepage: 'https://www.powerapp.com.tr/' },
+        { stationuuid: 'f6', name: 'Power Jazz', tags: 'jazz,lounge', countrycode: 'TR', url_resolved: 'https://live.powerapp.com.tr/powerjazz/mpeg/icecast.audio', homepage: 'https://www.powerapp.com.tr/' }
+      ];
+
+      function updateFloatingMediaBar() {
+        const bar = document.getElementById('floating-media-bar');
+        const label = document.getElementById('floating-media-title');
+        const dot = document.getElementById('sidebar-radio-dot');
+        if (radioState.playing && radioState.activeStation) {
+          label.textContent = 'Radyo: ' + radioState.activeStation.name;
+          bar.classList.remove('hidden');
+          bar.classList.add('flex');
+          dot.classList.remove('hidden');
+        } else if (radioState.mp3Playing && radioState.mp3Files[radioState.mp3Index]) {
+          label.textContent = 'MP3: ' + radioState.mp3Files[radioState.mp3Index].name;
+          bar.classList.remove('hidden');
+          bar.classList.add('flex');
+          dot.classList.remove('hidden');
+        } else {
+          bar.classList.add('hidden');
+          bar.classList.remove('flex');
+          dot.classList.add('hidden');
+        }
+      }
+
+      function stopAllStreamAudio() {
+        radioAudio.pause();
+        radioState.playing = false;
+        mp3Audio.pause();
+        radioState.mp3Playing = false;
+        document.getElementById('radio-play-text').textContent = 'Oynat';
+        document.getElementById('radio-play-icon').setAttribute('data-lucide', 'play');
+        document.getElementById('mp3-play-icon').setAttribute('data-lucide', 'play');
+        updateFloatingMediaBar();
+        lucide.createIcons();
+      }
+
+      document.getElementById('floating-media-stop').addEventListener('click', stopAllStreamAudio);
+
+      async function fetchRadioStations(query = '', tag = '') {
+        document.getElementById('radio-count-label').textContent = 'Kanallar yükleniyor...';
+        const mirrors = ['https://de1.api.radio-browser.info', 'https://nl1.api.radio-browser.info', 'https://at1.api.radio-browser.info'];
+        const params = new URLSearchParams({ hidebroken: 'true', order: 'clickcount', reverse: 'true', limit: '30' });
+        if (query) {
+          params.set('name', query);
+        } else if (tag) {
+          params.set('tag', tag);
+          if (tag === 'pop' || tag === 'turkish') params.set('countrycode', 'TR');
+        } else {
+          params.set('countrycode', 'TR');
+        }
+
+        for (const base of mirrors) {
+          try {
+            const res = await fetch(`${base}/json/stations/search?${params.toString()}`);
+            if (res.ok) {
+              const data = await res.json();
+              const httpsList = data.filter(st => st.url_resolved && st.url_resolved.startsWith('https://') && !st.url_resolved.endsWith('.m3u8'));
+              if (httpsList.length) {
+                radioState.stations = httpsList;
+                document.getElementById('radio-count-label').textContent = httpsList.length + ' canlı kanal';
+                renderRadioStations();
+                return;
+              }
+            }
+          } catch (err) { /* try next mirror */ }
+        }
+        radioState.stations = FALLBACK_RADIOS;
+        document.getElementById('radio-count-label').textContent = FALLBACK_RADIOS.length + ' seçili kanal';
+        renderRadioStations();
+      }
+
+      function renderRadioStations() {
+        const grid = document.getElementById('radio-stations-grid');
+        if (!radioState.stations.length) {
+          grid.innerHTML = '<div class="col-span-full editorial-card p-6 text-center text-xs text-muted">Aramanıza uygun radyo bulunamadı.</div>';
+          return;
+        }
+        grid.innerHTML = radioState.stations.map((st, idx) => {
+          const active = radioState.activeStation && radioState.activeStation.stationuuid === st.stationuuid;
+          const tagText = (st.tags || st.countrycode || 'Canlı').split(',').slice(0, 2).join(' · ');
+          return `
+            <button type="button" data-play-radio="${idx}" class="text-left p-3.5 rounded-xl border transition flex items-center justify-between gap-3 ${active ? 'border-forest bg-forestLight/70' : 'border-hairline bg-surface hover:border-ink/30'}">
+              <div class="min-w-0">
+                <p class="text-sm font-medium text-ink truncate">${escapeHtml(st.name)}</p>
+                <p class="text-[11px] text-muted truncate mt-0.5">${escapeHtml(tagText)}</p>
+              </div>
+              <span class="w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${active && radioState.playing ? 'bg-forest text-paper' : 'bg-paper border border-hairline text-ink'}">
+                <i data-lucide="${active && radioState.playing ? 'pause' : 'play'}" class="w-3.5 h-3.5 fill-current"></i>
+              </span>
+            </button>
+          `;
+        }).join('');
+        lucide.createIcons();
+      }
+
+      function playRadioByIndex(idx) {
+        const st = radioState.stations[idx];
+        if (!st) return;
+        // Stop MP3 & ambient audio if playing
+        mp3Audio.pause();
+        radioState.mp3Playing = false;
+        document.getElementById('mp3-play-icon').setAttribute('data-lucide', 'play');
+        if (state.audioPlaying) toggleAudio();
+
+        if (radioState.activeStation && radioState.activeStation.stationuuid === st.stationuuid && radioState.playing) {
+          radioAudio.pause();
+          radioState.playing = false;
+          document.getElementById('radio-now-status').textContent = 'Duraklatıldı';
+          document.getElementById('radio-play-text').textContent = 'Oynat';
+          document.getElementById('radio-play-icon').setAttribute('data-lucide', 'play');
+          renderRadioStations();
+          updateFloatingMediaBar();
+          lucide.createIcons();
+          return;
+        }
+
+        radioState.activeStation = st;
+        document.getElementById('radio-now-title').textContent = st.name;
+        document.getElementById('radio-now-status').textContent = 'Bağlanıyor...';
+        radioAudio.src = st.url_resolved;
+        radioAudio.play().then(() => {
+          radioState.playing = true;
+          document.getElementById('radio-now-status').textContent = 'Canlı Yayın Çalıyor';
+          document.getElementById('radio-play-text').textContent = 'Duraklat';
+          document.getElementById('radio-play-icon').setAttribute('data-lucide', 'pause');
+          renderRadioStations();
+          updateFloatingMediaBar();
+          lucide.createIcons();
+        }).catch(() => {
+          radioState.playing = false;
+          document.getElementById('radio-now-status').textContent = 'Bu kanal şu an yanıt vermiyor — başka bir kanal deneyin';
+          showToast('Bu radyo yayınına şu an bağlanılamadı, başka bir kanalı seçebilirsiniz.');
+          renderRadioStations();
+          updateFloatingMediaBar();
+        });
+      }
+
+      document.addEventListener('click', (e) => {
+        const btn = e.target.closest('[data-play-radio]');
+        if (btn) playRadioByIndex(Number(btn.dataset.playRadio));
+      });
+
+      document.getElementById('radio-play-pause-btn').addEventListener('click', () => {
+        if (!radioState.activeStation && radioState.stations.length) {
+          playRadioByIndex(0);
+          return;
+        }
+        if (radioState.playing) {
+          radioAudio.pause();
+          radioState.playing = false;
+          document.getElementById('radio-now-status').textContent = 'Duraklatıldı';
+          document.getElementById('radio-play-text').textContent = 'Oynat';
+          document.getElementById('radio-play-icon').setAttribute('data-lucide', 'play');
+        } else if (radioState.activeStation) {
+          radioAudio.play().then(() => {
+            radioState.playing = true;
+            document.getElementById('radio-now-status').textContent = 'Canlı Yayın Çalıyor';
+            document.getElementById('radio-play-text').textContent = 'Duraklat';
+            document.getElementById('radio-play-icon').setAttribute('data-lucide', 'pause');
+            updateFloatingMediaBar();
+            lucide.createIcons();
+          }).catch(() => showToast('Yayın başlatılamadı.'));
+        }
+        renderRadioStations();
+        updateFloatingMediaBar();
+        lucide.createIcons();
+      });
+
+      document.getElementById('radio-volume').addEventListener('input', (e) => {
+        const v = Number(e.target.value) / 100;
+        radioAudio.volume = v;
+        mp3Audio.volume = v;
+      });
+
+      document.querySelectorAll('.radio-cat-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.radio-cat-btn').forEach(b => {
+            const active = b === btn;
+            b.className = 'radio-cat-btn px-3 py-1 rounded-full text-xs font-medium ' +
+              (active ? 'bg-ink text-paper' : 'bg-surface border border-hairline text-muted hover:text-ink');
+          });
+          document.getElementById('radio-search-input').value = '';
+          fetchRadioStations('', btn.dataset.radioTag);
+        });
+      });
+
+      document.getElementById('radio-search-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const q = document.getElementById('radio-search-input').value.trim();
+        fetchRadioStations(q, '');
+      });
+
+      // Personal MP3 Player
+      function fmtSec(sec) {
+        if (!isFinite(sec)) return '00:00';
+        const m = Math.floor(sec / 60);
+        const s = Math.floor(sec % 60);
+        return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+      }
+
+      function renderMp3Playlist() {
+        const listEl = document.getElementById('mp3-playlist');
+        if (!radioState.mp3Files.length) {
+          listEl.innerHTML = '<p class="py-4 text-center text-muted">Birden fazla MP3 seçerek kendi çalma listenizi oluşturabilirsiniz.</p>';
+          return;
+        }
+        listEl.innerHTML = radioState.mp3Files.map((f, i) => `
+          <button type="button" data-play-mp3="${i}" class="w-full py-2 px-2 flex items-center justify-between gap-2 text-left rounded hover:bg-paper ${i === radioState.mp3Index ? 'text-forest font-medium bg-forestLight/50' : 'text-ink'}">
+            <span class="truncate">${i + 1}. ${escapeHtml(f.name)}</span>
+            <span class="text-[11px] text-muted shrink-0">${i === radioState.mp3Index && radioState.mp3Playing ? 'Çalıyor' : 'Oynat'}</span>
+          </button>
+        `).join('');
+      }
+
+      function playMp3At(idx) {
+        if (idx < 0 || idx >= radioState.mp3Files.length) return;
+        radioAudio.pause();
+        radioState.playing = false;
+        document.getElementById('radio-play-text').textContent = 'Oynat';
+        if (state.audioPlaying) toggleAudio();
+
+        radioState.mp3Index = idx;
+        const track = radioState.mp3Files[idx];
+        mp3Audio.src = track.url;
+        mp3Audio.play().then(() => {
+          radioState.mp3Playing = true;
+          document.getElementById('mp3-current-title').textContent = track.name;
+          document.getElementById('mp3-play-icon').setAttribute('data-lucide', 'pause');
+          renderMp3Playlist();
+          renderRadioStations();
+          updateFloatingMediaBar();
+          lucide.createIcons();
+        }).catch(() => showToast('Ses dosyası oynatılamadı.'));
+      }
+
+      document.getElementById('mp3-file-input').addEventListener('change', (e) => {
+        const files = Array.from(e.target.files || []);
+        if (!files.length) return;
+        files.forEach(file => {
+          radioState.mp3Files.push({ name: file.name.replace(/\.[^.]+$/, ''), url: URL.createObjectURL(file) });
+        });
+        renderMp3Playlist();
+        if (radioState.mp3Index === -1) playMp3At(0);
+        showToast(files.length + ' ses dosyası listeye eklendi.');
+        e.target.value = '';
+      });
+
+      document.addEventListener('click', (e) => {
+        const btn = e.target.closest('[data-play-mp3]');
+        if (btn) playMp3At(Number(btn.dataset.playMp3));
+      });
+
+      document.getElementById('mp3-toggle-btn').addEventListener('click', () => {
+        if (!radioState.mp3Files.length) {
+          showToast('Önce "+ MP3 Seç" düğmesinden ses dosyası ekleyin.');
+          return;
+        }
+        if (radioState.mp3Index === -1) { playMp3At(0); return; }
+        if (radioState.mp3Playing) {
+          mp3Audio.pause();
+          radioState.mp3Playing = false;
+          document.getElementById('mp3-play-icon').setAttribute('data-lucide', 'play');
+        } else {
+          mp3Audio.play();
+          radioState.mp3Playing = true;
+          document.getElementById('mp3-play-icon').setAttribute('data-lucide', 'pause');
+        }
+        renderMp3Playlist();
+        updateFloatingMediaBar();
+        lucide.createIcons();
+      });
+
+      document.getElementById('mp3-prev-btn').addEventListener('click', () => {
+        if (!radioState.mp3Files.length) return;
+        playMp3At((radioState.mp3Index - 1 + radioState.mp3Files.length) % radioState.mp3Files.length);
+      });
+      document.getElementById('mp3-next-btn').addEventListener('click', () => {
+        if (!radioState.mp3Files.length) return;
+        playMp3At((radioState.mp3Index + 1) % radioState.mp3Files.length);
+      });
+
+      mp3Audio.addEventListener('timeupdate', () => {
+        const pct = mp3Audio.duration ? (mp3Audio.currentTime / mp3Audio.duration) * 100 : 0;
+        document.getElementById('mp3-seek').value = pct;
+        document.getElementById('mp3-time-label').textContent = fmtSec(mp3Audio.currentTime) + ' / ' + fmtSec(mp3Audio.duration);
+      });
+      mp3Audio.addEventListener('ended', () => {
+        if (radioState.mp3Files.length > 1) playMp3At((radioState.mp3Index + 1) % radioState.mp3Files.length);
+      });
+      document.getElementById('mp3-seek').addEventListener('input', (e) => {
+        if (mp3Audio.duration) mp3Audio.currentTime = (Number(e.target.value) / 100) * mp3Audio.duration;
+      });
+
+      // =====================================================
+      // LIVE TV CHANNELS (100% SITE-ICI OYNATICI — YONLENDIRMESIZ)
+      // =====================================================
+      const TV_CHANNELS = [
+        { id: 'trt1', name: 'TRT 1', cat: 'Ulusal · HD Canlı', type: 'hls', src: 'https://tv-trt1.medya.trt.com.tr/master.m3u8' },
+        { id: 'trthaber', name: 'TRT Haber', cat: 'Haber · HD Canlı', type: 'hls', src: 'https://tv-trthaber.medya.trt.com.tr/master.m3u8', fallbackEmbed: 'https://www.youtube.com/embed/live_stream?channel=UCBgTP2LOFVPmq15W-RH-WXA&autoplay=1' },
+        { id: 'trt2', name: 'TRT 2', cat: 'Kültür & Sanat · HD Canlı', type: 'hls', src: 'https://tv-trt2.medya.trt.com.tr/master.m3u8' },
+        { id: 'trtbelgesel', name: 'TRT Belgesel', cat: 'Belgesel · HD Canlı', type: 'hls', src: 'https://tv-trtbelgesel.medya.trt.com.tr/master.m3u8' },
+        { id: 'bloomberght', name: 'Bloomberg HT', cat: 'Ekonomi & Piyasa · Canlı', type: 'embed', src: 'https://www.youtube.com/embed/live_stream?channel=UCApLxl6oYQafxvykuoC2uxQ&autoplay=1' },
+        { id: 'ntv', name: 'NTV', cat: 'Haber · Canlı', type: 'embed', src: 'https://www.youtube.com/embed/live_stream?channel=UC9TDTjbOjFB9jADmPhSAPsw&autoplay=1' },
+        { id: 'cnnturk', name: 'CNN TÜRK', cat: 'Haber · Canlı', type: 'embed', src: 'https://www.youtube.com/embed/live_stream?channel=UCV6zcRug6Hqp1UX_FdyUeBg&autoplay=1' },
+        { id: 'haberturk', name: 'Habertürk TV', cat: 'Haber & Gündem · Canlı', type: 'embed', src: 'https://www.youtube.com/embed/live_stream?channel=UCn6dNfiRE_Xunu7iMyvD7AA&autoplay=1' },
+        { id: 'atv', name: 'ATV', cat: 'Ulusal · Canlı', type: 'embed', src: 'https://www.youtube.com/embed/live_stream?channel=UCUVZ7T_kwkxDOGFcDlFI-hg&autoplay=1' },
+        { id: 'halktv', name: 'Halk TV', cat: 'Haber · Canlı', type: 'embed', src: 'https://www.youtube.com/embed/live_stream?channel=UCf_ResXZzE-o18zACUEmyvQ&autoplay=1' },
+        { id: 'trtspor', name: 'TRT Spor', cat: 'Spor · HD Canlı', type: 'hls', src: 'https://tv-trtspor1.medya.trt.com.tr/master.m3u8' },
+        { id: 'trtmuzik', name: 'TRT Müzik', cat: 'Belgesel · Müzik HD', type: 'hls', src: 'https://tv-trtmuzik.medya.trt.com.tr/master.m3u8' },
+        { id: 'trtcocuk', name: 'TRT Çocuk', cat: 'Ulusal · Çocuk HD', type: 'hls', src: 'https://tv-trtcocuk.medya.trt.com.tr/master.m3u8' },
+        { id: 'trtavaz', name: 'TRT Avaz', cat: 'Belgesel · Kültür HD', type: 'hls', src: 'https://tv-trtavaz.medya.trt.com.tr/master.m3u8' }
+      ];
+      let tvFilterCat = 'Tümü';
+      let activeTvId = 'trt1';
+      let hlsInstance = null;
+
+      function stopTvStreams() {
+        const video = document.getElementById('tv-hls-video');
+        const iframe = document.getElementById('tv-player-iframe');
+        if (hlsInstance) {
+          hlsInstance.destroy();
+          hlsInstance = null;
+        }
+        video.pause();
+        video.removeAttribute('src');
+        video.load();
+        iframe.src = '';
+      }
+
+      function playTvChannel(ch) {
+        if (!ch) return;
+        // Pause radio/mp3 so audio doesn't overlap
+        stopAllStreamAudio();
+        stopTvStreams();
+
+        activeTvId = ch.id;
+        const video = document.getElementById('tv-hls-video');
+        const iframe = document.getElementById('tv-player-iframe');
+        document.getElementById('tv-active-title').textContent = ch.name + ' Canlı';
+        document.getElementById('tv-active-cat').textContent = ch.cat;
+
+        if (ch.type === 'hls') {
+          iframe.classList.add('hidden');
+          video.classList.remove('hidden');
+          document.getElementById('tv-stream-mode-badge').textContent = 'Site İçi HD Yayın';
+          if (window.Hls && window.Hls.isSupported()) {
+            hlsInstance = new window.Hls({ enableWorker: true, lowLatencyMode: true });
+            hlsInstance.loadSource(ch.src);
+            hlsInstance.attachMedia(video);
+            hlsInstance.on(window.Hls.Events.MANIFEST_PARSED, () => {
+              video.play().catch(() => {});
+            });
+            hlsInstance.on(window.Hls.Events.ERROR, (ev, data) => {
+              if (data.fatal && ch.fallbackEmbed) {
+                playTvChannel({ ...ch, type: 'embed', src: ch.fallbackEmbed });
+              }
+            });
+          } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            video.src = ch.src;
+            video.play().catch(() => {});
+          } else if (ch.fallbackEmbed) {
+            playTvChannel({ ...ch, type: 'embed', src: ch.fallbackEmbed });
+          }
+        } else {
+          video.classList.add('hidden');
+          iframe.classList.remove('hidden');
+          document.getElementById('tv-stream-mode-badge').textContent = 'Site İçi Canlı Oynatıcı';
+          iframe.src = ch.src;
+        }
+        renderTvChannels();
+      }
+
+      function renderTvChannels() {
+        const listEl = document.getElementById('tv-channels-list');
+        const filtered = tvFilterCat === 'Tümü' ? TV_CHANNELS : TV_CHANNELS.filter(c => c.cat.toLowerCase().includes(tvFilterCat.toLowerCase()));
+        document.getElementById('tv-channel-count').textContent = filtered.length + ' canlı kanal hazır';
+        listEl.innerHTML = filtered.map(ch => {
+          const active = ch.id === activeTvId;
+          return `
+            <button type="button" data-select-tv="${ch.id}" class="w-full text-left p-3 rounded-xl border transition flex items-center justify-between gap-2 ${active ? 'border-forest bg-forestLight/70' : 'border-hairline bg-paper hover:border-ink/30'}">
+              <div>
+                <p class="text-sm font-medium text-ink">${escapeHtml(ch.name)}</p>
+                <p class="text-[11px] text-muted">${escapeHtml(ch.cat)}</p>
+              </div>
+              <span class="text-[11px] font-medium ${active ? 'text-terracotta' : 'text-forest'}">${active ? 'İzleniyor' : 'İzle'}</span>
+            </button>
+          `;
+        }).join('');
+      }
+
+      document.addEventListener('click', (e) => {
+        const btn = e.target.closest('[data-select-tv]');
+        if (!btn) return;
+        const ch = TV_CHANNELS.find(x => x.id === btn.dataset.selectTv);
+        if (ch) playTvChannel(ch);
+      });
+
+      document.getElementById('custom-tv-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const raw = document.getElementById('custom-tv-url').value.trim();
+        if (raw.includes('.m3u8')) {
+          playTvChannel({ id: 'custom', name: 'Özel Canlı Yayın', cat: 'HLS Akışı', type: 'hls', src: raw });
+          showToast('Canlı yayın site içinde açıldı.');
+          return;
+        }
+        const m1 = raw.match(/[?&]v=([a-zA-Z0-9_-]{11})/);
+        const m2 = raw.match(/youtu\.be\/([a-zA-Z0-9_-]{11})/);
+        const m3 = raw.match(/youtube\.com\/live\/([a-zA-Z0-9_-]{11})/);
+        const vidId = (m1 && m1[1]) || (m2 && m2[1]) || (m3 && m3[1]) || '';
+        if (!vidId) {
+          showToast('Geçerli bir YouTube canlı linki veya .m3u8 yayın adresi girin.');
+          return;
+        }
+        playTvChannel({ id: 'custom', name: 'Özel Yayın', cat: 'Site İçi Oynatıcı', type: 'embed', src: 'https://www.youtube.com/embed/' + vidId + '?autoplay=1' });
+        showToast('Yayın site içinde açıldı.');
+      });
+
+      // Auto-load TRT 1 when user first opens TV tab (prevents background video playing on Overview)
+      let tvInitialized = false;
+      document.querySelectorAll('[data-view="tv"], [data-jump="tv"]').forEach(b => {
+        b.addEventListener('click', () => {
+          if (!tvInitialized) {
+            tvInitialized = true;
+            playTvChannel(TV_CHANNELS[0]);
+          }
+        });
+      });
+
+      fetchRadioStations('', '');
+      renderTvChannels();
+
+      // =====================================================
+      // TV CATEGORY FILTER, PIP, M3U UPLOAD & COMMUNITY LIST
+      // =====================================================
+      document.querySelectorAll('.tv-cat-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          tvFilterCat = btn.dataset.tvCat;
+          document.querySelectorAll('.tv-cat-btn').forEach(b => {
+            const active = b === btn;
+            b.className = 'tv-cat-btn px-2.5 py-1 rounded-full text-[11px] font-medium ' +
+              (active ? 'bg-ink text-paper' : 'bg-paper border border-hairline text-muted');
+          });
+          renderTvChannels();
+        });
+      });
+
+      document.getElementById('tv-pip-btn').addEventListener('click', async () => {
+        const video = document.getElementById('tv-hls-video');
+        if (video.classList.contains('hidden')) {
+          showToast('Küçük ekran modu HD (HLS) kanallarda (TRT 1, TRT Haber, TRT Spor, TRT 2 vb.) çalışır.');
+          return;
+        }
+        try {
+          if (document.pictureInPictureElement) {
+            await document.exitPictureInPicture();
+          } else if (video.requestPictureInPicture) {
+            await video.requestPictureInPicture();
+          } else {
+            showToast('Tarayıcınız küçük ekran (PiP) modunu desteklemiyor.');
+          }
+        } catch (err) {
+          showToast('Önce bir HD kanal başlatıp ardından Küçük Ekran düğmesine basın.');
+        }
+      });
+
+      function parseM3uText(text) {
+        const lines = text.split(/\r?\n/);
+        let currentName = '';
+        let added = 0;
+        const existingSrcs = new Set(TV_CHANNELS.map(c => c.src));
+        for (const rawLine of lines) {
+          const line = rawLine.trim();
+          if (line.startsWith('#EXTINF')) {
+            const commaIdx = line.lastIndexOf(',');
+            currentName = commaIdx !== -1 ? line.slice(commaIdx + 1).trim() : 'Canlı Kanal';
+          } else if (line.startsWith('https://') && line.includes('.m3u8')) {
+            if (!existingSrcs.has(line) && currentName) {
+              existingSrcs.add(line);
+              const lower = currentName.toLowerCase();
+              const cat = lower.includes('spor') ? 'Spor · Canlı' :
+                          lower.includes('haber') || lower.includes('news') ? 'Haber · Canlı' :
+                          lower.includes('belgesel') || lower.includes('müzik') || lower.includes('muzik') ? 'Belgesel · Kültür' : 'Ulusal · Canlı';
+              TV_CHANNELS.push({ id: 'm3u_' + TV_CHANNELS.length, name: currentName, cat, type: 'hls', src: line });
+              added++;
+            }
+            currentName = '';
+          }
+        }
+        if (added > 0) renderTvChannels();
+        return added;
+      }
+
+      // Auto-load community Turkey Free-TV M3U8 list (HTTPS, CORS-enabled)
+      fetch('https://raw.githubusercontent.com/Free-TV/IPTV/master/playlists/playlist_turkey.m3u8')
+        .then(r => r.ok ? r.text() : '')
+        .then(txt => { if (txt) parseM3uText(txt); })
+        .catch(() => {});
+
+      document.getElementById('tv-m3u-upload').addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          const n = parseM3uText(String(ev.target.result || ''));
+          showToast(n > 0 ? n + ' canlı kanal listeye eklendi!' : 'Dosyada yeni HTTPS .m3u8 kanalı bulunamadı.');
+        };
+        reader.readAsText(file, 'UTF-8');
+        e.target.value = '';
+      });
+
+      // Radio Sleep Timer
+      let radioSleepTimer = null;
+      document.getElementById('radio-sleep-select').addEventListener('change', (e) => {
+        clearTimeout(radioSleepTimer);
+        const mins = Number(e.target.value);
+        if (mins > 0) {
+          radioSleepTimer = setTimeout(() => {
+            stopAllStreamAudio();
+            if (state.audioPlaying) toggleAudio();
+            showToast('Uyku zamanlayıcısı doldu, yayın durduruldu.');
+            document.getElementById('radio-sleep-select').value = '0';
+          }, mins * 60 * 1000);
+          showToast(mins + ' dakika sonra yayın otomatik kapanacak.');
+        }
+      });
+
+      // =====================================================
+      // FINANCIAL SIMULATOR (COMPOUND, LOAN, INFLATION)
+      // =====================================================
+      let compoundChartInstance = null;
+
+      function updateCompoundSim() {
+        const initial = Math.max(0, Number(document.getElementById('sim-initial').value) || 0);
+        const monthly = Math.max(0, Number(document.getElementById('sim-monthly').value) || 0);
+        const annualRate = Math.max(0, Number(document.getElementById('sim-rate').value) || 0) / 100;
+        const years = Math.min(30, Math.max(1, Number(document.getElementById('sim-years').value) || 5));
+        const rMonth = annualRate / 12;
+
+        const labels = [];
+        const principalArr = [];
+        const totalArr = [];
+        let bal = initial;
+        let prin = initial;
+
+        for (let y = 1; y <= years; y++) {
+          for (let m = 0; m < 12; m++) {
+            bal = bal * (1 + rMonth) + monthly;
+            prin += monthly;
+          }
+          labels.push(y + '. Yıl');
+          principalArr.push(Math.round(prin));
+          totalArr.push(Math.round(bal));
+        }
+
+        const finalTotal = totalArr[totalArr.length - 1] || initial;
+        const finalPrin = principalArr[principalArr.length - 1] || initial;
+        document.getElementById('sim-out-principal').textContent = formatTR(finalPrin, 0) + ' ₺';
+        document.getElementById('sim-out-profit').textContent = '+' + formatTR(Math.max(0, finalTotal - finalPrin), 0) + ' ₺';
+        document.getElementById('sim-out-total').textContent = formatTR(finalTotal, 0) + ' ₺';
+
+        const ctx = document.getElementById('compoundChart');
+        if (ctx && typeof Chart !== 'undefined') {
+          if (!compoundChartInstance) {
+            compoundChartInstance = new Chart(ctx, {
+              type: 'bar',
+              data: {
+                labels,
+                datasets: [
+                  { label: 'Yatırılan Ana Para', data: principalArr, backgroundColor: '#CFC8BA', borderRadius: 4 },
+                  { label: 'Bileşik Toplam', data: totalArr, backgroundColor: '#26463B', borderRadius: 4 }
+                ]
+              },
+              options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 11 } } } },
+                scales: {
+                  y: { grid: { color: '#ECE8DF' }, ticks: { color: '#666158', callback: v => formatTR(v, 0) + ' ₺' } },
+                  x: { grid: { display: false }, ticks: { color: '#666158' } }
+                }
+              }
+            });
+          } else {
+            compoundChartInstance.data.labels = labels;
+            compoundChartInstance.data.datasets[0].data = principalArr;
+            compoundChartInstance.data.datasets[1].data = totalArr;
+            compoundChartInstance.update();
+          }
+        }
+      }
+
+      function updateLoanCalc() {
+        const P = Math.max(0, Number(document.getElementById('loan-amount').value) || 0);
+        const n = Math.max(1, Number(document.getElementById('loan-months').value) || 1);
+        const r = Math.max(0, Number(document.getElementById('loan-rate').value) || 0) / 100;
+        let monthly = 0;
+        if (r === 0) {
+          monthly = P / n;
+        } else {
+          const factor = Math.pow(1 + r, n);
+          monthly = P * (r * factor) / (factor - 1);
+        }
+        const total = monthly * n;
+        const interest = Math.max(0, total - P);
+        document.getElementById('loan-out-monthly').textContent = formatTR(monthly, 0) + ' ₺';
+        document.getElementById('loan-out-total').textContent = formatTR(total, 0) + ' ₺';
+        document.getElementById('loan-out-interest').textContent = formatTR(interest, 0) + ' ₺';
+      }
+
+      function updateInflationCalc() {
+        const oldSal = Math.max(1, Number(document.getElementById('inf-old').value) || 1);
+        const newSal = Math.max(1, Number(document.getElementById('inf-new').value) || 1);
+        const inf = Math.max(0, Number(document.getElementById('inf-rate').value) || 0) / 100;
+        const needed = oldSal * (1 + inf);
+        const realPct = ((newSal / needed) - 1) * 100;
+        const el = document.getElementById('inf-result-text');
+        if (realPct >= 0) {
+          el.textContent = `Alım gücünüz reel olarak +%${formatTR(realPct, 1)} arttı (enflasyonu korumak için gereken: ${formatTR(needed, 0)} ₺).`;
+          el.className = 'text-xs p-3 rounded-lg bg-forestLight/70 text-forest font-medium';
+        } else {
+          el.textContent = `Alım gücünüz reel olarak %${formatTR(Math.abs(realPct), 1)} azaldı (aynı alım gücü için gereken: ${formatTR(needed, 0)} ₺).`;
+          el.className = 'text-xs p-3 rounded-lg bg-terracottaLight text-terracotta font-medium';
+        }
+      }
+
+      ['sim-initial', 'sim-monthly', 'sim-rate', 'sim-years'].forEach(id => document.getElementById(id).addEventListener('input', updateCompoundSim));
+      ['loan-amount', 'loan-months', 'loan-rate'].forEach(id => document.getElementById(id).addEventListener('input', updateLoanCalc));
+      ['inf-old', 'inf-new', 'inf-rate'].forEach(id => document.getElementById(id).addEventListener('input', updateInflationCalc));
+
+      document.getElementById('sim-export-loan-csv').addEventListener('click', () => {
+        const P = Math.max(0, Number(document.getElementById('loan-amount').value) || 0);
+        const n = Math.max(1, Number(document.getElementById('loan-months').value) || 1);
+        const r = Math.max(0, Number(document.getElementById('loan-rate').value) || 0) / 100;
+        const monthly = r === 0 ? P / n : P * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+        let bal = P;
+        const rows = ['Taksit No;Taksit Tutari (TL);Faiz (TL);Anapara (TL);Kalan Borc (TL)'];
+        for (let i = 1; i <= n; i++) {
+          const interest = bal * r;
+          const prin = monthly - interest;
+          bal = Math.max(0, bal - prin);
+          rows.push(`${i};${monthly.toFixed(2)};${interest.toFixed(2)};${prin.toFixed(2)};${bal.toFixed(2)}`);
+        }
+        triggerDownload('pusula-kredi-odeme-plani.csv', '\uFEFF' + rows.join('\n'), 'text/csv;charset=utf-8;');
+        showToast('Kredi ödeme planı Excel (CSV) olarak indirildi.');
+      });
+
+      // =====================================================
+      // TURKISH 5-LETTER WORDLE + MEMORY TRAINER
+      // =====================================================
+      const TR_WORDS = [
+        'GÜNEŞ','DENİZ','SABAH','KİTAP','MÜZİK','HAYAL','BAHAR','ÇİÇEK','BULUT','KALEM',
+        'KAĞIT','KAHVE','ŞEHİR','SOKAK','ZAMAN','HUZUR','SEVGİ','RADYO','EKRAN','BÜTÇE',
+        'ALTIN','DOLAR','BORSA','FİKİR','ÇÖZÜM','HEDEF','GÜVEN','DOĞAL','SAHNE','SERGİ',
+        'ROMAN','MİRAS','VAKİT','NİSAN','KASIM','EYLÜL','MAYIS','ŞUBAT','PAZAR','AKŞAM',
+        'YARIN','BUGÜN','DÜNYA','İNSAN','HAYAT'
+      ];
+      const TR_KEYS = [
+        ['E','R','T','Y','U','I','O','P','Ğ','Ü'],
+        ['A','S','D','F','G','H','J','K','L','Ş','İ'],
+        ['GİR','Z','C','V','B','N','M','Ö','Ç','SİL']
+      ];
+      const wState = { target: '', guesses: [], current: '', over: false, streak: 0 };
+
+      function trUpper(ch) {
+        return ch === 'i' ? 'İ' : ch === 'ı' ? 'I' : ch.toLocaleUpperCase('tr-TR');
+      }
+
+      function initWordle(randomWord = false) {
+        const dayIdx = Math.floor(Date.now() / 86400000) % TR_WORDS.length;
+        wState.target = randomWord ? TR_WORDS[Math.floor(Math.random() * TR_WORDS.length)] : TR_WORDS[dayIdx];
+        wState.guesses = [];
+        wState.current = '';
+        wState.over = false;
+        document.getElementById('wordle-status').textContent = '';
+        renderWordle();
+      }
+
+      function evalGuess(guess, target) {
+        const res = Array(5).fill('absent');
+        const tArr = Array.from(target);
+        const gArr = Array.from(guess);
+        for (let i = 0; i < 5; i++) {
+          if (gArr[i] === tArr[i]) { res[i] = 'correct'; tArr[i] = null; }
+        }
+        for (let i = 0; i < 5; i++) {
+          if (res[i] === 'absent') {
+            const idx = tArr.indexOf(gArr[i]);
+            if (idx !== -1) { res[i] = 'present'; tArr[idx] = null; }
+          }
+        }
+        return res;
+      }
+
+      function renderWordle() {
+        const board = document.getElementById('wordle-board');
+        const keyStates = {};
+        let html = '';
+        for (let r = 0; r < 6; r++) {
+          html += '<div class="grid grid-cols-5 gap-2">';
+          const word = r < wState.guesses.length ? wState.guesses[r] : (r === wState.guesses.length ? wState.current : '');
+          const chars = Array.from(word);
+          const evals = r < wState.guesses.length ? evalGuess(word, wState.target) : null;
+          for (let c = 0; c < 5; c++) {
+            const ch = chars[c] || '';
+            let cls = 'border-hairline bg-paper text-ink';
+            if (evals) {
+              if (evals[c] === 'correct') { cls = 'border-forest bg-forest text-paper'; keyStates[ch] = 'correct'; }
+              else if (evals[c] === 'present') { cls = 'border-terracotta bg-terracotta text-paper'; if (keyStates[ch] !== 'correct') keyStates[ch] = 'present'; }
+              else { cls = 'border-stonewarm bg-stonewarm text-muted'; if (!keyStates[ch]) keyStates[ch] = 'absent'; }
+            } else if (ch) {
+              cls = 'border-ink/40 bg-surface text-ink';
+            }
+            html += `<div class="h-12 rounded-lg border-2 flex items-center justify-center font-semibold text-lg ${cls}">${escapeHtml(ch)}</div>`;
+          }
+          html += '</div>';
+        }
+        board.innerHTML = html;
+
+        const kb = document.getElementById('wordle-keyboard');
+        kb.innerHTML = TR_KEYS.map(row => `
+          <div class="flex justify-center gap-1">
+            ${row.map(k => {
+              const st = keyStates[k];
+              const cls = st === 'correct' ? 'bg-forest text-paper border-forest' :
+                          st === 'present' ? 'bg-terracotta text-paper border-terracotta' :
+                          st === 'absent' ? 'bg-stonewarm text-muted border-stonewarm' :
+                          'bg-surface text-ink border-hairline hover:border-ink/40';
+              const wide = (k === 'GİR' || k === 'SİL') ? 'px-2.5 text-[11px]' : 'w-8 sm:w-9 text-xs';
+              return `<button type="button" data-wkey="${k}" class="${wide} h-9 rounded-md border font-medium transition ${cls}">${k}</button>`;
+            }).join('')}
+          </div>
+        `).join('');
+        document.getElementById('wordle-streak-badge').textContent = 'Seri: ' + wState.streak;
+      }
+
+      function handleWordleKey(key) {
+        if (wState.over) return;
+        if (key === 'SİL' || key === 'BACKSPACE') {
+          const arr = Array.from(wState.current);
+          arr.pop();
+          wState.current = arr.join('');
+          renderWordle();
+          return;
+        }
+        if (key === 'GİR' || key === 'ENTER') {
+          if (Array.from(wState.current).length < 5) {
+            document.getElementById('wordle-status').textContent = 'Lütfen 5 harf girin.';
+            return;
+          }
+          wState.guesses.push(wState.current);
+          if (wState.current === wState.target) {
+            wState.over = true;
+            wState.streak++;
+            document.getElementById('wordle-status').textContent = `Harika! ${wState.guesses.length}. denemede bildiniz.`;
+          } else if (wState.guesses.length >= 6) {
+            wState.over = true;
+            wState.streak = 0;
+            document.getElementById('wordle-status').textContent = 'Doğru kelime: ' + wState.target;
+          } else {
+            document.getElementById('wordle-status').textContent = '';
+          }
+          wState.current = '';
+          renderWordle();
+          return;
+        }
+        if (Array.from(wState.current).length < 5 && /^[A-ZÇĞİÖŞÜ]$/.test(key)) {
+          wState.current += key;
+          renderWordle();
+        }
+      }
+
+      document.addEventListener('click', (e) => {
+        const kbtn = e.target.closest('[data-wkey]');
+        if (kbtn) handleWordleKey(kbtn.dataset.wkey);
+      });
+      document.addEventListener('keydown', (e) => {
+        if (state.activeView !== 'games') return;
+        if (document.activeElement && ['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+        if (e.key === 'Backspace') handleWordleKey('SİL');
+        else if (e.key === 'Enter') handleWordleKey('GİR');
+        else if (e.key.length === 1) handleWordleKey(trUpper(e.key));
+      });
+      document.getElementById('wordle-new-btn').addEventListener('click', () => initWordle(true));
+      document.getElementById('wordle-share-btn').addEventListener('click', () => {
+        const gridTxt = wState.guesses.map(g => evalGuess(g, wState.target).map(e => e === 'correct' ? '🟩' : e === 'present' ? '🟧' : '⬜').join('')).join('\n');
+        const shareStr = `Pusula Günün Kelimesi (${wState.guesses.length}/6)\n${gridTxt}\n${window.location.href.startsWith('http') ? window.location.href : 'https://pusula-web-opal.vercel.app'}`;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(shareStr).then(() => showToast('Skorunuz kopyalandı! WhatsApp veya X’te yapıştırabilirsiniz.'));
+        } else {
+          showToast('Skor hazırlandı.');
+        }
+      });
+
+      // Memory Sequence Game
+      const memState = { level: 1, best: 0, seq: '' };
+      let memTimeout = null;
+      function startMemoryRound() {
+        const digits = memState.level + 2;
+        let seq = '';
+        for (let i = 0; i < digits; i++) seq += Math.floor(Math.random() * 10);
+        memState.seq = seq;
+        document.getElementById('mem-level-label').textContent = `Seviye ${memState.level} · ${digits} Basamak`;
+        document.getElementById('mem-number-display').textContent = seq;
+        document.getElementById('mem-start-btn').classList.add('hidden');
+        document.getElementById('mem-answer-form').classList.add('hidden');
+        document.getElementById('mem-feedback').textContent = 'Sayıyı aklınızda tutun...';
+        clearTimeout(memTimeout);
+        memTimeout = setTimeout(() => {
+          document.getElementById('mem-number-display').textContent = '•'.repeat(digits);
+          document.getElementById('mem-answer-form').classList.remove('hidden');
+          document.getElementById('mem-answer-input').value = '';
+          document.getElementById('mem-answer-input').focus();
+          document.getElementById('mem-feedback').textContent = 'Şimdi gördüğünüz sayıyı yazın.';
+        }, Math.min(4000, 1400 + digits * 320));
+      }
+      document.getElementById('mem-start-btn').addEventListener('click', startMemoryRound);
+      document.getElementById('mem-answer-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const ans = document.getElementById('mem-answer-input').value.trim();
+        if (ans === memState.seq) {
+          if (memState.level > memState.best) memState.best = memState.level;
+          document.getElementById('mem-best-badge').textContent = 'Rekor: ' + memState.best;
+          memState.level++;
+          document.getElementById('mem-feedback').textContent = 'Doğru! Sonraki seviyeye geçiliyor...';
+          setTimeout(startMemoryRound, 700);
+        } else {
+          document.getElementById('mem-feedback').textContent = `Yanlış (Doğrusu: ${memState.seq}). Tekrar deneyebilirsiniz.`;
+          memState.level = 1;
+          document.getElementById('mem-answer-form').classList.add('hidden');
+          document.getElementById('mem-start-btn').classList.remove('hidden');
+          document.getElementById('mem-start-btn').textContent = 'Yeniden Başlat';
+        }
+      });
+
+      // =====================================================
+      // CV / RESUME LIVE PREVIEW & PDF PRINT
+      // =====================================================
+      function updateCvPreview() {
+        document.getElementById('cv-prev-name').textContent = document.getElementById('cv-name').value || 'Ad Soyad';
+        document.getElementById('cv-prev-role').textContent = document.getElementById('cv-role').value || '';
+        document.getElementById('cv-prev-contact').textContent = document.getElementById('cv-contact').value || '';
+        document.getElementById('cv-prev-summary').textContent = document.getElementById('cv-summary').value || '';
+        const expLines = (document.getElementById('cv-exp').value || '').split('\n').filter(l => l.trim());
+        document.getElementById('cv-prev-exp').innerHTML = expLines.map(l => `<li>${escapeHtml(l)}</li>`).join('');
+        const skills = (document.getElementById('cv-skills').value || '').split(',').map(x => x.trim()).filter(Boolean);
+        document.getElementById('cv-prev-skills').innerHTML = skills.map(sk => `<span class="px-2 py-0.5 rounded bg-paper border border-hairline text-[11px] text-ink">${escapeHtml(sk)}</span>`).join('');
+      }
+      ['cv-name', 'cv-role', 'cv-contact', 'cv-summary', 'cv-exp', 'cv-skills'].forEach(id => document.getElementById(id).addEventListener('input', updateCvPreview));
+      document.getElementById('cv-export-pdf-btn').addEventListener('click', () => {
+        const prevHtml = document.getElementById('cv-live-preview').innerHTML;
+        const win = window.open('', '_blank', 'width=820,height=960');
+        if (!win) {
+          showToast('Lütfen tarayıcıda açılır pencerelere izin verin.');
+          return;
+        }
+        win.document.write(`<!DOCTYPE html><html lang="tr"><head><meta charset="UTF-8"><title>Pusula CV</title><style>body{font-family:Georgia,serif;color:#1D1B18;max-width:740px;margin:40px auto;padding:0 24px;line-height:1.55;}h4{font-size:28px;margin:0 0 4px;}ul{padding-left:18px;}li{margin-bottom:6px;}span{display:inline-block;border:1px solid #DDD;padding:2px 8px;border-radius:4px;margin:2px 4px 2px 0;font-size:12px;font-family:sans-serif;}</style></head><body>${prevHtml}<script>window.onload=function(){window.print();}<\/script></body></html>`);
+        win.document.close();
+      });
+
+      updateCompoundSim();
+      updateLoanCalc();
+      updateInflationCalc();
+      initWordle(false);
+      updateCvPreview();
+
+      // =====================================================
+      // PWA INSTALL (ANDROID 1-CLICK + IOS + OPTIONAL APK)
+      // =====================================================
+      let deferredInstallPrompt = null;
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredInstallPrompt = e;
+        document.getElementById('pwa-install-status-badge').textContent = 'Tek Tıkla Kuruluma Hazır ✓';
+      });
+      window.addEventListener('appinstalled', () => {
+        deferredInstallPrompt = null;
+        document.getElementById('pwa-install-status-badge').textContent = 'Cihazınıza Kuruldu ✓';
+        showToast('Pusula cihazınıza uygulama olarak kuruldu!');
+      });
+
+      document.getElementById('pwa-android-install-btn').addEventListener('click', async () => {
+        if (deferredInstallPrompt) {
+          deferredInstallPrompt.prompt();
+          const { outcome } = await deferredInstallPrompt.userChoice;
+          if (outcome === 'accepted') showToast('Pusula kuruluyor...');
+          deferredInstallPrompt = null;
+        } else {
+          showToast('Chrome sağ üst menüden (⋮) "Uygulamayı Yükle" veya "Ana Ekrana Ekle" seçeneğine dokunun.');
+        }
+      });
+
+      document.getElementById('copy-mobile-link-btn').addEventListener('click', () => {
+        const url = window.location.href.startsWith('http') ? window.location.href : 'https://pusula-web-opal.vercel.app';
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(url).then(() => showToast('Mobil kurulum adresi kopyalandı!'));
+        } else {
+          showToast(url);
+        }
+      });
+
+      if (cfg.ANDROID_APK_URL && cfg.ANDROID_APK_URL.startsWith('http')) {
+        const apkBtn = document.getElementById('android-apk-download-btn');
+        apkBtn.href = cfg.ANDROID_APK_URL;
+        apkBtn.classList.remove('hidden');
+      }
+
+      // =====================================================
       // INITIAL RENDER & AUTO-POLLING TIMERS
       // =====================================================
       renderHabits();
@@ -3250,6 +4832,11 @@
       setInterval(fetchLiveMarkets, 15000);
       setInterval(fetchLiveNews, 60000);
     })();
+  </script>
+<script>
+    if ('serviceWorker' in navigator && location.protocol === 'https:') {
+      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
+    }
   </script>
 </body>
 </html>
