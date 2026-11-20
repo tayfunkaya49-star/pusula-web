@@ -7,7 +7,7 @@
  */
 window.PUSULA_CONFIG = {
   // Supabase -> Project Settings -> API
-  SUPABASE_URL: "[https://nvdnhvsicxtvxhocsowm.supabase.co](https://nvdnhvsicxtvxhocsowm.supabase.co)",
+ SUPABASE_URL: "https://nvdnhvsicxtvxhocsowm.supabase.co",
   SUPABASE_ANON_KEY: "sb_publishable_j8CHJLtgQqebVlhrBI58OQ_0Pm6oOJa",
 
   // Ödeme Linkleri (iyziLink, Lemon Squeezy veya Stripe Checkout)
