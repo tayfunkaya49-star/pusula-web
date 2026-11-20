@@ -4,6 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pusula — Kişisel Yaşam, Gündem ve Üretkenlik Merkezi</title>
+  <meta name="description" content="Günlük planlama, canlı piyasa ve haber akışı, bütçe-abonelik takibi, odak müziği ve Excel/PDF ofis araçları tek sade merkezde." />
+  <meta property="og:title" content="Pusula — Kişisel Yaşam, Gündem ve Üretkenlik Merkezi" />
+  <meta property="og:description" content="Haber, piyasa, günlük plan, odak müziği, bütçe ve Excel/PDF araçlarını tek çatı altında toplayan kişisel çalışma alanınız." />
+  <meta property="og:type" content="website" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.47.10/dist/umd/supabase.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet" />
@@ -139,7 +144,6 @@
     }
   </style>
   <script src="./config.js"></script>
-  <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
 </head>
 <body class="min-h-screen flex flex-col lg:flex-row overflow-x-hidden">
 
@@ -273,6 +277,10 @@
           <p class="text-[11px] text-muted mt-1 leading-snug">Bulut yedekleme, akşam teması ve gelişmiş şablonlar.</p>
         </button>
 
+        <button id="sidebar-auth-btn" type="button" class="w-full flex items-center justify-between px-3 py-2 rounded-lg border border-hairline bg-surface hover:border-ink/30 text-xs font-medium text-ink transition">
+          <span class="flex items-center gap-2 truncate"><i data-lucide="user-circle" class="w-3.5 h-3.5 text-forest shrink-0"></i> <span id="sidebar-auth-label" class="truncate">Hesap / Bulut Kayıt</span></span>
+          <span id="cloud-sync-badge" class="text-[10px] text-muted shrink-0">Yerel</span>
+        </button>
         <button id="open-customize-btn" type="button" class="w-full flex items-center justify-between px-3 py-2 rounded-lg border border-hairline bg-surface hover:border-ink/30 text-xs font-medium text-ink transition">
           <span class="flex items-center gap-2"><i data-lucide="sliders-horizontal" class="w-3.5 h-3.5 text-forest"></i> Alanımı Özelleştir</span>
           <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-muted"></i>
@@ -303,6 +311,13 @@
           <i data-lucide="search" class="w-3.5 h-3.5"></i>
           <span>Hızlı Ara</span>
           <kbd class="text-[10px] px-1.5 py-0.5 rounded bg-paper border border-hairline text-muted">Ctrl K</kbd>
+        </button>
+        <button id="share-site-btn" type="button" class="p-1.5 rounded-lg border border-hairline bg-surface hover:border-ink/30 text-ink transition" title="Siteyi Paylaş" aria-label="Siteyi Paylaş">
+          <i data-lucide="share-2" class="w-3.5 h-3.5 text-forest"></i>
+        </button>
+        <button id="top-auth-btn" type="button" class="px-2.5 py-1.5 rounded-lg border border-forest/30 bg-forestLight/70 hover:bg-forestLight text-xs font-medium text-forest flex items-center gap-1.5 transition whitespace-nowrap">
+          <i data-lucide="user" class="w-3.5 h-3.5"></i>
+          <span id="top-auth-label">Giriş / Üye Ol</span>
         </button>
         <button id="theme-toggle-btn" type="button" title="Akşam / Gündüz Teması" class="p-1.5 rounded-lg border border-hairline bg-surface hover:border-ink/30 text-ink transition">
           <i data-lucide="moon" class="w-3.5 h-3.5"></i>
@@ -1114,51 +1129,147 @@
   </div>
 
   <!-- Pusula Pro Membership Modal -->
-  <div id="pro-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-ink/45 p-4">
-    <div class="bg-surface border border-hairline rounded-xl max-w-xl w-full p-6 space-y-5">
+  <div id="pro-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-ink/45 p-4 overflow-y-auto">
+    <div class="bg-surface border border-hairline rounded-xl max-w-2xl w-full p-6 space-y-5 my-auto">
       <div class="flex items-start justify-between gap-4">
         <div>
-          <span class="text-[11px] uppercase tracking-widest text-forest font-semibold">Üyelik &amp; Büyüme Modeli</span>
-          <h3 class="font-editorial text-3xl text-ink mt-1">Pusula Pro</h3>
-          <p class="text-xs text-muted mt-1">Temel tüm araçlar her zaman ücretsiz. Pro ile tüm cihazlarda senkronizasyon ve gelişmiş stüdyo açılır.</p>
+          <span class="text-[11px] uppercase tracking-widest text-forest font-semibold">Pusula Üyelik Planları</span>
+          <h3 class="font-editorial text-3xl text-ink mt-1">Pusula Pro ile Sınırları Kaldırın</h3>
+          <p class="text-xs text-muted mt-1">Tüm cihazlarınızda otomatik bulut senkronizasyonu, gelişmiş belge şablonları ve reklamsız deneyim.</p>
         </div>
         <button id="close-pro-modal" type="button" class="p-1.5 text-muted hover:text-ink" aria-label="Kapat">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
 
+      <!-- Billing Cycle Toggle -->
+      <div class="flex items-center justify-center gap-2 bg-paper p-1.5 rounded-lg border border-hairline w-fit mx-auto text-xs">
+        <button type="button" id="bill-monthly-btn" class="px-3.5 py-1.5 rounded-md bg-ink text-paper font-medium transition">Aylık</button>
+        <button type="button" id="bill-yearly-btn" class="px-3.5 py-1.5 rounded-md text-muted hover:text-ink font-medium transition flex items-center gap-1.5">
+          Yıllık <span class="text-[10px] px-1.5 py-0.5 rounded bg-forestLight text-forest font-semibold">%25 İndirim</span>
+        </button>
+      </div>
+
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-        <div class="p-4 rounded-xl bg-paper border border-hairline space-y-2.5">
-          <p class="font-semibold text-sm text-ink">Standart (Ücretsiz)</p>
-          <ul class="space-y-1.5 text-muted">
-            <li>• Canlı haber ve piyasa takibi</li>
-            <li>• Günlük plan, alışkanlık ve fikir panosu</li>
-            <li>• Odak müziği ve izleme listeleri</li>
-            <li>• Temel Excel/CSV ve PDF yazdırma</li>
-          </ul>
-        </div>
-        <div class="p-4 rounded-xl bg-forestLight/70 border border-forest/30 space-y-2.5">
-          <div class="flex items-center justify-between">
-            <p class="font-semibold text-sm text-forest">Pusula Pro</p>
-            <span class="text-[11px] font-medium text-forest">Örnek Plan</span>
+        <div class="p-5 rounded-xl bg-paper border border-hairline flex flex-col justify-between space-y-4">
+          <div class="space-y-2.5">
+            <div class="flex items-baseline justify-between">
+              <p class="font-semibold text-base text-ink">Standart</p>
+              <span class="font-editorial text-2xl text-ink">Ücretsiz</span>
+            </div>
+            <ul class="space-y-2 text-muted">
+              <li>• Canlı haber ve piyasa takibi</li>
+              <li>• Günlük plan, alışkanlık ve fikir panosu</li>
+              <li>• Odak müziği ve izleme listeleri</li>
+              <li>• Temel Excel/CSV ve PDF yazdırma</li>
+            </ul>
           </div>
-          <ul class="space-y-1.5 text-ink">
-            <li>• Tüm cihazlar arası bulut yedekleme</li>
-            <li>• Akşam / Koyu Ceviz özel okuma teması</li>
-            <li>• Profesyonel proje &amp; bütçe PDF şablonları</li>
-            <li>• Reklamsız deneyim &amp; öncelikli canlı veri</li>
-          </ul>
+          <button type="button" id="pro-free-continue-btn" class="w-full py-2 rounded-lg border border-hairline bg-surface text-ink font-medium hover:border-ink/30 transition">Ücretsiz Devam Et</button>
+        </div>
+
+        <div class="p-5 rounded-xl bg-forestLight/75 border-2 border-forest/40 flex flex-col justify-between space-y-4">
+          <div class="space-y-2.5">
+            <div class="flex items-baseline justify-between">
+              <p class="font-semibold text-base text-forest">Pusula Pro</p>
+              <div class="text-right">
+                <span id="pro-price-display" class="font-editorial text-2xl text-ink tabular">149 ₺</span>
+                <span id="pro-period-display" class="text-[11px] text-muted">/ ay</span>
+              </div>
+            </div>
+            <ul class="space-y-2 text-ink">
+              <li>• <strong>Sınırsız Bulut Kayıt:</strong> Telefon ve bilgisayarda anlık eşitleme</li>
+              <li>• <strong>Akşam Okuma Teması</strong> &amp; özel görünüm ayarları</li>
+              <li>• <strong>Profesyonel Şablonlar:</strong> Proje teklifi, bütçe &amp; rapor PDF</li>
+              <li>• <strong>Reklamsız Canlı Akış</strong> ve öncelikli destek</li>
+            </ul>
+          </div>
+          <button type="button" id="pro-checkout-btn" class="w-full py-2.5 rounded-lg bg-forest hover:bg-forest/90 text-paper font-medium transition flex items-center justify-center gap-1.5">
+            <i data-lucide="credit-card" class="w-3.5 h-3.5"></i> Pusula Pro’ya Geç
+          </button>
         </div>
       </div>
 
-      <form id="pro-signup-form" class="space-y-2.5 pt-2 border-t border-hairline">
-        <label for="pro-email-input" class="block text-xs font-medium text-ink">Erken Erişim / Pro Önizlemeyi Etkinleştir</label>
+      <form id="pro-signup-form" class="space-y-2 pt-3 border-t border-hairline">
+        <label for="pro-email-input" class="block text-xs font-medium text-ink">Veya 7 Günlük Pro Önizlemeyi Hemen Deneyin</label>
         <div class="flex flex-col sm:flex-row gap-2">
           <input id="pro-email-input" type="email" required placeholder="ornek@eposta.com" class="flex-1 bg-paper border border-hairline rounded-lg px-3.5 py-2 text-sm text-ink focus:outline-none focus:border-forest" />
-          <button type="submit" class="px-5 py-2 rounded-lg bg-forest hover:bg-forest/90 text-paper text-xs font-medium transition shrink-0">Pro Önizlemeyi Aç</button>
+          <button type="submit" class="px-5 py-2 rounded-lg bg-ink hover:bg-ink/90 text-paper text-xs font-medium transition shrink-0">Pro Önizlemeyi Aç</button>
         </div>
-        <p class="text-[11px] text-muted">Demo üyelik akışı: E-postanız bu tarayıcıda saklanır ve Akşam Teması ile Pro şablonları anında aktif olur.</p>
       </form>
+    </div>
+  </div>
+
+  <!-- Real Auth Modal (Supabase + Local Demo Fallback) -->
+  <div id="auth-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-ink/45 p-4">
+    <div class="bg-surface border border-hairline rounded-xl max-w-md w-full p-6 space-y-5">
+      <div class="flex items-start justify-between gap-3">
+        <div>
+          <span id="auth-mode-badge" class="text-[11px] uppercase tracking-wider text-forest font-semibold">Pusula Hesabı</span>
+          <h3 id="auth-modal-title" class="font-editorial text-2xl text-ink mt-0.5">Hesabınıza Giriş Yapın</h3>
+        </div>
+        <button id="close-auth-modal" type="button" class="p-1.5 text-muted hover:text-ink" aria-label="Kapat">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Logged-in View -->
+      <div id="auth-loggedin-box" class="hidden space-y-4">
+        <div class="p-4 rounded-xl bg-paper border border-hairline space-y-1">
+          <p class="text-xs text-muted">Aktif Hesap</p>
+          <p id="auth-user-email" class="text-sm font-medium text-ink"></p>
+          <p id="auth-sync-note" class="text-xs text-forest pt-1">Verileriniz hesabınızla senkronize ediliyor.</p>
+        </div>
+        <div class="flex gap-2">
+          <button id="auth-manual-sync-btn" type="button" class="flex-1 py-2 rounded-lg bg-forest text-paper text-xs font-medium hover:bg-forest/90 transition">Şimdi Buluta Kaydet</button>
+          <button id="auth-logout-btn" type="button" class="px-4 py-2 rounded-lg border border-hairline bg-surface text-xs font-medium text-terracotta hover:border-terracotta/40 transition">Çıkış Yap</button>
+        </div>
+      </div>
+
+      <!-- Logged-out Form -->
+      <div id="auth-form-box" class="space-y-4">
+        <div class="flex gap-1 bg-paper p-1 rounded-lg border border-hairline text-xs">
+          <button type="button" id="tab-login-btn" class="flex-1 py-1.5 rounded-md bg-ink text-paper font-medium">Giriş Yap</button>
+          <button type="button" id="tab-signup-btn" class="flex-1 py-1.5 rounded-md text-muted hover:text-ink font-medium">Ücretsiz Kayıt Ol</button>
+        </div>
+
+        <form id="auth-submit-form" class="space-y-3">
+          <div>
+            <label for="auth-email" class="block text-xs text-muted mb-1">E-posta Adresi</label>
+            <input id="auth-email" type="email" required placeholder="adiniz@eposta.com" class="w-full bg-paper border border-hairline rounded-lg px-3 py-2 text-sm text-ink focus:outline-none focus:border-forest" />
+          </div>
+          <div>
+            <label for="auth-password" class="block text-xs text-muted mb-1">Şifre (en az 6 karakter)</label>
+            <input id="auth-password" type="password" minlength="6" required placeholder="••••••••" class="w-full bg-paper border border-hairline rounded-lg px-3 py-2 text-sm text-ink focus:outline-none focus:border-forest" />
+          </div>
+          <p id="auth-error-msg" class="hidden text-xs text-terracotta"></p>
+          <button id="auth-submit-btn" type="submit" class="w-full py-2.5 rounded-lg bg-forest hover:bg-forest/90 text-paper text-xs font-medium transition">Giriş Yap</button>
+        </form>
+
+        <p id="auth-backend-hint" class="text-[11px] text-muted leading-relaxed bg-paper p-3 rounded-lg border border-hairline"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Share & Growth Modal -->
+  <div id="share-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-ink/45 p-4">
+    <div class="bg-surface border border-hairline rounded-xl max-w-md w-full p-6 space-y-4">
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="font-editorial text-2xl text-ink">Pusula’yı Paylaş</h3>
+          <p class="text-xs text-muted mt-0.5">Çalışma merkezinizi arkadaşlarınızla veya sosyal medyada paylaşın.</p>
+        </div>
+        <button id="close-share-modal" type="button" class="p-1.5 text-muted hover:text-ink" aria-label="Kapat">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      <div class="flex gap-2">
+        <input id="share-url-input" type="text" readonly class="flex-1 bg-paper border border-hairline rounded-lg px-3 py-2 text-xs text-ink" />
+        <button id="copy-share-url-btn" type="button" class="px-3.5 py-2 rounded-lg bg-forest text-paper text-xs font-medium hover:bg-forest/90 shrink-0">Kopyala</button>
+      </div>
+      <div class="grid grid-cols-2 gap-2.5 pt-1">
+        <a id="share-whatsapp-link" href="#" target="_blank" rel="noopener noreferrer" class="py-2 rounded-lg border border-hairline bg-paper hover:border-forest text-xs font-medium text-ink text-center transition">WhatsApp’ta Paylaş</a>
+        <a id="share-x-link" href="#" target="_blank" rel="noopener noreferrer" class="py-2 rounded-lg border border-hairline bg-paper hover:border-forest text-xs font-medium text-ink text-center transition">X’te Paylaş</a>
+      </div>
     </div>
   </div>
 
@@ -2868,6 +2979,252 @@
           if (target) target.classList.toggle('hidden', !cb.checked);
         });
       });
+
+      // =====================================================
+      // SUPABASE REAL AUTH, CLOUD SYNC, PRO CHECKOUT & SHARE
+      // =====================================================
+      const cfg = window.PUSULA_CONFIG || {};
+      let sbClient = null;
+      let currentUser = null;
+      let authMode = 'login';
+      let billingCycle = 'monthly';
+      let syncDebounce = null;
+
+      if (cfg.SUPABASE_URL && cfg.SUPABASE_ANON_KEY && window.supabase && typeof window.supabase.createClient === 'function') {
+        try {
+          sbClient = window.supabase.createClient(cfg.SUPABASE_URL, cfg.SUPABASE_ANON_KEY);
+        } catch (err) { sbClient = null; }
+      }
+
+      function updateAuthUI() {
+        const loggedIn = !!currentUser;
+        document.getElementById('top-auth-label').textContent = loggedIn ? currentUser.email.split('@')[0] : 'Giriş / Üye Ol';
+        document.getElementById('sidebar-auth-label').textContent = loggedIn ? currentUser.email : 'Hesap / Bulut Kayıt';
+        document.getElementById('cloud-sync-badge').textContent = loggedIn ? (sbClient ? 'Bulut ✓' : 'Demo ✓') : 'Yerel';
+        document.getElementById('cloud-sync-badge').className = 'text-[10px] shrink-0 ' + (loggedIn ? 'text-forest font-semibold' : 'text-muted');
+        document.getElementById('auth-loggedin-box').classList.toggle('hidden', !loggedIn);
+        document.getElementById('auth-form-box').classList.toggle('hidden', loggedIn);
+        if (loggedIn) {
+          document.getElementById('auth-user-email').textContent = currentUser.email;
+          document.getElementById('auth-modal-title').textContent = 'Hesabınız Aktif';
+          document.getElementById('auth-sync-note').textContent = sbClient
+            ? 'Görevleriniz, notlarınız, alışkanlıklarınız ve abonelikleriniz Supabase bulut hesabınıza kaydediliyor.'
+            : 'Demo hesap modundasınız. config.js içine Supabase bilgilerinizi eklediğinizde tüm cihazlarınızda gerçek bulut kaydı başlar.';
+        } else {
+          document.getElementById('auth-modal-title').textContent = authMode === 'login' ? 'Hesabınıza Giriş Yapın' : 'Ücretsiz Pusula Hesabı Oluşturun';
+          document.getElementById('auth-submit-btn').textContent = authMode === 'login' ? 'Giriş Yap' : 'Kayıt Ol';
+          document.getElementById('auth-backend-hint').textContent = sbClient
+            ? 'Supabase bulut bağlantısı aktif. E-posta ve şifrenizle gerçek hesap oluşturabilirsiniz.'
+            : 'Şu an yerel moddasınız. Gerçek üyelik için proje klasöründeki config.js dosyasına Supabase bilgilerinizi yapıştırmanız yeterlidir.';
+        }
+      }
+
+      async function saveWorkspaceToCloud(silent = true) {
+        if (!currentUser || !sbClient) return;
+        try {
+          const payload = {
+            user_id: currentUser.id,
+            scratchpad: document.getElementById('quick-scratchpad').value || '',
+            tasks: state.tasks,
+            habits: state.habits,
+            ideas: state.ideas,
+            subscriptions: state.subscriptions,
+            updated_at: new Date().toISOString()
+          };
+          const { error } = await sbClient.from('user_workspace').upsert(payload, { onConflict: 'user_id' });
+          if (!error && !silent) showToast('Verileriniz buluta kaydedildi.');
+        } catch (err) { /* ignore network errors */ }
+      }
+
+      function scheduleCloudSync() {
+        clearTimeout(syncDebounce);
+        syncDebounce = setTimeout(() => saveWorkspaceToCloud(true), 1500);
+      }
+
+      async function loadWorkspaceFromCloud() {
+        if (!currentUser || !sbClient) return;
+        try {
+          const { data: ws } = await sbClient.from('user_workspace').select('*').eq('user_id', currentUser.id).maybeSingle();
+          if (ws) {
+            if (typeof ws.scratchpad === 'string') document.getElementById('quick-scratchpad').value = ws.scratchpad;
+            if (Array.isArray(ws.tasks) && ws.tasks.length) state.tasks = ws.tasks;
+            if (Array.isArray(ws.habits) && ws.habits.length) state.habits = ws.habits;
+            if (Array.isArray(ws.ideas) && ws.ideas.length) state.ideas = ws.ideas;
+            if (Array.isArray(ws.subscriptions) && ws.subscriptions.length) state.subscriptions = ws.subscriptions;
+            renderHabits();
+            renderSubscriptions();
+            renderTasks();
+            renderIdeas();
+          }
+          const { data: prof } = await sbClient.from('profiles').select('is_pro').eq('id', currentUser.id).maybeSingle();
+          if (prof && prof.is_pro) {
+            state.isPro = true;
+            updateProUI();
+          }
+        } catch (err) { /* fallback */ }
+      }
+
+      const authModal = document.getElementById('auth-modal');
+      function openAuthModal() {
+        updateAuthUI();
+        authModal.classList.remove('hidden');
+        authModal.classList.add('flex');
+      }
+      function closeAuthModal() {
+        authModal.classList.add('hidden');
+        authModal.classList.remove('flex');
+      }
+      document.getElementById('top-auth-btn').addEventListener('click', openAuthModal);
+      document.getElementById('sidebar-auth-btn').addEventListener('click', openAuthModal);
+      document.getElementById('close-auth-modal').addEventListener('click', closeAuthModal);
+
+      document.getElementById('tab-login-btn').addEventListener('click', () => {
+        authMode = 'login';
+        document.getElementById('tab-login-btn').className = 'flex-1 py-1.5 rounded-md bg-ink text-paper font-medium';
+        document.getElementById('tab-signup-btn').className = 'flex-1 py-1.5 rounded-md text-muted hover:text-ink font-medium';
+        updateAuthUI();
+      });
+      document.getElementById('tab-signup-btn').addEventListener('click', () => {
+        authMode = 'signup';
+        document.getElementById('tab-signup-btn').className = 'flex-1 py-1.5 rounded-md bg-ink text-paper font-medium';
+        document.getElementById('tab-login-btn').className = 'flex-1 py-1.5 rounded-md text-muted hover:text-ink font-medium';
+        updateAuthUI();
+      });
+
+      document.getElementById('auth-submit-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('auth-email').value.trim();
+        const password = document.getElementById('auth-password').value;
+        const errEl = document.getElementById('auth-error-msg');
+        errEl.classList.add('hidden');
+
+        if (!sbClient) {
+          // Local Demo fallback
+          currentUser = { id: 'local', email };
+          try { localStorage.setItem('pusula_demo_email', email); } catch (err) {}
+          updateAuthUI();
+          closeAuthModal();
+          showToast('Hoş geldiniz! Demo oturumunuz açıldı.');
+          return;
+        }
+
+        try {
+          let result;
+          if (authMode === 'signup') {
+            result = await sbClient.auth.signUp({ email, password });
+          } else {
+            result = await sbClient.auth.signInWithPassword({ email, password });
+          }
+          if (result.error) {
+            errEl.textContent = result.error.message;
+            errEl.classList.remove('hidden');
+            return;
+          }
+          if (result.data && result.data.user) {
+            currentUser = result.data.user;
+            updateAuthUI();
+            await loadWorkspaceFromCloud();
+            closeAuthModal();
+            showToast(authMode === 'signup' ? 'Hesabınız oluşturuldu! E-posta doğrulamasını kontrol edin.' : 'Başarıyla giriş yapıldı.');
+          }
+        } catch (err) {
+          errEl.textContent = 'Bağlantı hatası oluştu. Lütfen tekrar deneyin.';
+          errEl.classList.remove('hidden');
+        }
+      });
+
+      document.getElementById('auth-manual-sync-btn').addEventListener('click', () => saveWorkspaceToCloud(false));
+      document.getElementById('auth-logout-btn').addEventListener('click', async () => {
+        if (sbClient) { try { await sbClient.auth.signOut(); } catch (err) {} }
+        currentUser = null;
+        try { localStorage.removeItem('pusula_demo_email'); } catch (err) {}
+        updateAuthUI();
+        closeAuthModal();
+        showToast('Hesaptan çıkış yapıldı.');
+      });
+
+      // Restore existing session on load
+      if (sbClient) {
+        sbClient.auth.getSession().then(({ data }) => {
+          if (data && data.session && data.session.user) {
+            currentUser = data.session.user;
+            updateAuthUI();
+            loadWorkspaceFromCloud();
+          }
+        });
+      } else {
+        try {
+          const demoEmail = localStorage.getItem('pusula_demo_email');
+          if (demoEmail) { currentUser = { id: 'local', email: demoEmail }; }
+        } catch (err) {}
+      }
+
+      // Auto-sync hooks on key interactions
+      document.getElementById('quick-scratchpad').addEventListener('input', scheduleCloudSync);
+      document.addEventListener('submit', (e) => {
+        if (['daily-task-form', 'overview-quick-task-form', 'idea-form', 'sub-add-form'].includes(e.target.id)) {
+          scheduleCloudSync();
+        }
+      });
+
+      // Pro Billing Toggle & Checkout
+      document.getElementById('bill-monthly-btn').addEventListener('click', () => {
+        billingCycle = 'monthly';
+        document.getElementById('bill-monthly-btn').className = 'px-3.5 py-1.5 rounded-md bg-ink text-paper font-medium transition';
+        document.getElementById('bill-yearly-btn').className = 'px-3.5 py-1.5 rounded-md text-muted hover:text-ink font-medium transition flex items-center gap-1.5';
+        document.getElementById('pro-price-display').textContent = '149 ₺';
+        document.getElementById('pro-period-display').textContent = '/ ay';
+      });
+      document.getElementById('bill-yearly-btn').addEventListener('click', () => {
+        billingCycle = 'yearly';
+        document.getElementById('bill-yearly-btn').className = 'px-3.5 py-1.5 rounded-md bg-ink text-paper font-medium transition flex items-center gap-1.5';
+        document.getElementById('bill-monthly-btn').className = 'px-3.5 py-1.5 rounded-md text-muted hover:text-ink font-medium transition';
+        document.getElementById('pro-price-display').textContent = '1.340 ₺';
+        document.getElementById('pro-period-display').textContent = '/ yıl';
+      });
+      document.getElementById('pro-free-continue-btn').addEventListener('click', closeProModal);
+      document.getElementById('pro-checkout-btn').addEventListener('click', () => {
+        const url = billingCycle === 'yearly' && cfg.PRO_CHECKOUT_URL_YEARLY
+          ? cfg.PRO_CHECKOUT_URL_YEARLY
+          : cfg.PRO_CHECKOUT_URL;
+        if (url && url.startsWith('http')) {
+          const sep = url.includes('?') ? '&' : '?';
+          const finalUrl = currentUser ? `${url}${sep}email=${encodeURIComponent(currentUser.email)}` : url;
+          window.open(finalUrl, '_blank', 'noopener,noreferrer');
+        } else {
+          showToast('Ödeme linki henüz eklenmedi. config.js dosyasındaki PRO_CHECKOUT_URL alanına iyzico/Lemon Squeezy linkinizi yapıştırın.');
+        }
+      });
+
+      // Share Modal
+      const shareModal = document.getElementById('share-modal');
+      function openShareModal() {
+        const shareUrl = window.location.href.startsWith('http') ? window.location.href : 'https://pusula-web.vercel.app';
+        const shareMsg = 'Günlük plan, canlı piyasa, haberler, odak müziği ve Excel/PDF araçlarını tek yerde toplayan Pusula: ';
+        document.getElementById('share-url-input').value = shareUrl;
+        document.getElementById('share-whatsapp-link').href = 'https://wa.me/?text=' + encodeURIComponent(shareMsg + shareUrl);
+        document.getElementById('share-x-link').href = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(shareMsg) + '&url=' + encodeURIComponent(shareUrl);
+        shareModal.classList.remove('hidden');
+        shareModal.classList.add('flex');
+      }
+      function closeShareModal() {
+        shareModal.classList.add('hidden');
+        shareModal.classList.remove('flex');
+      }
+      document.getElementById('share-site-btn').addEventListener('click', openShareModal);
+      document.getElementById('close-share-modal').addEventListener('click', closeShareModal);
+      document.getElementById('copy-share-url-btn').addEventListener('click', () => {
+        const inp = document.getElementById('share-url-input');
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(inp.value).then(() => showToast('Site adresi kopyalandı!'));
+        } else {
+          inp.select();
+          document.execCommand('copy');
+          showToast('Site adresi kopyalandı!');
+        }
+      });
+
+      updateAuthUI();
 
       // =====================================================
       // INITIAL RENDER & AUTO-POLLING TIMERS
