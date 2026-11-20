@@ -13,7 +13,9 @@ window.PUSULA_CONFIG = {
   // Ödeme Linkleri (iyziLink, Lemon Squeezy veya Stripe Checkout)
   PRO_CHECKOUT_URL: "",        // Aylık 149 TL plan ödeme linki
   PRO_CHECKOUT_URL_YEARLY: "", // Yıllık 1.340 TL plan ödeme linki (opsiyonel)
-
+IBAN_HOLDER: "Alıcı TAYFUN KAYA",
+  IBAN_NUMBER: "TR88 0001 5001 5800 7306 8238 64",
+  RECEIPT_EMAIL: "tayfunkaya49@gmail.com",
   // Otomatik Canlı Veri Yenileme (ms)
   MARKET_REFRESH_MS: 15000,
   NEWS_REFRESH_MS: 60000
