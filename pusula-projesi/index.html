@@ -3328,12 +3328,7 @@
           grand += t;
           html += `<tr><td>${escapeHtml(r.item)}</td><td>${escapeHtml(r.cat)}</td><td>${r.qty}</td><td>${r.price}</td><td>${t}</td></tr>`;
         });
-        html += `<tr><td colspan="4"><strong>GENEL TOPLAM</strong></td><td><strong>${grand}</strong></td></tr></table><script>
-    if ('serviceWorker' in navigator && location.protocol === 'https:') {
-      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
-    }
-  </script>
-</body></html>`;
+        html += `<tr><td colspan="4"><strong>GENEL TOPLAM</strong></td><td><strong>${grand}</strong></td></tr></table></body></html>`;
         triggerDownload('pusula-tablo.xls', html, 'application/vnd.ms-excel;charset=utf-8;');
         showToast('Excel (.xls) dosyası indirildi.');
       }
@@ -4837,6 +4832,11 @@
       setInterval(fetchLiveMarkets, 15000);
       setInterval(fetchLiveNews, 60000);
     })();
+  </script>
+<script>
+    if ('serviceWorker' in navigator && location.protocol === 'https:') {
+      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
+    }
   </script>
 </body>
 </html>
