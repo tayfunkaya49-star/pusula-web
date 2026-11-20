@@ -16,6 +16,7 @@ window.PUSULA_CONFIG = {
 IBAN_HOLDER: "TAYFUN KAYA",
   IBAN_NUMBER: "TR88 0001 5001 5800 7306 8238 64",
   RECEIPT_EMAIL: "tayfunkaya49@gmail.com",
+  ANDROID_APK_URL: "https://pusula-web-opal.vercel.app/pusula.apk",
   // Otomatik Canlı Veri Yenileme (ms)
   MARKET_REFRESH_MS: 15000,
   NEWS_REFRESH_MS: 60000
