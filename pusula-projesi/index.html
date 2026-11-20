@@ -1189,6 +1189,49 @@
         </div>
       </div>
 
+      <!-- IBAN / EFT Payment & Receipt Notification Panel -->
+      <div id="pro-iban-panel" class="hidden p-4 rounded-xl bg-paper border border-forest/30 space-y-3.5 text-xs">
+        <div class="flex items-center justify-between">
+          <span class="font-semibold text-sm text-forest flex items-center gap-1.5">
+            <i data-lucide="landmark" class="w-4 h-4"></i> Havale / EFT ile Ödeme Bilgileri
+          </span>
+          <span id="iban-selected-plan-badge" class="px-2 py-0.5 rounded bg-forestLight text-forest font-medium">Aylık · 149 ₺</span>
+        </div>
+
+        <div class="p-3 rounded-lg bg-surface border border-hairline space-y-1.5">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-muted">Alıcı:</span>
+            <span id="iban-holder-display" class="font-medium text-ink">Hesap sahibi bilgisi (config.js)</span>
+          </div>
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-muted">IBAN:</span>
+            <div class="flex items-center gap-2">
+              <span id="iban-number-display" class="font-mono font-medium text-ink select-all">TR00 0000 0000 0000 0000 0000 00</span>
+              <button type="button" id="copy-iban-btn" class="px-2 py-0.5 rounded bg-forest text-paper text-[11px] hover:bg-forest/90 transition">Kopyala</button>
+            </div>
+          </div>
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-muted">Açıklama:</span>
+            <span id="iban-ref-display" class="font-medium text-forest">Pusula Pro (e-postanız)</span>
+          </div>
+        </div>
+
+        <form id="iban-receipt-form" class="space-y-2.5">
+          <p class="font-medium text-ink">Ödemeyi yaptıktan sonra bildirim gönderin (onaylanınca Pro otomatik açılır):</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <input id="receipt-sender" type="text" required placeholder="Gönderen Ad Soyad" class="bg-surface border border-hairline rounded-lg px-3 py-2 text-xs text-ink focus:outline-none focus:border-forest" />
+            <input id="receipt-email" type="email" required placeholder="Pusula hesap e-postanız" class="bg-surface border border-hairline rounded-lg px-3 py-2 text-xs text-ink focus:outline-none focus:border-forest" />
+          </div>
+          <input id="receipt-note" type="text" placeholder="Dekont / İşlem saati veya kısa not (isteğe bağlı)" class="w-full bg-surface border border-hairline rounded-lg px-3 py-2 text-xs text-ink focus:outline-none focus:border-forest" />
+          <div class="flex flex-col sm:flex-row gap-2">
+            <button type="submit" id="receipt-submit-btn" class="flex-1 py-2 rounded-lg bg-forest hover:bg-forest/90 text-paper font-medium transition">Ödeme Bildirimini Gönder</button>
+            <a id="receipt-whatsapp-btn" href="#" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex items-center justify-center px-3.5 py-2 rounded-lg border border-forest/40 bg-surface text-forest font-medium hover:bg-forestLight transition">WhatsApp’tan Dekont At</a>
+            <a id="receipt-email-btn" href="#" class="hidden sm:inline-flex items-center justify-center px-3.5 py-2 rounded-lg border border-forest/40 bg-surface text-forest font-medium hover:bg-forestLight transition">E-posta ile Dekont Gönder</a>
+          </div>
+          <p id="receipt-status-msg" class="hidden text-xs text-forest font-medium"></p>
+        </form>
+      </div>
+
       <form id="pro-signup-form" class="space-y-2 pt-3 border-t border-hairline">
         <label for="pro-email-input" class="block text-xs font-medium text-ink">Veya 7 Günlük Pro Önizlemeyi Hemen Deneyin</label>
         <div class="flex flex-col sm:flex-row gap-2">
@@ -3173,16 +3216,46 @@
         document.getElementById('bill-monthly-btn').className = 'px-3.5 py-1.5 rounded-md bg-ink text-paper font-medium transition';
         document.getElementById('bill-yearly-btn').className = 'px-3.5 py-1.5 rounded-md text-muted hover:text-ink font-medium transition flex items-center gap-1.5';
         document.getElementById('pro-price-display').textContent = '149 ₺';
-        document.getElementById('pro-period-display').textContent = '/ ay';
+        document.getElementById('pro-period-display').textContent = '/ ay'; refreshIbanPanel();
       });
       document.getElementById('bill-yearly-btn').addEventListener('click', () => {
         billingCycle = 'yearly';
         document.getElementById('bill-yearly-btn').className = 'px-3.5 py-1.5 rounded-md bg-ink text-paper font-medium transition flex items-center gap-1.5';
         document.getElementById('bill-monthly-btn').className = 'px-3.5 py-1.5 rounded-md text-muted hover:text-ink font-medium transition';
         document.getElementById('pro-price-display').textContent = '1.340 ₺';
-        document.getElementById('pro-period-display').textContent = '/ yıl';
+        document.getElementById('pro-period-display').textContent = '/ yıl'; refreshIbanPanel();
       });
       document.getElementById('pro-free-continue-btn').addEventListener('click', closeProModal);
+      function refreshIbanPanel() {
+        const amountLabel = billingCycle === 'yearly' ? 'Yıllık · 1.340 ₺' : 'Aylık · 149 ₺';
+        document.getElementById('iban-selected-plan-badge').textContent = amountLabel;
+        document.getElementById('iban-holder-display').textContent = cfg.IBAN_HOLDER || 'Alıcı adı (config.js içinden ekleyin)';
+        document.getElementById('iban-number-display').textContent = cfg.IBAN_NUMBER || 'IBAN henüz eklenmedi (config.js)';
+        const userMail = currentUser ? currentUser.email : 'hesap e-postanız';
+        document.getElementById('iban-ref-display').textContent = 'Pusula Pro - ' + userMail;
+        if (currentUser && !document.getElementById('receipt-email').value) {
+          document.getElementById('receipt-email').value = currentUser.email;
+        }
+        const waBtn = document.getElementById('receipt-whatsapp-btn');
+        if (cfg.WHATSAPP_PHONE) {
+          const cleanPhone = String(cfg.WHATSAPP_PHONE).replace(/\D/g, '');
+          const waText = `Merhaba, Pusula Pro (${amountLabel}) için havale yaptım. Hesap e-postam: ${userMail}. Dekontu ekliyorum.`;
+          waBtn.href = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(waText)}`;
+          waBtn.classList.remove('hidden');
+        } else {
+          waBtn.classList.add('hidden');
+        }
+        const mailBtn = document.getElementById('receipt-email-btn');
+        if (cfg.RECEIPT_EMAIL) {
+          const subj = `Pusula Pro Dekont Bildirimi (${amountLabel})`;
+          const body = `Merhaba,\n\nPusula Pro (${amountLabel}) için havale/EFT yaptım.\nHesap e-postam: ${userMail}\n\nDekontu ekte paylaşıyorum.`;
+          mailBtn.href = `mailto:${encodeURIComponent(cfg.RECEIPT_EMAIL)}?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`;
+          mailBtn.classList.remove('hidden');
+        } else {
+          mailBtn.classList.add('hidden');
+        }
+      }
+
       document.getElementById('pro-checkout-btn').addEventListener('click', () => {
         const url = billingCycle === 'yearly' && cfg.PRO_CHECKOUT_URL_YEARLY
           ? cfg.PRO_CHECKOUT_URL_YEARLY
@@ -3192,8 +3265,54 @@
           const finalUrl = currentUser ? `${url}${sep}email=${encodeURIComponent(currentUser.email)}` : url;
           window.open(finalUrl, '_blank', 'noopener,noreferrer');
         } else {
-          showToast('Ödeme linki henüz eklenmedi. config.js dosyasındaki PRO_CHECKOUT_URL alanına iyzico/Lemon Squeezy linkinizi yapıştırın.');
+          refreshIbanPanel();
+          const panel = document.getElementById('pro-iban-panel');
+          panel.classList.remove('hidden');
+          panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          lucide.createIcons();
         }
+      });
+
+      document.getElementById('copy-iban-btn').addEventListener('click', () => {
+        const iban = cfg.IBAN_NUMBER || document.getElementById('iban-number-display').textContent;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(iban).then(() => showToast('IBAN kopyalandı!'));
+        } else {
+          showToast('IBAN: ' + iban);
+        }
+      });
+
+      document.getElementById('iban-receipt-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const sender = document.getElementById('receipt-sender').value.trim();
+        const email = document.getElementById('receipt-email').value.trim();
+        const note = document.getElementById('receipt-note').value.trim();
+        const plan = billingCycle === 'yearly' ? 'Yıllık (1.340 TL)' : 'Aylık (149 TL)';
+        const statusEl = document.getElementById('receipt-status-msg');
+
+        if (sbClient) {
+          try {
+            const { error } = await sbClient.from('payment_requests').insert({
+              user_id: currentUser && currentUser.id !== 'local' ? currentUser.id : null,
+              email,
+              sender_name: sender,
+              plan,
+              note,
+              status: 'bekliyor'
+            });
+            if (error) {
+              statusEl.textContent = 'Bildirim kaydedilirken hata oluştu: ' + error.message;
+              statusEl.className = 'text-xs text-terracotta font-medium';
+              statusEl.classList.remove('hidden');
+              return;
+            }
+          } catch (err) { /* ignore */ }
+        }
+        statusEl.textContent = 'Ödeme bildiriminiz alındı! Dekont kontrol edilince Pusula Pro hesabınız aktif edilecektir.';
+        statusEl.className = 'text-xs text-forest font-medium';
+        statusEl.classList.remove('hidden');
+        e.target.reset();
+        showToast('Ödeme bildiriminiz başarıyla iletildi.');
       });
 
       // Share Modal
