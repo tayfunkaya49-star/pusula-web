@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "app.vercel.pusula_web_opal.twa",
+      "sha256_cert_fingerprints": [
+        "EA:34:60:9C:CD:23:03:A2:69:CB:98:FA:9D:D8:B7:43:BE:CC:52:C2:0E:02:8A:5F:C7:9F:71:59:63:2C:C3:C9"
+      ]
+    }
+  }
+]
