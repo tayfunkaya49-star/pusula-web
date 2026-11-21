@@ -3,8 +3,15 @@
 Bu klasör, **Pusula** web uygulamanızı kendi bilgisayarınızda (VS Code) açmanız, ücretsiz olarak internette yayınlamanız (Vercel), gerçek kullanıcı üyeliği eklemeniz (Supabase) ve gelir elde etmeniz (iyzico / Lemon Squeezy / Stripe) için gereken tüm dosyaları içerir.
 
 ## Klasördeki Dosyalar
-- `index.html` — Pusula web uygulamasının tamamı (otomatik canlı piyasa ve haber akışı dahil).
-- `config.js` — Supabase ve ödeme bağlantınızı yapıştıracağınız tek ayar dosyası.
+- `index.html` — Pusula ana web uygulaması ve arayüz iskeleti.
+- `styles.css` — Gündüz/Gece stüdyo teması, 3D kart ve kod editörü stilleri.
+- `academy-data.js` — Yazılım, Teknoloji ve Yapay Zeka akademisi müfredat, kod görevi, bilgi kartı ve sınav bankası.
+- `office-data.js` — Başlangıçtan uzman seviyeye Microsoft Office (Excel, Word, PowerPoint, Outlook) & AI Copilot dersleri, canlı Excel formül görevleri, bilgi kartları ve sınav bankası.
+- `promo-video.js` — Pusula Pro 60 saniyelik interaktif sinematik tanıtım videosu oynatıcısı.
+- `academy.js` — 7 işlevsel eğitim sekmesinin (Dersler, MS Office Pratik & AI, Kod & Prompt Lab, Bilgi Kartları, Sınav, AI/Algoritma Simülatörü, Yol Haritası) etkileşim motoru.
+- `app.js` — Canlı piyasa, haber akışı, günlük plan, bütçe, radyo/TV ve ofis araçları motoru.
+- `config.js` — Supabase, Gemini AI (opsiyonel) ve ödeme bağlantınızı yapıştıracağınız tek ayar dosyası.
+- `manifest.json`, `sw.js`, `icon.svg` — Mobil PWA kurulum ve çevrimdışı önbellek dosyaları.
 - `supabase-kurulum.sql` — Kullanıcı hesapları ve bulut kaydı için hazır veritabanı şeması.
 - `vercel.json` — Vercel yayın ve güvenlik ayar dosyası.
 

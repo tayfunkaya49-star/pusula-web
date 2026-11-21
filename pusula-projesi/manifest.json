@@ -1,25 +1,17 @@
 {
-  "name": "Pusula — Kişisel Yaşam ve Üretkenlik Merkezi",
+  "name": "Pusula — Yaşam, Akademi ve Üretkenlik Merkezi",
   "short_name": "Pusula",
-  "description": "Canlı piyasa, haberler, günlük planlama, canlı radyo & TV, finansal simülatör ve Excel/PDF araçları tek sade merkezde.",
+  "description": "Yazılım & Yapay Zeka Akademisi, günlük planlama, canlı piyasa ve haber akışı, bütçe ve ofis araçları tek merkezde.",
   "start_url": "./index.html",
-  "scope": "./",
   "display": "standalone",
-  "orientation": "portrait-primary",
-  "background_color": "#F7F5F0",
-  "theme_color": "#26463B",
+  "background_color": "#F4F6FA",
+  "theme_color": "#0D9488",
   "lang": "tr",
   "icons": [
     {
-      "src": "./icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "./icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
       "purpose": "any maskable"
     }
   ]
