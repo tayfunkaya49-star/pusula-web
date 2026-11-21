@@ -2593,7 +2593,7 @@ Veri Analisti — Teknoloji A.Ş. (2021–2023): Raporlama, Python otomasyonu ve
               <li>✓ Sınırsız Özel Bilgi Kartı + Pro Derin Odak Frekansları</li>
             </ul>
           </div>
-          <button type="button" id="pro-checkout-btn" class="w-full py-2.5 rounded-lg bg-forest hover:bg-forest/90 text-paper font-medium transition">Pusula Pro’ya Geç</button>
+          <button type="button" id="pro-checkout-btn" class="w-full py-2.5 rounded-lg bg-forest hover:bg-forest/90 text-paper font-medium transition">Özel Proje &amp; Pro Başvurusu</button>
         </div>
       </div>
 
@@ -2619,13 +2619,34 @@ Veri Analisti — Teknoloji A.Ş. (2021–2023): Raporlama, Python otomasyonu ve
         </form>
       </div>
 
-      <form id="pro-signup-form" class="space-y-2 pt-3 border-t border-hairline">
-        <label for="pro-email-input" class="block text-xs font-medium text-ink">Veya 7 Günlük Pro Önizlemeyi Hemen Deneyin</label>
-        <div class="flex flex-col sm:flex-row gap-2">
-          <input id="pro-email-input" type="email" required placeholder="ornek@eposta.com" class="flex-1 bg-paper border border-hairline rounded-lg px-3.5 py-2 text-sm text-ink" />
-          <button type="submit" class="px-5 py-2 rounded-lg bg-ink text-paper text-xs font-medium shrink-0">Pro Önizlemeyi Aç</button>
+      <!-- B2B / Custom Excel, AI & Web Project Inquiry Panel -->
+      <div id="pro-inquiry-panel" class="p-4 rounded-xl bg-paper border border-plum/30 space-y-3 text-xs">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <div>
+            <span class="pro-badge-pill">ÖZEL PROJE &amp; KURUMSAL ÇÖZÜMLER</span>
+            <p class="font-semibold text-sm text-ink mt-1">Özel Excel / VBA, Web Sitesi &amp; Yapay Zeka Kurulumu Talebi</p>
+          </div>
+          <a href="mailto:tayfunkaya49@gmail.com" class="text-ocean font-semibold hover:underline">tayfunkaya49@gmail.com</a>
         </div>
-      </form>
+        <form id="pro-inquiry-form" class="space-y-2.5">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+            <input id="inq-name" type="text" required placeholder="Ad Soyad / Firma" class="bg-surface border border-hairline rounded-lg px-3 py-2 text-ink" />
+            <input id="inq-email" type="email" required placeholder="İletişim e-postanız" class="bg-surface border border-hairline rounded-lg px-3 py-2 text-ink" />
+            <select id="inq-topic" class="bg-surface border border-hairline rounded-lg px-2.5 py-2 text-ink">
+              <option value="Özel Excel & VBA Otomasyonu">Özel Excel &amp; VBA Otomasyonu</option>
+              <option value="Kurumsal Office & AI Ekip Eğitimi">Kurumsal Office &amp; AI Eğitimi</option>
+              <option value="Özel Web Sitesi & AI Asistan">Özel Web Sitesi &amp; AI Asistan</option>
+              <option value="Pusula Pro Erken Erişim">Pusula Pro Erken Erişim</option>
+            </select>
+          </div>
+          <textarea id="inq-details" rows="2" required placeholder="İhtiyacınızı kısaca yazın (ör. şirketimiz için Excel rapor otomasyonu veya kurumsal web/AI paneli)..." class="w-full bg-surface border border-hairline rounded-lg px-3 py-2 text-ink"></textarea>
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <span class="text-[11px] text-muted">Pro &amp; kurucu erişimi için sol menüden <strong>Hesap / Bulut Kayıt</strong> ile oturum açabilirsiniz.</span>
+            <button type="submit" class="px-4 py-2 rounded-lg bg-ink hover:bg-ink/90 text-paper font-semibold transition shrink-0">Talebi Gönder &amp; E-posta Aç →</button>
+          </div>
+          <p id="inq-status-msg" class="hidden text-xs text-forest font-medium"></p>
+        </form>
+      </div>
     </div>
   </div>
 

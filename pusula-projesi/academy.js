@@ -29,8 +29,8 @@
   }
 
   function isProActive() {
-    if (typeof window.pusulaIsPro === 'function') return window.pusulaIsPro();
-    try { return localStorage.getItem('pusula_pro') === '1'; } catch (e) { return false; }
+    if (typeof window.pusulaIsPro === 'function') return !!window.pusulaIsPro();
+    return false;
   }
 
   function openProShowcase() {
@@ -363,8 +363,8 @@
           <div class="p-6 rounded-2xl border-2 border-plum/40 bg-plumLight/40 text-center space-y-3">
             <span class="pro-badge-pill">PUSULA PRO UZMAN SEVİYE MODÜLÜ</span>
             <h4 class="font-editorial text-xl text-ink">Bu Uzman Modülü ve VBA / AI Copilot Pratikleri Pusula Pro Üyelerine Özeldir</h4>
-            <p class="text-xs text-muted max-w-lg mx-auto leading-relaxed">Başlangıç, Orta ve İleri tüm dersler ücretsizdir. VBA makro otomasyonu, Python in Excel ve AI Copilot masterclass içeriklerini açmak için Pro tanıtımını izleyip etkinleştirebilirsiniz.</p>
-            <button type="button" id="ac-unlock-pro-lesson-btn" class="px-5 py-2.5 rounded-xl bg-forest text-paper text-xs font-semibold hover:bg-forest/90 transition">▶ Pro Tanıtım Filmini İzle &amp; Kilidi Aç</button>
+            <p class="text-xs text-muted max-w-lg mx-auto leading-relaxed">Başlangıç, Orta ve İleri tüm dersler ücretsizdir. VBA makro otomasyonu, Python in Excel ve AI Copilot uzman modülleri Pusula Pro &amp; Kurumsal Eğitim üyeliklerine özeldir.</p>
+            <button type="button" id="ac-unlock-pro-lesson-btn" class="px-5 py-2.5 rounded-xl bg-forest text-paper text-xs font-semibold hover:bg-forest/90 transition">▶ Pro Ayrıcalıklarını &amp; Tanıtım Filmini Gör</button>
           </div>
         ` : `
           <div class="space-y-4">
@@ -446,7 +446,7 @@
       if (lesson.isPro && !isProActive()) {
         openProShowcase();
         if (window.PusulaPromoVideo) window.PusulaPromoVideo.play();
-        toast('Bu uzman dersini tamamlamak için Pusula Pro önizlemeyi veya üyeliği açın.');
+        toast('Bu uzman modülü Pusula Pro & Kurumsal Eğitim kapsamındadır.');
         return;
       }
       const idx = acState.completedLessons.indexOf(lesson.id);
@@ -1262,7 +1262,7 @@
     if (!out) return;
 
     if (app === 'vba' && !isProActive()) {
-      out.textContent = '🔒 Excel VBA Makro & Kurumsal Otomasyon Üreticisi Pusula Pro üyelerine özeldir.\n"Pusula Pro" penceresinden tanıtım filmini izleyip Pro önizlemeyi anında açabilirsiniz.';
+      out.textContent = '🔒 Excel VBA Makro & Kurumsal Otomasyon Üreticisi Pusula Pro üyelerine ve yetkili kurumsal hesaplara özeldir.\nDetaylar için "Pusula Pro" penceresinden tanıtım filmini inceleyebilir veya kurumsal talep gönderebilirsiniz.';
       openProShowcase();
       return;
     }

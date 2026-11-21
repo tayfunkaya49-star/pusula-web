@@ -214,14 +214,17 @@
     } catch (e) {}
   }
 
+  function isFounderEmail(email) {
+    const fMail = ((window.PUSULA_CONFIG && window.PUSULA_CONFIG.FOUNDER_EMAIL) || 'tayfunkaya49@gmail.com').trim().toLowerCase();
+    return !!email && String(email).trim().toLowerCase() === fMail;
+  }
+
   function loadWorkspaceLocal() {
     try {
+      localStorage.removeItem('pusula_pro');
       const spKey = window.pusulaGetUserKey('pusula_scratchpad');
       const savedNote = localStorage.getItem(spKey);
       if (savedNote !== null) document.getElementById('quick-scratchpad').value = savedNote;
-      if (localStorage.getItem('pusula_pro') === '1' || localStorage.getItem(window.pusulaGetUserKey('pusula_pro')) === '1') {
-        state.isPro = true;
-      }
 
       const raw = localStorage.getItem(window.pusulaGetUserKey(WORKSPACE_STORAGE_KEY)) || localStorage.getItem(WORKSPACE_STORAGE_KEY);
       if (!raw) return;
@@ -1865,17 +1868,31 @@
   const budgetUnlockBtn = document.getElementById('budget-pro-unlock-btn');
   if (budgetUnlockBtn) budgetUnlockBtn.addEventListener('click', () => openProModal(true));
   document.getElementById('close-pro-modal').addEventListener('click', closeProModal);
-  document.getElementById('pro-signup-form').addEventListener('submit', (e) => {
-    e.preventDefault();
-    state.isPro = true;
-    try {
-      localStorage.setItem('pusula_pro', '1');
-      localStorage.setItem(window.pusulaGetUserKey('pusula_pro'), '1');
-    } catch (err) {}
-    updateProUI();
-    closeProModal();
-    showToast('Pusula Pro önizleme etkinleştirildi! Tüm uzman ayrıcalıklar açıldı.');
-  });
+  const proInquiryForm = document.getElementById('pro-inquiry-form');
+  if (proInquiryForm) {
+    proInquiryForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('inq-name').value.trim();
+      const email = document.getElementById('inq-email').value.trim();
+      const topic = document.getElementById('inq-topic').value;
+      const details = document.getElementById('inq-details').value.trim();
+      const statusEl = document.getElementById('inq-status-msg');
+      if (sbClient) {
+        try {
+          await sbClient.from('project_inquiries').insert({ name, email, topic, details });
+        } catch (err) {}
+      }
+      const contactMail = (cfg && cfg.FOUNDER_EMAIL) || 'tayfunkaya49@gmail.com';
+      const mailHref = `mailto:${encodeURIComponent(contactMail)}?subject=${encodeURIComponent('[Pusula Talebi] ' + topic + ' - ' + name)}&body=${encodeURIComponent('Gönderen: ' + name + '\nE-posta: ' + email + '\nKonu: ' + topic + '\n\nDetay:\n' + details)}`;
+      if (statusEl) {
+        statusEl.textContent = `Talebiniz hazırlandı! E-posta istemciniz açılmadıysa doğrudan ${contactMail} adresine iletebilirsiniz.`;
+        statusEl.classList.remove('hidden');
+      }
+      showToast('Proje / kurumsal talebiniz kaydedildi.');
+      window.open(mailHref, '_blank', 'noopener,noreferrer');
+      e.target.reset();
+    });
+  }
 
   const custModal = document.getElementById('customize-modal');
   function applyWidgetVisibility() {
@@ -1981,6 +1998,7 @@
 
   function switchUserStorageScope(email) {
     activeUserKeySuffix = email ? hashUserEmail(email) : '';
+    state.isPro = isFounderEmail(email);
     loadWorkspaceLocal();
     applyThemeUI();
     applyWidgetVisibility();
@@ -2248,12 +2266,18 @@
       const sep = url.includes('?') ? '&' : '?';
       const finalUrl = currentUser ? `${url}${sep}email=${encodeURIComponent(currentUser.email)}` : url;
       window.open(finalUrl, '_blank', 'noopener,noreferrer');
-    } else {
+    } else if (cfg.IBAN_NUMBER && String(cfg.IBAN_NUMBER).trim()) {
       refreshIbanPanel();
       const panel = document.getElementById('pro-iban-panel');
       panel.classList.remove('hidden');
       panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       lucide.createIcons();
+    } else {
+      const inqPanel = document.getElementById('pro-inquiry-panel');
+      const inqName = document.getElementById('inq-name');
+      if (inqPanel) inqPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      if (inqName) setTimeout(() => inqName.focus(), 200);
+      showToast('Özel proje veya kurumsal paket talebinizi aşağıdaki formdan iletebilirsiniz.');
     }
   });
 
@@ -2287,7 +2311,7 @@
   // Share Modal
   const shareModal = document.getElementById('share-modal');
   function openShareModal() {
-    const shareUrl = window.location.href.startsWith('http') ? window.location.href : 'https://pusula-web.vercel.app';
+    const shareUrl = window.location.href.startsWith('http') ? window.location.href : 'https://pusula-web-opal.vercel.app';
     const shareMsg = 'Yazılım & AI Akademisi, günlük plan, canlı piyasa ve ofis araçları tek merkezde — Pusula: ';
     document.getElementById('share-url-input').value = shareUrl;
     document.getElementById('share-whatsapp-link').href = 'https://wa.me/?text=' + encodeURIComponent(shareMsg + shareUrl);
