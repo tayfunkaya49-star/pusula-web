@@ -3168,7 +3168,7 @@
     const url = window.location.href.startsWith('http') ? window.location.href : 'https://pusula-web-opal.vercel.app';
     if (navigator.clipboard) navigator.clipboard.writeText(url).then(() => showToast('Mobil kurulum adresi kopyalandı!'));
   });
-  if (cfg.ANDROID_APK_URL && cfg.ANDROID_APK_URL.startsWith('http')) {
+  if (cfg.ANDROID_APK_URL && (cfg.ANDROID_APK_URL.startsWith('http') || cfg.ANDROID_APK_URL.startsWith('./') || cfg.ANDROID_APK_URL.startsWith('/'))) {
     const apkBtn = document.getElementById('android-apk-download-btn');
     apkBtn.href = cfg.ANDROID_APK_URL;
     apkBtn.classList.remove('hidden');

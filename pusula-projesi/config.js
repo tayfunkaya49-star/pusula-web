@@ -31,8 +31,8 @@ window.PUSULA_CONFIG = {
   WHATSAPP_PHONE: "",
   RECEIPT_EMAIL: "tayfunkaya49@gmail.com",
 
-  // İsteğe Bağlı: Android APK İndirme Bağlantısı
-  ANDROID_APK_URL: "",
+  // İsteğe Bağlı: Android APK İndirme Bağlantısı (Doğrudan imzalı APK)
+  ANDROID_APK_URL: "./pusula.apk",
 
   // Otomatik Canlı Veri Yenileme (ms)
   MARKET_REFRESH_MS: 15000,

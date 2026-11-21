@@ -11,7 +11,7 @@
   <meta name="description" content="Yazılım & Yapay Zeka Akademisi, günlük planlama, canlı piyasa ve haber akışı, bütçe-abonelik takibi ve ofis araçları tek modern merkezde." />
   <link rel="icon" href="./icon.svg" type="image/svg+xml" />
   <link rel="manifest" href="./manifest.json" />
-  <link rel="apple-touch-icon" href="./icon.svg" />
+  <link rel="apple-touch-icon" href="./icon-192.png" />
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.15/dist/hls.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -2385,17 +2385,18 @@ Veri Analisti — Teknoloji A.Ş. (2021–2023): Raporlama, Python otomasyonu ve
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div class="editorial-card p-6 flex flex-col justify-between space-y-5">
             <div class="space-y-3">
-              <div class="flex items-center justify-between"><span class="px-2.5 py-1 rounded-md bg-forestLight text-forest text-xs font-semibold">Android (Chrome / Edge)</span><i data-lucide="smartphone" class="w-5 h-5 text-forest"></i></div>
-              <h3 class="font-editorial text-2xl text-ink">Android Telefonlara Tek Tıkla Kur</h3>
-              <p class="text-xs text-muted leading-relaxed">Pusula’yı ana ekranınıza gerçek bir PWA uygulaması olarak kurabilirsiniz.</p>
+              <div class="flex items-center justify-between"><span class="px-2.5 py-1 rounded-md bg-forestLight text-forest text-xs font-semibold">Android (APK + Chrome PWA)</span><i data-lucide="smartphone" class="w-5 h-5 text-forest"></i></div>
+              <h3 class="font-editorial text-2xl text-ink">Android Telefonlara APK veya Tek Tıkla Kur</h3>
+              <p class="text-xs text-muted leading-relaxed">İster <strong>Doğrudan İmzalı APK (.apk)</strong> dosyasını indirip kurun, ister Chrome üzerinden ana ekran uygulaması (PWA) olarak yükleyin.</p>
               <ol class="text-xs text-ink space-y-1.5 list-decimal pl-4 pt-1">
-                <li>Aşağıdaki <strong>Android’e Uygulama Olarak Yükle</strong> düğmesine basın.</li>
-                <li>Açılan pencerede <strong>Yükle (Install)</strong> seçeneğini onaylayın.</li>
+                <li><strong>Doğrudan APK İndir (Pusula.apk)</strong> düğmesine dokunup dosyayı indirin (Android 7.0+ destekli, v2/v3 imzalı).</li>
+                <li>Açarken telefonunuz sorarsa <strong>"Bu kaynaktan uygulamalara izin ver"</strong> seçeneğini açın.</li>
+                <li>Play Store dışı yeni imza uyarısı çıkarsa <strong>"Ayrıntılar → Yine de yükle"</strong> adımıyla kurulumu tamamlayın.</li>
               </ol>
             </div>
             <div class="space-y-2.5 pt-2">
-              <button id="pwa-android-install-btn" type="button" class="w-full py-2.5 rounded-lg bg-forest hover:bg-forest/90 text-paper text-xs font-medium transition flex items-center justify-center gap-2"><i data-lucide="download" class="w-4 h-4"></i> Android’e Uygulama Olarak Yükle</button>
-              <a id="android-apk-download-btn" href="#" target="_blank" rel="noopener noreferrer" class="hidden w-full py-2 rounded-lg border border-forest/40 bg-paper text-forest text-xs font-medium text-center">Doğrudan APK İndir (.apk)</a>
+              <a id="android-apk-download-btn" href="./pusula.apk" download="Pusula.apk" class="hidden w-full py-2.5 rounded-lg bg-forest hover:bg-forest/90 text-paper text-xs font-semibold text-center flex items-center justify-center gap-2 transition"><i data-lucide="package-check" class="w-4 h-4"></i> Doğrudan İmzalı APK İndir (Pusula.apk · 1.06 MB)</a>
+              <button id="pwa-android-install-btn" type="button" class="w-full py-2.5 rounded-lg border border-hairline bg-paper hover:border-forest text-ink text-xs font-medium transition flex items-center justify-center gap-2"><i data-lucide="download" class="w-4 h-4 text-forest"></i> Chrome ile Ana Ekrana Yükle (PWA)</button>
             </div>
           </div>
 
