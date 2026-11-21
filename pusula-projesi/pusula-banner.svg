@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" fill="none">
+  <defs>
+    <linearGradient id="heroBg" x1="0" y1="0" x2="1200" y2="320" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#070B14" />
+      <stop offset="52%" stop-color="#0F172A" />
+      <stop offset="100%" stop-color="#0B2E33" />
+    </linearGradient>
+    <radialGradient id="glowTeal" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(215 160) rotate(90) scale(170)">
+      <stop offset="0%" stop-color="#2DD4BF" stop-opacity="0.34" />
+      <stop offset="100%" stop-color="#2DD4BF" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="glowIndigo" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(990 130) rotate(90) scale(210)">
+      <stop offset="0%" stop-color="#6366F1" stop-opacity="0.28" />
+      <stop offset="100%" stop-color="#6366F1" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="accentLine" x1="350" y1="0" x2="1080" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#2DD4BF" />
+      <stop offset="55%" stop-color="#818CF8" />
+      <stop offset="100%" stop-color="#38BDF8" stop-opacity="0" />
+    </linearGradient>
+    <linearGradient id="cardStroke" x1="0" y1="0" x2="1200" y2="320" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#2DD4BF" stop-opacity="0.45" />
+      <stop offset="50%" stop-color="#6366F1" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#334155" stop-opacity="0.6" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="320" rx="24" fill="url(#heroBg)" />
+  <rect x="1.5" y="1.5" width="1197" height="317" rx="22.5" stroke="url(#cardStroke)" stroke-width="2" />
+
+  <!-- Subtle AI Neural Grid -->
+  <g stroke="#94A3B8" stroke-opacity="0.06" stroke-width="1">
+    <path d="M0 64H1200 M0 128H1200 M0 192H1200 M0 256H1200" />
+    <path d="M120 0V320 M240 0V320 M360 0V320 M480 0V320 M600 0V320 M720 0V320 M840 0V320 M960 0V320 M1080 0V320" />
+  </g>
+
+  <rect width="1200" height="320" rx="24" fill="url(#glowTeal)" />
+  <rect width="1200" height="320" rx="24" fill="url(#glowIndigo)" />
+
+  <!-- Right-side Neural Constellation -->
+  <g opacity="0.68">
+    <path d="M880 76 L985 112 L1090 70 M880 76 L945 190 L1055 215 L1120 135 L1090 70 M985 112 L945 190 M985 112 L1120 135 M945 190 L1015 262 L1055 215" stroke="#6366F1" stroke-opacity="0.45" stroke-width="1.5" />
+    <circle cx="880" cy="76" r="5" fill="#2DD4BF" />
+    <circle cx="985" cy="112" r="7" fill="#818CF8" />
+    <circle cx="1090" cy="70" r="4.5" fill="#38BDF8" />
+    <circle cx="945" cy="190" r="5.5" fill="#2DD4BF" />
+    <circle cx="1055" cy="215" r="6" fill="#A5B4FC" />
+    <circle cx="1120" cy="135" r="4.5" fill="#34D399" />
+    <circle cx="1015" cy="262" r="4" fill="#F43F5E" />
+  </g>
+
+  <!-- Left Compass Brand Emblem -->
+  <g transform="translate(105, 58)">
+    <rect width="204" height="204" rx="46" fill="#0B1324" stroke="#2DD4BF" stroke-opacity="0.42" stroke-width="2" />
+    <circle cx="102" cy="102" r="68" stroke="#FFFFFF" stroke-opacity="0.16" stroke-width="6" />
+    <circle cx="102" cy="102" r="52" stroke="#2DD4BF" stroke-opacity="0.45" stroke-width="2" stroke-dasharray="5 5" />
+    <polygon points="102,42 122,102 102,90 82,102" fill="#2DD4BF" />
+    <polygon points="102,162 122,102 102,114 82,102" fill="#F43F5E" />
+    <circle cx="102" cy="102" r="10" fill="#FFFFFF" />
+    <circle cx="102" cy="102" r="4.5" fill="#0B1120" />
+  </g>
+
+  <!-- Typography -->
+  <g transform="translate(352, 92)">
+    <rect x="0" y="0" width="248" height="28" rx="14" fill="#0D9488" fill-opacity="0.22" stroke="#2DD4BF" stroke-opacity="0.45" />
+    <circle cx="16" cy="14" r="4" fill="#2DD4BF" />
+    <text x="28" y="18" fill="#5EEAD4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" letter-spacing="1.8">OPEN SOURCE AI STUDIO</text>
+
+    <text x="0" y="92" fill="#F8FAFC" font-family="Arial, Helvetica, sans-serif" font-size="60" font-weight="800" letter-spacing="6">PUSULA</text>
+
+    <rect x="0" y="108" width="520" height="2.5" rx="1.25" fill="url(#accentLine)" />
+
+    <text x="0" y="140" fill="#CBD5E1" font-family="Arial, Helvetica, sans-serif" font-size="15.5" font-weight="600" letter-spacing="1.2">AI ACADEMY  ·  MS OFFICE &amp; COPILOT  ·  FINANCE  ·  CLOUD VAULT</text>
+
+    <!-- Feature Mini Pills -->
+    <g transform="translate(0, 162)" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700">
+      <rect x="0" y="0" width="128" height="28" rx="8" fill="#1E293B" stroke="#334155" />
+      <text x="64" y="18" text-anchor="middle" fill="#2DD4BF">7 Academy Tabs</text>
+
+      <rect x="138" y="0" width="136" height="28" rx="8" fill="#1E293B" stroke="#334155" />
+      <text x="206" y="18" text-anchor="middle" fill="#A5B4FC">Live Excel &amp; JS Lab</text>
+
+      <rect x="284" y="0" width="132" height="28" rx="8" fill="#1E293B" stroke="#334155" />
+      <text x="350" y="18" text-anchor="middle" fill="#38BDF8">Zero-Build PWA</text>
+
+      <rect x="426" y="0" width="126" height="28" rx="8" fill="#1E293B" stroke="#334155" />
+      <text x="489" y="18" text-anchor="middle" fill="#FBBF24">Supabase + Gemini</text>
+    </g>
+  </g>
+</svg>
