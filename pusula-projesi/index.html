@@ -25,22 +25,22 @@
       theme: {
         extend: {
           colors: {
-            paper: '#F7F5F0',
+            paper: '#F2F5F9',
             surface: '#FFFFFF',
-            stonewarm: '#ECE8DF',
-            ink: '#1D1B18',
-            muted: '#666158',
-            hairline: '#E4DFD5',
-            forest: '#26463B',
-            forestLight: '#EEF3F0',
-            terracotta: '#B85633',
-            terracottaLight: '#F9EFEA',
-            ocean: '#2B4C7E',
-            oceanLight: '#EBF1F8',
+            stonewarm: '#E6ECF4',
+            ink: '#0F172A',
+            muted: '#5B667A',
+            hairline: '#E2E8F0',
+            forest: '#0F766E',
+            forestLight: '#E6F6F4',
+            terracotta: '#E0533C',
+            terracottaLight: '#FDEEEB',
+            ocean: '#2563EB',
+            oceanLight: '#EFF6FF',
             amberwarm: '#A66E1B',
             amberLight: '#FDF4E3',
-            plum: '#68438A',
-            plumLight: '#F3EEF8'
+            plum: '#6D28D9',
+            plumLight: '#F3EEFF'
           },
           fontFamily: {
             serif: ['Plus Jakarta Sans', 'Inter', 'system-ui', 'sans-serif'],
@@ -52,8 +52,8 @@
   </script>
   <style>
     html, body {
-      background-color: #F7F5F0;
-      color: #1D1B18;
+      background-color: #F2F5F9;
+      color: #0F172A;
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
       -webkit-font-smoothing: antialiased;
     }
@@ -104,13 +104,32 @@
     }
     .editorial-card {
       background: #FFFFFF;
-      border: 1px solid #E4DFD5;
-      border-radius: 12px;
-      transition: border-color 0.18s ease;
+      border: 1px solid #E2E8F0;
+      border-radius: 16px;
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.035);
+      transition: border-color 0.18s ease, box-shadow 0.18s ease;
     }
     .editorial-card:hover {
-      border-color: #CFC8BA;
+      border-color: #CBD5E1;
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.06);
     }
+    /* Sleek Midnight Slate Sidebar */
+    #sidebar {
+      background: linear-gradient(180deg, #0F172A 0%, #131E35 100%) !important;
+      border-right-color: #1E293B !important;
+      color: #E2E8F0 !important;
+    }
+    #sidebar .nav-btn { color: #94A3B8 !important; }
+    #sidebar .nav-btn:hover { background-color: rgba(255,255,255,0.06) !important; color: #FFFFFF !important; }
+    #sidebar .nav-btn.active { background-color: rgba(15, 118, 110, 0.28) !important; color: #FFFFFF !important; }
+    #sidebar .nav-btn.active .nav-indicator { background-color: #2DD4BF !important; }
+    #sidebar .border-hairline { border-color: rgba(255,255,255,0.09) !important; }
+    #sidebar .bg-surface { background-color: rgba(255,255,255,0.06) !important; color: #E2E8F0 !important; }
+    #sidebar .text-ink { color: #F8FAFC !important; }
+    #sidebar .text-muted { color: #94A3B8 !important; }
+    #sidebar #badge-tasks { background-color: rgba(255,255,255,0.14) !important; color: #F8FAFC !important; }
+    #sidebar #open-pro-btn { background: linear-gradient(135deg, rgba(15,118,110,0.35), rgba(37,99,235,0.28)) !important; border-color: rgba(45,212,191,0.35) !important; }
+    #sidebar #open-pro-btn .text-forest { color: #5EEAD4 !important; }
     .accent-top-forest { border-top: 3px solid #26463B; }
     .accent-top-terracotta { border-top: 3px solid #B85633; }
     .accent-top-ocean { border-top: 3px solid #2B4C7E; }
@@ -305,7 +324,7 @@
           <span class="nav-indicator opacity-0 absolute left-0 top-2 bottom-2 w-0.5 bg-forest rounded-r"></span>
           <i data-lucide="puzzle" class="w-4 h-4 shrink-0"></i>
           <span>Oyun Salonu</span>
-          <span class="ml-auto text-[10px] px-1.5 py-0.5 rounded bg-terracotta text-paper font-medium">4 Oyun</span>
+          <span class="ml-auto text-[10px] px-1.5 py-0.5 rounded bg-terracotta text-paper font-medium">6 Oyun</span>
         </button>
 
         <div class="pt-3 pb-1">
@@ -1530,6 +1549,49 @@
             </div>
           </div>
         </div>
+      
+        <!-- Third Row of Games: Memory Card Match + Reflex Speed Test -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <!-- Memory Card Match Game -->
+          <div class="lg:col-span-7 editorial-card accent-top-ocean p-6 space-y-4">
+            <div class="flex items-center justify-between gap-2">
+              <div>
+                <span class="text-[11px] uppercase tracking-wider text-ocean font-semibold">Görsel Hafıza</span>
+                <h3 class="font-editorial text-2xl text-ink">Kart Eşleştirme Oyunu</h3>
+              </div>
+              <div class="flex items-center gap-2 text-xs">
+                <span class="px-2.5 py-1 rounded-lg bg-oceanLight text-ocean font-semibold tabular">Hamle: <span id="mc-moves">0</span></span>
+                <button id="mc-restart-btn" type="button" class="px-3 py-1 rounded-lg bg-ink text-paper font-medium hover:bg-ink/90">Karıştır</button>
+              </div>
+            </div>
+            <div id="mc-board" class="grid grid-cols-4 gap-2.5 max-w-md mx-auto"></div>
+            <p id="mc-status" class="text-center text-xs font-medium text-muted min-h-[18px]">Aynı iki simgeyi bularak tüm kartları eşleştirin.</p>
+          </div>
+
+          <!-- Reflex / Reaction Speed Test -->
+          <div class="lg:col-span-5 editorial-card accent-top-terracotta p-6 flex flex-col justify-between space-y-4">
+            <div>
+              <div class="flex items-center justify-between gap-2">
+                <div>
+                  <span class="text-[11px] uppercase tracking-wider text-terracotta font-semibold">Hız &amp; Dikkat</span>
+                  <h3 class="font-editorial text-2xl text-ink">Refleks Testi (ms)</h3>
+                </div>
+                <span id="rfx-best-badge" class="text-xs px-2.5 py-1 rounded-full bg-terracottaLight text-terracotta font-semibold tabular">En İyi: -- ms</span>
+              </div>
+              <p class="text-xs text-muted mt-1">Kutu <strong>yeşile</strong> döndüğü an olabildiğince hızlı tıklayın!</p>
+            </div>
+
+            <button id="rfx-box" type="button" class="w-full h-44 rounded-2xl bg-ink text-paper flex flex-col items-center justify-center gap-1.5 transition select-none">
+              <span id="rfx-main-text" class="font-editorial text-2xl">Başlamak İçin Tıkla</span>
+              <span id="rfx-sub-text" class="text-xs opacity-80">Tepki süreniz milisaniye olarak ölçülür</span>
+            </button>
+
+            <div class="flex items-center justify-between text-xs text-muted">
+              <span id="rfx-rank-label">Ortalama insan refleksi: ~250 ms</span>
+              <span id="rfx-last-label" class="font-semibold text-ink tabular">Son: -- ms</span>
+            </div>
+          </div>
+        </div>
       </section>
 
       <!-- ========================================================= -->
@@ -2274,6 +2336,49 @@
       </div>
       <div class="pt-2 flex justify-end">
         <button id="save-customize-btn" type="button" class="px-4 py-2 rounded-lg bg-forest text-paper text-xs font-medium hover:bg-forest/90">Tamam</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dedicated A4 Petition & Document Studio Modal (Opens right over Hazır Şablonlar — no Excel jump!) -->
+  <div id="petition-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-ink/55 p-3 sm:p-6 overflow-y-auto">
+    <div class="bg-surface border border-hairline rounded-2xl max-w-4xl w-full overflow-hidden shadow-2xl my-auto flex flex-col max-h-[92vh]">
+      <div class="px-6 py-4 bg-ink text-paper flex items-center justify-between gap-3">
+        <div>
+          <span class="text-[11px] uppercase tracking-wider text-paper/70 font-semibold">Dilekçe &amp; Belge Stüdyosu</span>
+          <h3 id="pet-modal-heading" class="font-editorial text-xl text-paper">Dilekçe Düzenleyici</h3>
+        </div>
+        <button id="close-petition-modal" type="button" class="p-1.5 rounded-lg bg-paper/10 hover:bg-paper/20 text-paper" aria-label="Kapat">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Quick Auto-Fill Personal Info Bar -->
+      <div class="px-6 py-3 bg-paper border-b border-hairline grid grid-cols-1 sm:grid-cols-4 gap-2 text-xs">
+        <input id="pet-fill-name" type="text" placeholder="Adınız Soyadınız" class="bg-surface border border-hairline rounded-lg px-2.5 py-1.5 text-ink focus:outline-none focus:border-forest" />
+        <input id="pet-fill-tc" type="text" placeholder="T.C. Kimlik No (isteğe bağlı)" class="bg-surface border border-hairline rounded-lg px-2.5 py-1.5 text-ink focus:outline-none focus:border-forest" />
+        <input id="pet-fill-phone" type="text" placeholder="Telefon / Adres" class="bg-surface border border-hairline rounded-lg px-2.5 py-1.5 text-ink focus:outline-none focus:border-forest" />
+        <button id="pet-autofill-btn" type="button" class="px-3 py-1.5 rounded-lg bg-forest text-paper font-medium hover:bg-forest/90 transition">Bilgilerimi Metne Ekle</button>
+      </div>
+
+      <!-- Clean A4 Paper Editing Area -->
+      <div class="flex-1 overflow-y-auto p-5 sm:p-8 bg-paper/70">
+        <div class="bg-surface border border-hairline rounded-xl p-6 sm:p-8 shadow-sm max-w-3xl mx-auto space-y-4">
+          <input id="pet-title-input" type="text" class="w-full font-editorial text-2xl text-ink border-b border-hairline pb-2 focus:outline-none focus:border-forest" />
+          <textarea id="pet-body-input" rows="15" class="w-full bg-transparent text-sm leading-relaxed text-ink focus:outline-none resize-y font-sans"></textarea>
+        </div>
+      </div>
+
+      <!-- Action Footer -->
+      <div class="px-6 py-3.5 bg-surface border-t border-hairline flex flex-wrap items-center justify-between gap-2 text-xs">
+        <span id="pet-word-stat" class="text-muted">0 kelime</span>
+        <div class="flex flex-wrap items-center gap-2">
+          <button id="pet-copy-btn" type="button" class="px-3.5 py-2 rounded-lg border border-hairline bg-paper hover:border-ink text-ink font-medium transition">Metni Kopyala</button>
+          <button id="pet-word-btn" type="button" class="px-3.5 py-2 rounded-lg border border-forest/40 bg-forestLight text-forest font-medium hover:bg-forest hover:text-paper transition">Word (.doc) İndir</button>
+          <button id="pet-pdf-btn" type="button" class="px-4 py-2 rounded-lg bg-ink hover:bg-ink/90 text-paper font-medium flex items-center gap-1.5 transition">
+            <i data-lucide="printer" class="w-3.5 h-3.5"></i> Temiz A4 PDF / Yazdır
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -5919,21 +6024,74 @@
         });
       });
 
+      const petModal = document.getElementById('petition-modal');
+      function updatePetWordCount() {
+        const txt = document.getElementById('pet-body-input').value.trim();
+        const words = txt ? txt.split(/\s+/).length : 0;
+        document.getElementById('pet-word-stat').textContent = words + ' kelime · ' + txt.length + ' karakter';
+      }
+      function openPetitionStudio(tpl) {
+        document.getElementById('pet-modal-heading').textContent = tpl.title;
+        document.getElementById('pet-title-input').value = tpl.title;
+        document.getElementById('pet-body-input').value = tpl.content;
+        updatePetWordCount();
+        petModal.classList.remove('hidden');
+        petModal.classList.add('flex');
+        lucide.createIcons();
+      }
+      document.getElementById('close-petition-modal').addEventListener('click', () => {
+        petModal.classList.add('hidden');
+        petModal.classList.remove('flex');
+      });
+      document.getElementById('pet-body-input').addEventListener('input', updatePetWordCount);
+      document.getElementById('pet-autofill-btn').addEventListener('click', () => {
+        const nm = document.getElementById('pet-fill-name').value.trim();
+        const tc = document.getElementById('pet-fill-tc').value.trim();
+        const ph = document.getElementById('pet-fill-phone').value.trim();
+        const area = document.getElementById('pet-body-input');
+        let text = area.value;
+        if (nm) text = text.replace(/Ad Soyad/g, nm);
+        if (tc) text = text.replace(/T\.C\. Kimlik No|T\.C\./g, 'T.C.: ' + tc);
+        if (ph) text = text.replace(/Telefon|İletişim/g, ph);
+        area.value = text;
+        updatePetWordCount();
+        showToast('Bilgileriniz dilekçe metnine işlendi!');
+      });
+      document.getElementById('pet-copy-btn').addEventListener('click', () => {
+        const full = document.getElementById('pet-title-input').value + '\n\n' + document.getElementById('pet-body-input').value;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(full).then(() => showToast('Dilekçe metni kopyalandı!'));
+        }
+      });
+      document.getElementById('pet-word-btn').addEventListener('click', () => {
+        const title = document.getElementById('pet-title-input').value || 'Dilekce';
+        const body = document.getElementById('pet-body-input').value.replace(/\n/g, '<br>');
+        const docHtml = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word"><head><meta charset="UTF-8"><title>${escapeHtml(title)}</title></head><body style="font-family:Times New Roman,serif;line-height:1.7;margin:40px;"><h2 style="text-align:center;">${escapeHtml(title)}</h2><p>${body}</p></body></html>`;
+        triggerDownload('pusula-dilekce.doc', docHtml, 'application/msword;charset=utf-8;');
+        showToast('Dilekçe Word (.doc) olarak indirildi.');
+      });
+      document.getElementById('pet-pdf-btn').addEventListener('click', () => {
+        const title = document.getElementById('pet-title-input').value || 'Dilekçe';
+        const body = escapeHtml(document.getElementById('pet-body-input').value).replace(/\n/g, '<br>');
+        const win = window.open('', '_blank', 'width=820,height=960');
+        if (!win) { showToast('Açılır pencereye izin verin.'); return; }
+        win.document.write(`<!DOCTYPE html><html lang="tr"><head><meta charset="UTF-8"><title>${escapeHtml(title)}</title><style>body{font-family:Georgia,serif;color:#111;max-width:720px;margin:48px auto;padding:0 28px;line-height:1.8;font-size:15px;}h2{text-align:center;font-size:18px;margin-bottom:28px;text-transform:uppercase;}</style></head><body><h2>${escapeHtml(title)}</h2><div>${body}</div><script>window.onload=function(){window.print();}<\/script></body></html>`);
+        win.document.close();
+      });
+
       document.addEventListener('click', (e) => {
         const btn = e.target.closest('[data-use-tpl]');
         if (!btn) return;
         const tpl = LIFE_TEMPLATES.find(x => x.id === btn.dataset.useTpl);
         if (!tpl) return;
-        switchView('office');
         if (tpl.mode === 'sheet' && tpl.rows) {
+          switchView('office');
           state.sheetRows = JSON.parse(JSON.stringify(tpl.rows));
           renderSheet();
           showToast(tpl.title + ' Excel tablosuna yüklendi!');
         } else {
-          document.getElementById('doc-title-input').value = tpl.title;
-          document.getElementById('doc-body-input').value = tpl.content;
-          updateDocWordCount();
-          showToast(tpl.title + ' belge editörüne yüklendi — düzenleyip PDF/Word alabilirsiniz.');
+          // Open dedicated A4 Petition Editor right here — NEVER jump to Excel!
+          openPetitionStudio(tpl);
         }
       });
 
@@ -6122,6 +6280,124 @@
       renderTemplates();
       renderLaws();
       renderAiChat();
+
+      // =====================================================
+      // MEMORY CARD MATCH GAME (16 CARDS)
+      // =====================================================
+      const MC_ICONS = ['🧭','🎵','📺','💡','📚','☕','🌿','⚡'];
+      let mcCards = [];
+      let mcFlipped = [];
+      let mcMatched = 0;
+      let mcMoves = 0;
+      let mcLock = false;
+
+      function initMemoryCards() {
+        mcCards = shuffleArr([...MC_ICONS, ...MC_ICONS]).map((sym, idx) => ({ idx, sym, open: false, done: false }));
+        mcFlipped = [];
+        mcMatched = 0;
+        mcMoves = 0;
+        mcLock = false;
+        document.getElementById('mc-moves').textContent = '0';
+        document.getElementById('mc-status').textContent = 'Aynı iki simgeyi bularak tüm kartları eşleştirin.';
+        renderMemoryCards();
+      }
+
+      function renderMemoryCards() {
+        const board = document.getElementById('mc-board');
+        board.innerHTML = mcCards.map(c => `
+          <button type="button" data-mc-idx="${c.idx}" class="aspect-square rounded-xl border-2 text-2xl flex items-center justify-center transition ${
+            c.done ? 'border-forest bg-forestLight' :
+            c.open ? 'border-ocean bg-oceanLight' :
+            'border-hairline bg-paper hover:border-ocean/50'
+          }">${c.open || c.done ? c.sym : '?'}</button>
+        `).join('');
+      }
+
+      document.addEventListener('click', (e) => {
+        const btn = e.target.closest('[data-mc-idx]');
+        if (!btn || mcLock) return;
+        const c = mcCards[Number(btn.dataset.mcIdx)];
+        if (!c || c.open || c.done) return;
+        c.open = true;
+        mcFlipped.push(c);
+        renderMemoryCards();
+        if (mcFlipped.length === 2) {
+          mcMoves++;
+          document.getElementById('mc-moves').textContent = mcMoves;
+          const [a, b] = mcFlipped;
+          if (a.sym === b.sym) {
+            a.done = true; b.done = true;
+            mcMatched += 2;
+            mcFlipped = [];
+            renderMemoryCards();
+            if (mcMatched === mcCards.length) {
+              document.getElementById('mc-status').textContent = `Harika! Tüm kartları ${mcMoves} hamlede eşleştirdiniz.`;
+            }
+          } else {
+            mcLock = true;
+            setTimeout(() => {
+              a.open = false; b.open = false;
+              mcFlipped = [];
+              mcLock = false;
+              renderMemoryCards();
+            }, 650);
+          }
+        }
+      });
+      document.getElementById('mc-restart-btn').addEventListener('click', initMemoryCards);
+
+      // =====================================================
+      // REFLEX / REACTION SPEED TEST (MS)
+      // =====================================================
+      let rfxState = 'idle'; // idle | wait | go
+      let rfxTimer = null;
+      let rfxStartTs = 0;
+      let rfxBest = null;
+      try { const savedBest = Number(localStorage.getItem('pusula_rfx_best')); if (savedBest > 50) rfxBest = savedBest; } catch (e) {}
+      if (rfxBest) document.getElementById('rfx-best-badge').textContent = 'En İyi: ' + rfxBest + ' ms';
+
+      document.getElementById('rfx-box').addEventListener('click', () => {
+        const box = document.getElementById('rfx-box');
+        const mainTxt = document.getElementById('rfx-main-text');
+        const subTxt = document.getElementById('rfx-sub-text');
+
+        if (rfxState === 'idle') {
+          rfxState = 'wait';
+          box.className = 'w-full h-44 rounded-2xl bg-terracotta text-paper flex flex-col items-center justify-center gap-1.5 transition select-none';
+          mainTxt.textContent = 'Bekleyin...';
+          subTxt.textContent = 'Yeşil olunca hemen tıklayın';
+          clearTimeout(rfxTimer);
+          rfxTimer = setTimeout(() => {
+            rfxState = 'go';
+            rfxStartTs = performance.now();
+            box.className = 'w-full h-44 rounded-2xl bg-forest text-paper flex flex-col items-center justify-center gap-1.5 transition select-none';
+            mainTxt.textContent = 'ŞİMDİ TIKLA!';
+            subTxt.textContent = 'Hemen basın!';
+          }, 1500 + Math.random() * 2600);
+        } else if (rfxState === 'wait') {
+          clearTimeout(rfxTimer);
+          rfxState = 'idle';
+          box.className = 'w-full h-44 rounded-2xl bg-amberwarm text-paper flex flex-col items-center justify-center gap-1.5 transition select-none';
+          mainTxt.textContent = 'Çok Erken Bastınız!';
+          subTxt.textContent = 'Tekrar denemek için tıklayın';
+        } else if (rfxState === 'go') {
+          const ms = Math.round(performance.now() - rfxStartTs);
+          rfxState = 'idle';
+          box.className = 'w-full h-44 rounded-2xl bg-ocean text-paper flex flex-col items-center justify-center gap-1.5 transition select-none';
+          mainTxt.textContent = ms + ' ms';
+          const rank = ms < 210 ? 'F1 Pilotu Refleksi!' : ms < 270 ? 'Çok Hızlı!' : ms < 340 ? 'İyi Skor' : 'Biraz daha hızlı olabilirsiniz';
+          subTxt.textContent = rank + ' · Tekrar için tıklayın';
+          document.getElementById('rfx-last-label').textContent = 'Son: ' + ms + ' ms';
+          document.getElementById('rfx-rank-label').textContent = rank;
+          if (!rfxBest || ms < rfxBest) {
+            rfxBest = ms;
+            try { localStorage.setItem('pusula_rfx_best', String(rfxBest)); } catch (e) {}
+            document.getElementById('rfx-best-badge').textContent = 'En İyi: ' + rfxBest + ' ms';
+          }
+        }
+      });
+
+      initMemoryCards();
 
       // =====================================================
       // INITIAL RENDER & AUTO-POLLING TIMERS
