@@ -225,6 +225,13 @@
           <span>Genel Bakış</span>
         </button>
 
+        <button type="button" data-view="assistant" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-muted hover:bg-stonewarm/60 hover:text-ink relative text-left">
+          <span class="nav-indicator opacity-0 absolute left-0 top-2 bottom-2 w-0.5 bg-forest rounded-r"></span>
+          <i data-lucide="bot" class="w-4 h-4 shrink-0 text-forest"></i>
+          <span>Pusula AI Asistan</span>
+          <span class="ml-auto text-[10px] px-1.5 py-0.5 rounded bg-forest text-paper font-medium">AI</span>
+        </button>
+
         <button type="button" data-view="daily" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-muted hover:bg-stonewarm/60 hover:text-ink relative text-left">
           <span class="nav-indicator opacity-0 absolute left-0 top-2 bottom-2 w-0.5 bg-forest rounded-r"></span>
           <i data-lucide="check-square" class="w-4 h-4 shrink-0"></i>
@@ -309,7 +316,13 @@
           <span class="nav-indicator opacity-0 absolute left-0 top-2 bottom-2 w-0.5 bg-plum rounded-r"></span>
           <i data-lucide="files" class="w-4 h-4 shrink-0 text-plum"></i>
           <span>Hazır Şablonlar</span>
-          <span class="ml-auto text-[10px] px-1.5 py-0.5 rounded bg-plumLight text-plum font-medium">9 Adet</span>
+          <span class="ml-auto text-[10px] px-1.5 py-0.5 rounded bg-plumLight text-plum font-medium">20+ Adet</span>
+        </button>
+
+        <button type="button" data-view="law" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-muted hover:bg-stonewarm/60 hover:text-ink relative text-left">
+          <span class="nav-indicator opacity-0 absolute left-0 top-2 bottom-2 w-0.5 bg-amberwarm rounded-r"></span>
+          <i data-lucide="scale" class="w-4 h-4 shrink-0 text-amberwarm"></i>
+          <span>T.C. Kanun &amp; Mevzuat</span>
         </button>
 
         <button type="button" data-view="office" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-muted hover:bg-stonewarm/60 hover:text-ink relative text-left">
@@ -1459,35 +1472,31 @@
       
         <!-- Second Row of Games: 2048 + Daily Turkish Trivia Quiz -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          <!-- 2048 Game -->
-          <div class="lg:col-span-6 editorial-card accent-top-amber p-6 space-y-4">
-            <div class="flex items-center justify-between gap-2">
-              <div>
-                <span class="text-[11px] uppercase tracking-wider text-amberwarm font-semibold">Strateji &amp; Odak</span>
-                <h3 class="font-editorial text-2xl text-ink">2048 Sayı Birleştirme</h3>
-              </div>
-              <div class="flex items-center gap-2">
-                <div class="px-3 py-1 rounded-lg bg-paper border border-hairline text-center">
-                  <p class="text-[10px] text-muted uppercase">Skor</p>
-                  <p id="g2048-score" class="text-sm font-bold text-ink tabular">0</p>
+          <!-- XOX (Tic-Tac-Toe vs Smart AI) — Everyone understands in 2 seconds! -->
+          <div class="lg:col-span-6 editorial-card accent-top-amber p-6 flex flex-col justify-between space-y-4">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between gap-2">
+                <div>
+                  <span class="text-[11px] uppercase tracking-wider text-amberwarm font-semibold">Klasik Strateji</span>
+                  <h3 class="font-editorial text-2xl text-ink">XOX (Yapay Zekaya Karşı)</h3>
                 </div>
-                <div class="px-3 py-1 rounded-lg bg-amberLight border border-amberwarm/20 text-center">
-                  <p class="text-[10px] text-amberwarm uppercase">Rekor</p>
-                  <p id="g2048-best" class="text-sm font-bold text-amberwarm tabular">0</p>
+                <div class="flex items-center gap-2 text-xs">
+                  <span class="px-2.5 py-1 rounded-lg bg-forestLight text-forest font-semibold tabular">Sen: <span id="xox-score-x">0</span></span>
+                  <span class="px-2.5 py-1 rounded-lg bg-terracottaLight text-terracotta font-semibold tabular">AI: <span id="xox-score-o">0</span></span>
                 </div>
               </div>
+              <p class="text-xs text-muted">Sırayla hamle yapın; yatay, dikey veya çapraz 3 tane <strong>X</strong> sıralayan kazanır.</p>
+
+              <div id="xox-board" class="grid grid-cols-3 gap-2.5 max-w-[260px] mx-auto pt-1"></div>
+              <p id="xox-status" class="text-center text-xs font-semibold text-forest min-h-[18px]">Sıra sizde (X)</p>
             </div>
 
-            <div id="g2048-board" class="grid grid-cols-4 gap-2 p-2.5 rounded-xl bg-stonewarm max-w-[300px] mx-auto select-none"></div>
-
-            <div class="flex items-center justify-between gap-2 pt-1">
-              <div class="flex items-center gap-1.5">
-                <button type="button" data-2048-dir="left" class="px-2.5 py-1.5 rounded-lg border border-hairline bg-paper hover:border-ink text-xs font-medium" aria-label="Sola">←</button>
-                <button type="button" data-2048-dir="up" class="px-2.5 py-1.5 rounded-lg border border-hairline bg-paper hover:border-ink text-xs font-medium" aria-label="Yukarı">↑</button>
-                <button type="button" data-2048-dir="down" class="px-2.5 py-1.5 rounded-lg border border-hairline bg-paper hover:border-ink text-xs font-medium" aria-label="Aşağı">↓</button>
-                <button type="button" data-2048-dir="right" class="px-2.5 py-1.5 rounded-lg border border-hairline bg-paper hover:border-ink text-xs font-medium" aria-label="Sağa">→</button>
-              </div>
-              <button id="g2048-restart-btn" type="button" class="px-3.5 py-1.5 rounded-lg bg-ink text-paper text-xs font-medium hover:bg-ink/90">Yeniden Başlat</button>
+            <div class="flex items-center justify-between pt-2 border-t border-hairline">
+              <select id="xox-difficulty" class="bg-paper border border-hairline rounded-lg px-2.5 py-1.5 text-xs text-ink">
+                <option value="normal">Zorluk: Dengeli</option>
+                <option value="hard">Zorluk: Zor</option>
+              </select>
+              <button id="xox-restart-btn" type="button" class="px-4 py-1.5 rounded-lg bg-ink text-paper text-xs font-medium hover:bg-ink/90">Yeni Tur</button>
             </div>
           </div>
 
@@ -1499,7 +1508,10 @@
                   <span class="text-[11px] uppercase tracking-wider text-plum font-semibold">Genel Kültür</span>
                   <h3 class="font-editorial text-2xl text-ink">Günün Bilgi Yarışması</h3>
                 </div>
-                <span id="quiz-progress-badge" class="text-xs px-2.5 py-1 rounded-full bg-plumLight text-plum font-semibold tabular">Soru 1 / 10</span>
+                <div class="flex items-center gap-1.5">
+                  <button id="quiz-online-btn" type="button" class="text-[11px] px-2.5 py-1 rounded-full bg-plum text-paper font-medium hover:bg-plum/90 transition" title="İnternetten yeni sorular çek">Yeni Sorular ↻</button>
+                  <span id="quiz-progress-badge" class="text-xs px-2.5 py-1 rounded-full bg-plumLight text-plum font-semibold tabular">Soru 1</span>
+                </div>
               </div>
 
               <div class="p-4 rounded-xl bg-paper border border-hairline space-y-3">
@@ -1522,6 +1534,82 @@
 
       <!-- ========================================================= -->
       <!-- ========================================================= -->
+      <!-- VIEW: PUSULA AI ASİSTAN (HAKLAR, HUKUK & GENEL REHBER)    -->
+      <!-- ========================================================= -->
+      <section id="view-assistant" class="view-panel space-y-6">
+        <div class="p-6 rounded-2xl bg-forest text-paper flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <span class="text-xs uppercase tracking-widest text-paper/75 font-semibold">Yapay Zeka Destekli Rehber</span>
+            <h2 class="font-editorial text-3xl text-paper mt-1">Pusula Akıllı Asistan</h2>
+            <p class="text-xs text-paper/85 mt-1">Kamu hakları, tüketici şikayetleri, kira/iş hukuku, icra itirazı, dilekçe rehberliği ve günlük tüm sorularınızı sorun.</p>
+          </div>
+          <span id="ai-engine-badge" class="text-xs px-3 py-1.5 rounded-full bg-paper/15 text-paper font-medium self-start md:self-auto shrink-0">Akıllı Rehber Aktif</span>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <!-- Main Chat Window -->
+          <div class="lg:col-span-8 editorial-card flex flex-col h-[540px] overflow-hidden">
+            <div id="ai-chat-messages" class="flex-1 overflow-y-auto p-5 space-y-4 bg-paper/40"></div>
+            <form id="ai-chat-form" class="p-3.5 bg-surface border-t border-hairline flex gap-2">
+              <input id="ai-chat-input" type="text" required placeholder="Sorunuzu veya yaşadığınız sıkıntıyı yazın (Örn: Ev sahibi kirayı %100 artırmak istiyor, ne yapmalıyım?)" class="flex-1 bg-paper border border-hairline rounded-lg px-3.5 py-2.5 text-sm text-ink focus:outline-none focus:border-forest" />
+              <button id="ai-send-btn" type="submit" class="px-5 py-2.5 rounded-lg bg-forest hover:bg-forest/90 text-paper text-xs font-medium transition shrink-0">Sor</button>
+            </form>
+          </div>
+
+          <!-- Quick Legal & Citizen Prompts -->
+          <div class="lg:col-span-4 space-y-4">
+            <div class="editorial-card accent-top-forest p-5 space-y-3">
+              <h3 class="font-editorial text-lg text-ink">Sık Sorulan Vatandaş Soruları</h3>
+              <p class="text-xs text-muted">Tek tıkla sorun, ilgili kanun maddesini ve dilekçe taslağını anında görün:</p>
+              <div class="space-y-2 text-xs" id="ai-quick-prompts">
+                <button type="button" data-ai-q="Ev sahibi kira artışını yasal oranın üstünde istiyor, haklarım neler?" class="w-full text-left p-2.5 rounded-lg bg-paper border border-hairline hover:border-forest text-ink transition">• Kira artışı ve ev sahibi hakları</button>
+                <button type="button" data-ai-q="İnternetten aldığım ürün ayıplı çıktı, iade almıyorlar ne yapmalıyım?" class="w-full text-left p-2.5 rounded-lg bg-paper border border-hairline hover:border-forest text-ink transition">• Ayıplı ürün ve 14 gün cayma hakkı</button>
+                <button type="button" data-ai-q="İcra takibi geldi, borca nasıl itiraz edebilirim ve maaş haczi sınırı nedir?" class="w-full text-left p-2.5 rounded-lg bg-paper border border-hairline hover:border-forest text-ink transition">• İcra itirazı ve maaş haczi sınırı</button>
+                <button type="button" data-ai-q="İşten çıkarıldım, kıdem ve ihbar tazminatı haklarım nelerdir?" class="w-full text-left p-2.5 rounded-lg bg-paper border border-hairline hover:border-forest text-ink transition">• İşten çıkarma, kıdem ve ihbar</button>
+                <button type="button" data-ai-q="İnternette dolandırıldım veya hakarete uğradım, savcılığa nasıl şikayet ederim?" class="w-full text-left p-2.5 rounded-lg bg-paper border border-hairline hover:border-forest text-ink transition">• Savcılık suç duyurusu ve şikayet</button>
+                <button type="button" data-ai-q="İnternet veya GSM aboneliğimi iptal etmiyorlar, ne yapabilirim?" class="w-full text-left p-2.5 rounded-lg bg-paper border border-hairline hover:border-forest text-ink transition">• Abonelik iptali ve cayma bedeli</button>
+              </div>
+            </div>
+            <div class="p-4 rounded-xl bg-amberLight border border-amberwarm/25 text-[11px] text-ink/90 leading-relaxed">
+              <strong>Bilgilendirme:</strong> Pusula AI Asistan genel mevzuat ve rehberlik bilgisi sunar; resmi hukuki danışmanlık yerine geçmez. Kritik davalarda bir avukata başvurmanız önerilir.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================= -->
+      <!-- VIEW: T.C. KANUN & MEVZUAT ARAMA REHBERİ (LAW)            -->
+      <!-- ========================================================= -->
+      <section id="view-law" class="view-panel space-y-6">
+        <div class="p-6 rounded-2xl bg-amberLight/80 border border-amberwarm/25 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <span class="text-xs uppercase tracking-widest text-amberwarm font-semibold">Türkiye Cumhuriyeti Temel Mevzuat Rehberi</span>
+            <h2 class="font-editorial text-3xl text-ink mt-1">T.C. Kanun &amp; Madde Arama Merkezi</h2>
+            <p class="text-xs text-muted mt-1">Aradığınız konuyu veya kelimeyi yazın (Örn: kira, depozito, icra, maaş haczi, cayma, fazla mesai, hakaret, dilekçe) — ilgili kanun maddesi anında gelsin.</p>
+          </div>
+          <a href="https://www.mevzuat.gov.tr/" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-lg bg-amberwarm hover:bg-amberwarm/90 text-paper text-xs font-medium shrink-0 self-start md:self-auto transition">Resmi Mevzuat.gov.tr ↗</a>
+        </div>
+
+        <div class="flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between">
+          <div class="relative flex-1">
+            <i data-lucide="search" class="w-4 h-4 text-muted absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+            <input id="law-search-input" type="text" placeholder="Kanun veya kelime ara (Örn: kira artışı, kıdem, ihbar, icra, haciz, cayma, hakaret, KVKK)..." class="w-full bg-surface border border-hairline rounded-xl pl-10 pr-4 py-2.5 text-sm text-ink focus:outline-none focus:border-amberwarm" />
+          </div>
+          <div class="flex flex-wrap gap-1.5" id="law-cat-bar">
+            <button type="button" data-law-cat="Tümü" class="law-cat-btn px-3 py-1.5 rounded-full text-xs font-medium bg-ink text-paper">Tümü</button>
+            <button type="button" data-law-cat="Anayasa" class="law-cat-btn px-3 py-1.5 rounded-full text-xs font-medium bg-surface border border-hairline text-muted">Anayasa</button>
+            <button type="button" data-law-cat="Borçlar / Kira" class="law-cat-btn px-3 py-1.5 rounded-full text-xs font-medium bg-surface border border-hairline text-muted">Borçlar / Kira</button>
+            <button type="button" data-law-cat="Tüketici" class="law-cat-btn px-3 py-1.5 rounded-full text-xs font-medium bg-surface border border-hairline text-muted">Tüketici</button>
+            <button type="button" data-law-cat="İş Hukuku" class="law-cat-btn px-3 py-1.5 rounded-full text-xs font-medium bg-surface border border-hairline text-muted">İş Hukuku</button>
+            <button type="button" data-law-cat="Ceza (TCK)" class="law-cat-btn px-3 py-1.5 rounded-full text-xs font-medium bg-surface border border-hairline text-muted">Ceza (TCK)</button>
+            <button type="button" data-law-cat="İcra & KVKK" class="law-cat-btn px-3 py-1.5 rounded-full text-xs font-medium bg-surface border border-hairline text-muted">İcra &amp; KVKK</button>
+          </div>
+        </div>
+
+        <div id="law-results-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+      </section>
+
+      <!-- ========================================================= -->
       <!-- VIEW: HAZIR ŞABLONLAR MERKEZİ (TEMPLATES)                 -->
       <!-- ========================================================= -->
       <section id="view-templates" class="view-panel space-y-7">
@@ -1533,7 +1621,9 @@
           </div>
           <div class="flex flex-wrap gap-1.5" id="tpl-cat-bar">
             <button type="button" data-tpl-cat="Tümü" class="tpl-cat-btn px-3 py-1.5 rounded-full text-xs font-medium bg-plum text-paper">Tümü</button>
-            <button type="button" data-tpl-cat="Dilekçe" class="tpl-cat-btn px-3 py-1.5 rounded-full text-xs font-medium bg-surface border border-hairline text-muted">Resmi Dilekçe</button>
+            <button type="button" data-tpl-cat="Adliye" class="tpl-cat-btn px-3 py-1.5 rounded-full text-xs font-medium bg-surface border border-hairline text-muted">Adliye &amp; Savcılık</button>
+            <button type="button" data-tpl-cat="Tüketici" class="tpl-cat-btn px-3 py-1.5 rounded-full text-xs font-medium bg-surface border border-hairline text-muted">Tüketici &amp; Banka</button>
+            <button type="button" data-tpl-cat="Kamu" class="tpl-cat-btn px-3 py-1.5 rounded-full text-xs font-medium bg-surface border border-hairline text-muted">Kamu &amp; Belediye</button>
             <button type="button" data-tpl-cat="İş" class="tpl-cat-btn px-3 py-1.5 rounded-full text-xs font-medium bg-surface border border-hairline text-muted">İş &amp; Freelance</button>
             <button type="button" data-tpl-cat="Bütçe" class="tpl-cat-btn px-3 py-1.5 rounded-full text-xs font-medium bg-surface border border-hairline text-muted">Bütçe &amp; Yaşam</button>
           </div>
@@ -2668,6 +2758,7 @@
       // =====================================================
       const VIEW_META = {
         overview: 'Genel Bakış',
+        assistant: 'Pusula AI Asistan',
         daily: 'Günlük & Fikirler',
         news: 'Haberler & Gündem',
         markets: 'Piyasalar & Analiz',
@@ -2680,6 +2771,7 @@
         media: 'TV, Film & Kültür',
         social: 'Sosyal & Şehir',
         templates: 'Hazır Şablonlar Merkezi',
+        law: 'T.C. Kanun & Mevzuat Rehberi',
         office: 'Ofis, Excel & PDF',
         toolbox: 'Akıllı Araç Kutusu',
         mobile: 'Mobil Uygulama (Android & iOS)'
@@ -3818,6 +3910,8 @@
         const term = q.trim().toLowerCase();
         const items = [
           { label: 'Genel Bakış', sub: 'Ana ekran', view: 'overview' },
+          { label: 'Pusula AI Asistan', sub: 'Hukuki haklar, şikayetler ve genel sorular için yapay zeka', view: 'assistant' },
+          { label: 'T.C. Kanun & Mevzuat Arama', sub: 'Anayasa, Kira, Tüketici, İş, TCK, İcra kanun maddeleri', view: 'law' },
           { label: 'Günlük Plan, Odak & Fikirler', sub: 'Görevler, Pomodoro, Problem Panosu', view: 'daily' },
           { label: 'Haberler & Dünya Gündemi', sub: 'Otomatik canlı akış', view: 'news' },
           { label: 'Piyasalar & Analiz', sub: 'Canlı USD, EUR, Altın, Bitcoin ve Hesaplayıcı', view: 'markets' },
@@ -5526,143 +5620,204 @@
       renderBookmarks();
 
       // =====================================================
-      // 2048 GAME (FULL PLAYABLE)
+      // XOX GAME (TIC-TAC-TOE VS AI)
       // =====================================================
-      let g2048Grid = [];
-      let g2048Score = 0;
-      let g2048Best = 0;
-      try { g2048Best = Number(localStorage.getItem('pusula_2048_best')) || 0; } catch (e) {}
+      let xoxBoard = Array(9).fill('');
+      let xoxOver = false;
+      let xoxScoreX = 0;
+      let xoxScoreO = 0;
+      const XOX_WINS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
 
-      const TILE_COLORS = {
-        0: 'bg-paper/70 text-transparent',
-        2: 'bg-surface text-ink',
-        4: 'bg-amberLight text-ink',
-        8: 'bg-terracottaLight text-terracotta',
-        16: 'bg-terracotta/85 text-paper',
-        32: 'bg-terracotta text-paper',
-        64: 'bg-amberwarm text-paper',
-        128: 'bg-forestLight text-forest',
-        256: 'bg-forest/85 text-paper',
-        512: 'bg-forest text-paper',
-        1024: 'bg-ocean text-paper',
-        2048: 'bg-plum text-paper'
-      };
+      function checkXoxWinner(b) {
+        for (const [a, c, d] of XOX_WINS) {
+          if (b[a] && b[a] === b[c] && b[a] === b[d]) return b[a];
+        }
+        return b.includes('') ? null : 'DRAW';
+      }
 
-      function add2048Tile() {
-        const empty = [];
-        for (let r = 0; r < 4; r++) for (let c = 0; c < 4; c++) if (g2048Grid[r][c] === 0) empty.push([r, c]);
+      function renderXox() {
+        const el = document.getElementById('xox-board');
+        el.innerHTML = xoxBoard.map((cell, idx) => `
+          <button type="button" data-xox-cell="${idx}" class="aspect-square rounded-xl border-2 text-3xl font-bold flex items-center justify-center transition ${
+            cell === 'X' ? 'border-forest bg-forestLight text-forest' :
+            cell === 'O' ? 'border-terracotta bg-terracottaLight text-terracotta' :
+            'border-hairline bg-paper hover:border-ink/40 text-ink'
+          }">${cell}</button>
+        `).join('');
+        document.getElementById('xox-score-x').textContent = xoxScoreX;
+        document.getElementById('xox-score-o').textContent = xoxScoreO;
+      }
+
+      function xoxAiMove() {
+        if (xoxOver) return;
+        const diff = document.getElementById('xox-difficulty').value;
+        const empty = xoxBoard.map((v, i) => v === '' ? i : -1).filter(i => i !== -1);
         if (!empty.length) return;
-        const [r, c] = empty[Math.floor(Math.random() * empty.length)];
-        g2048Grid[r][c] = Math.random() < 0.9 ? 2 : 4;
-      }
 
-      function render2048() {
-        const board = document.getElementById('g2048-board');
-        board.innerHTML = g2048Grid.flat().map(val => {
-          const cls = TILE_COLORS[val] || 'bg-ink text-paper';
-          return `<div class="aspect-square rounded-lg flex items-center justify-center font-bold text-lg tabular shadow-sm ${cls}">${val || ''}</div>`;
-        }).join('');
-        document.getElementById('g2048-score').textContent = g2048Score;
-        if (g2048Score > g2048Best) {
-          g2048Best = g2048Score;
-          try { localStorage.setItem('pusula_2048_best', String(g2048Best)); } catch (e) {}
+        let pick = -1;
+        // 1. Win if possible
+        for (const i of empty) {
+          xoxBoard[i] = 'O';
+          if (checkXoxWinner(xoxBoard) === 'O') { pick = i; xoxBoard[i] = ''; break; }
+          xoxBoard[i] = '';
         }
-        document.getElementById('g2048-best').textContent = g2048Best;
-      }
-
-      function init2048() {
-        g2048Grid = Array.from({ length: 4 }, () => [0, 0, 0, 0]);
-        g2048Score = 0;
-        add2048Tile();
-        add2048Tile();
-        render2048();
-      }
-
-      function slideRow(row) {
-        let arr = row.filter(v => v !== 0);
-        for (let i = 0; i < arr.length - 1; i++) {
-          if (arr[i] === arr[i + 1]) {
-            arr[i] *= 2;
-            g2048Score += arr[i];
-            arr.splice(i + 1, 1);
+        // 2. Block player win
+        if (pick === -1 && (diff === 'hard' || Math.random() < 0.75)) {
+          for (const i of empty) {
+            xoxBoard[i] = 'X';
+            if (checkXoxWinner(xoxBoard) === 'X') { pick = i; xoxBoard[i] = ''; break; }
+            xoxBoard[i] = '';
           }
         }
-        while (arr.length < 4) arr.push(0);
-        return arr;
+        if (pick === -1 && empty.includes(4) && diff === 'hard') pick = 4;
+        if (pick === -1) pick = empty[Math.floor(Math.random() * empty.length)];
+
+        xoxBoard[pick] = 'O';
+        const w = checkXoxWinner(xoxBoard);
+        if (w === 'O') {
+          xoxOver = true; xoxScoreO++;
+          document.getElementById('xox-status').textContent = 'Yapay Zeka (O) kazandı! Tekrar deneyin.';
+          document.getElementById('xox-status').className = 'text-center text-xs font-semibold text-terracotta min-h-[18px]';
+        } else if (w === 'DRAW') {
+          xoxOver = true;
+          document.getElementById('xox-status').textContent = 'Berabere!';
+          document.getElementById('xox-status').className = 'text-center text-xs font-semibold text-muted min-h-[18px]';
+        } else {
+          document.getElementById('xox-status').textContent = 'Sıra sizde (X)';
+          document.getElementById('xox-status').className = 'text-center text-xs font-semibold text-forest min-h-[18px]';
+        }
+        renderXox();
       }
 
-      function move2048(dir) {
-        const before = JSON.stringify(g2048Grid);
-        if (dir === 'left') {
-          g2048Grid = g2048Grid.map(slideRow);
-        } else if (dir === 'right') {
-          g2048Grid = g2048Grid.map(r => slideRow(r.slice().reverse()).reverse());
-        } else if (dir === 'up') {
-          for (let c = 0; c < 4; c++) {
-            const col = slideRow([g2048Grid[0][c], g2048Grid[1][c], g2048Grid[2][c], g2048Grid[3][c]]);
-            for (let r = 0; r < 4; r++) g2048Grid[r][c] = col[r];
-          }
-        } else if (dir === 'down') {
-          for (let c = 0; c < 4; c++) {
-            const col = slideRow([g2048Grid[3][c], g2048Grid[2][c], g2048Grid[1][c], g2048Grid[0][c]]).reverse();
-            for (let r = 0; r < 4; r++) g2048Grid[r][c] = col[r];
-          }
-        }
-        if (JSON.stringify(g2048Grid) !== before) {
-          add2048Tile();
-          render2048();
-        }
-      }
-
-      document.querySelectorAll('[data-2048-dir]').forEach(btn => {
-        btn.addEventListener('click', () => move2048(btn.dataset['2048Dir']));
-      });
-      document.getElementById('g2048-restart-btn').addEventListener('click', init2048);
-      document.addEventListener('keydown', (e) => {
-        if (state.activeView !== 'games') return;
-        if (['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)) {
-          e.preventDefault();
-          const map = { ArrowLeft: 'left', ArrowRight: 'right', ArrowUp: 'up', ArrowDown: 'down' };
-          move2048(map[e.key]);
+      document.addEventListener('click', (e) => {
+        const cellBtn = e.target.closest('[data-xox-cell]');
+        if (!cellBtn || xoxOver) return;
+        const idx = Number(cellBtn.dataset.xoxCell);
+        if (xoxBoard[idx] !== '') return;
+        xoxBoard[idx] = 'X';
+        renderXox();
+        const w = checkXoxWinner(xoxBoard);
+        if (w === 'X') {
+          xoxOver = true; xoxScoreX++;
+          document.getElementById('xox-status').textContent = 'Tebrikler, siz (X) kazandınız!';
+          document.getElementById('xox-status').className = 'text-center text-xs font-semibold text-forest min-h-[18px]';
+          renderXox();
+        } else if (w === 'DRAW') {
+          xoxOver = true;
+          document.getElementById('xox-status').textContent = 'Berabere!';
+          document.getElementById('xox-status').className = 'text-center text-xs font-semibold text-muted min-h-[18px]';
+        } else {
+          document.getElementById('xox-status').textContent = 'Yapay Zeka düşünüyor...';
+          setTimeout(xoxAiMove, 320);
         }
       });
 
+      document.getElementById('xox-restart-btn').addEventListener('click', () => {
+        xoxBoard = Array(9).fill('');
+        xoxOver = false;
+        document.getElementById('xox-status').textContent = 'Sıra sizde (X)';
+        document.getElementById('xox-status').className = 'text-center text-xs font-semibold text-forest min-h-[18px]';
+        renderXox();
+      });
+
       // =====================================================
-      // DAILY TURKISH GENERAL KNOWLEDGE QUIZ
+      // INFINITE ONLINE + EXPANDED TURKISH TRIVIA QUIZ
       // =====================================================
-      const QUIZ_QUESTIONS = [
+      const LOCAL_TR_QUIZ_BANK = [
         { q: 'Türkiye’nin en uzun kara sınırına sahip olduğu komşu ülke hangisidir?', opts: ['İran', 'Suriye', 'Yunanistan', 'Irak'], ans: 1, exp: 'Türkiye’nin en uzun kara sınırı yaklaşık 911 km ile Suriye iledir.' },
-        { q: 'Bir şirketin halka arz edilerek borsada işlem görmeye başlamasına ne ad verilir?', opts: ['Enflasyon', 'IPO (İlk Halka Arz)', 'Deflasyon', 'Arbitraj'], ans: 1, exp: 'IPO (Initial Public Offering), bir şirketin hisselerini ilk kez halka açmasıdır.' },
-        { q: 'Güneş sisteminde kendi ekseni etrafında diğer gezegenlerin tersine dönen gezegen hangisidir?', opts: ['Mars', 'Venüs', 'Jüpiter', 'Merkür'], ans: 1, exp: 'Venüs, güneş sistemindeki çoğu gezegenin aksine doğudan batıya doğru döner.' },
-        { q: '“Kürk Mantolu Madonna” romanının yazarı kimdir?', opts: ['Yaşar Kemal', 'Sabahattin Ali', 'Ahmet Hamdi Tanpınar', 'Oğuz Atay'], ans: 1, exp: 'Kürk Mantolu Madonna, Sabahattin Ali tarafından 1943 yılında yayımlanmıştır.' },
-        { q: 'Bileşik faiz/getiri ile basit getiri arasındaki temel fark nedir?', opts: ['Yalnızca dövizde uygulanır', 'Kazanılan getirinin de zamanla getiri üretmesi', 'Sadece 1 yıllık olması', 'Vergisiz olması'], ans: 1, exp: 'Bileşik getiride her dönem elde edilen kazanç ana paraya eklenerek kartopu etkisi oluşturur.' },
-        { q: 'İstanbul Boğazı’ndaki ilk asma köprü (15 Temmuz Şehitler Köprüsü) hangi yıl açılmıştır?', opts: ['1968', '1973', '1980', '1988'], ans: 1, exp: 'Boğaziçi Köprüsü Cumhuriyetin 50. yılında, 30 Ekim 1973 tarihinde açılmıştır.' },
-        { q: 'İnsan vücudundaki en büyük organ hangisidir?', opts: ['Karaciğer', 'Akciğer', 'Deri', 'Beyin'], ans: 2, exp: 'Deri, hem yüzey alanı hem de ağırlık bakımından insan vücudunun en büyük organıdır.' },
-        { q: 'Web adreslerinin başındaki “HTTPS” kısaltmasındaki “S” harfi neyi ifade eder?', opts: ['Speed (Hız)', 'Secure (Güvenli / Şifreli)', 'Server (Sunucu)', 'System (Sistem)'], ans: 1, exp: 'HTTPS, tarayıcı ile sunucu arasındaki verinin şifrelenerek güvenle iletildiğini gösterir.' },
-        { q: 'UNESCO Dünya Mirası Listesi’ndeki Göbeklitepe hangi ilimizdedir?', opts: ['Mardin', 'Gaziantep', 'Şanlıurfa', 'Adıyaman'], ans: 2, exp: 'Göbeklitepe, Şanlıurfa il merkezinin yaklaşık 18 km kuzeydoğusunda yer alır.' },
-        { q: 'Müzikte bir oktavda kaç temel nota (do’dan bir sonraki do’ya kadar) bulunur?', opts: ['6', '7', '8', '12'], ans: 2, exp: 'Oktav Latince “sekiz” demektir; do-re-mi-fa-sol-la-si-do dizisi 8 ses aralığıdır.' }
+        { q: 'Bir şirketin halka arz edilerek borsada işlem görmeye başlamasına ne ad verilir?', opts: ['Enflasyon', 'IPO (İlk Halka Arz)', 'Deflasyon', 'Arbitraj'], ans: 1, exp: 'IPO, bir şirketin hisselerini ilk kez halka açmasıdır.' },
+        { q: 'Güneş sisteminde diğer gezegenlerin tersine (doğudan batıya) dönen gezegen hangisidir?', opts: ['Mars', 'Venüs', 'Jüpiter', 'Merkür'], ans: 1, exp: 'Venüs kendi ekseni etrafında doğudan batıya döner.' },
+        { q: '“Kürk Mantolu Madonna” romanının yazarı kimdir?', opts: ['Yaşar Kemal', 'Sabahattin Ali', 'Ahmet Hamdi Tanpınar', 'Oğuz Atay'], ans: 1, exp: 'Sabahattin Ali tarafından 1943 yılında yayımlanmıştır.' },
+        { q: 'Türkiye’de mesafeli satışlarda (internet alışverişi) tüketicinin koşulsuz cayma hakkı kaç gündür?', opts: ['3 gün', '7 gün', '14 gün', '30 gün'], ans: 2, exp: '6502 sayılı TKHK m.48 uyarınca mesafeli sözleşmelerde cayma süresi 14 gündür.' },
+        { q: 'İcra ödeme emrine karşı borçlunun itiraz süresi kural olarak kaç gündür?', opts: ['3 gün', '7 gün', '15 gün', '30 gün'], ans: 1, exp: 'İcra ve İflas Kanunu m.62 uyarınca ödeme emrine 7 gün içinde itiraz edilebilir.' },
+        { q: 'Konut kiralarında ev sahibinin isteyebileceği depozito en fazla kaç aylık kira bedeli olabilir?', opts: ['1 aylık', '2 aylık', '3 aylık', '6 aylık'], ans: 2, exp: 'Türk Borçlar Kanunu m.342 gereği güvence bedeli 3 aylık kira bedelini aşamaz.' },
+        { q: 'İstanbul Boğazı’ndaki ilk asma köprü hangi yıl açılmıştır?', opts: ['1968', '1973', '1980', '1988'], ans: 1, exp: 'Boğaziçi Köprüsü 30 Ekim 1973 tarihinde açılmıştır.' },
+        { q: 'İnsan vücudundaki en büyük organ hangisidir?', opts: ['Karaciğer', 'Akciğer', 'Deri', 'Beyin'], ans: 2, exp: 'Deri, hem yüzey alanı hem ağırlık açısından en büyük organdır.' },
+        { q: 'UNESCO Dünya Mirası Listesi’ndeki Göbeklitepe hangi ilimizdedir?', opts: ['Mardin', 'Gaziantep', 'Şanlıurfa', 'Adıyaman'], ans: 2, exp: 'Göbeklitepe Şanlıurfa il sınırları içindedir.' },
+        { q: 'Türkiye’nin yüz ölçümü bakımından en büyük ili hangisidir?', opts: ['Ankara', 'Konya', 'Sivas', 'Erzurum'], ans: 1, exp: 'Konya yaklaşık 40.838 km² ile Türkiye’nin en büyük ilidir.' },
+        { q: 'Periyodik tabloda “Au” sembolü hangi elementi ifade eder?', opts: ['Gümüş', 'Altın', 'Alüminyum', 'Bakır'], ans: 1, exp: 'Au (Latince Aurum) altının kimyasal sembolüdür.' },
+        { q: 'Türkiye’nin en yüksek dağı olan Ağrı Dağı’nın yüksekliği yaklaşık kaç metredir?', opts: ['3.917 m', '4.135 m', '5.137 m', '5.895 m'], ans: 2, exp: 'Büyük Ağrı Dağı 5.137 metre ile Türkiye’nin en yüksek zirvesidir.' },
+        { q: 'İş Kanunu’na göre haftalık 45 saati aşan fazla çalışmalarda saatlik ücret yüzde kaç zamlı ödenir?', opts: ['%25', '%50', '%75', '%100'], ans: 1, exp: '4857 sayılı İş Kanunu m.41 gereği fazla çalışma ücreti %50 zamlıdır.' },
+        { q: 'Dünyada en çok konuşulan ana dil hangisidir?', opts: ['İngilizce', 'İspanyolca', 'Mandarin Çincesi', 'Hintçe'], ans: 2, exp: 'Mandarin Çincesi ana dil olarak dünyada en çok konuşulan dildir.' },
+        { q: 'Nobel Kimya Ödülü’nü (2015) kazanan Türk bilim insanı kimdir?', opts: ['Cahit Arf', 'Aziz Sancar', 'Oktay Sinanoğlu', 'Fuat Sezgin'], ans: 1, exp: 'Prof. Dr. Aziz Sancar, DNA onarım mekanizması çalışmalarıyla 2015 Nobel Kimya Ödülü’nü almıştır.' },
+        { q: 'Bir yıl içinde ortalama kaç gün vardır (artık yıllar dahil)?', opts: ['365', '365,25', '366', '364,5'], ans: 1, exp: 'Dünya’nın Güneş etrafındaki dönüşü 365 gün 6 saat (365,25 gün) sürer.' },
+        { q: 'Türkiye’nin ilk yerli ve milli elektrikli otomobil markası hangisidir?', opts: ['Devrim', 'Anadol', 'Togg', 'Otokar'], ans: 2, exp: 'Togg (Türkiye’nin Otomobili Girişim Grubu) Türkiye’nin ilk yerli elektrikli otomobilidir.' },
+        { q: 'Kişisel Verilerin Korunması Kanunu (KVKK) hangi kanun numarasıyla bilinir?', opts: ['4857', '5237', '6502', '6698'], ans: 3, exp: '6698 sayılı KVKK, 2016 yılında yürürlüğe girmiştir.' },
+        { q: 'Işık vakumda (boşlukta) saniyede yaklaşık kaç kilometre yol alır?', opts: ['30.000 km', '150.000 km', '300.000 km', '1.000.000 km'], ans: 2, exp: 'Işık hızı boşlukta saniyede yaklaşık 299.792 km’dir.' },
+        { q: 'Osmanlı Devleti’nin kurucusu Osman Gazi’nin babası kimdir?', opts: ['Süleyman Şah', 'Ertuğrul Gazi', 'Orhan Gazi', 'Alâeddin Keykubad'], ans: 1, exp: 'Osman Gazi, Kayı Boyu beyi Ertuğrul Gazi’nin oğludur.' },
+        { q: 'Türkiye’de maaş haczinde kural olarak maaşın en az ne kadarı haczedilebilir?', opts: ['Tamamı', 'Yarısı (1/2)', 'Dörtte biri (1/4)', 'Onda biri (1/10)'], ans: 2, exp: 'İcra ve İflas Kanunu m.83 uyarınca maaşın en az 1/4’ü haczedilebilir (nafaka hariç).' },
+        { q: 'Avrupa Birliği’nin ortak para birimi Euro hangi yıl nakit olarak dolaşıma girmiştir?', opts: ['1995', '1999', '2002', '2005'], ans: 2, exp: 'Euro banknot ve madeni paraları 1 Ocak 2002 tarihinde dolaşıma girmiştir.' },
+        { q: 'İstiklal Marşı’nın bestecisi kimdir?', opts: ['Mehmet Akif Ersoy', 'Osman Zeki Üngör', 'Cemal Reşit Rey', 'Ahmet Adnan Saygun'], ans: 1, exp: 'Sözleri Mehmet Akif Ersoy’a, bestesi Osman Zeki Üngör’e aittir.' }
       ];
+
+      let quizPool = [];
       let quizIdx = 0;
       let quizScore = 0;
       let quizAnswered = false;
+      let quizTotalAsked = 0;
+
+      function shuffleArr(arr) {
+        const a = arr.slice();
+        for (let i = a.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+      }
+
+      function decodeHtmlEntities(str) {
+        const txt = document.createElement('textarea');
+        txt.innerHTML = str;
+        return txt.value;
+      }
+
+      async function fetchOnlineTriviaQuestions() {
+        const btn = document.getElementById('quiz-online-btn');
+        btn.textContent = 'Yükleniyor...';
+        try {
+          const res = await fetch('https://opentdb.com/api.php?amount=10&type=multiple');
+          if (res.ok) {
+            const data = await res.json();
+            if (data && data.results && data.results.length) {
+              const onlineQs = data.results.map(item => {
+                const correct = decodeHtmlEntities(item.correct_answer);
+                const opts = shuffleArr([correct, ...item.incorrect_answers.map(decodeHtmlEntities)]);
+                return {
+                  q: '[Global · ' + decodeHtmlEntities(item.category) + '] ' + decodeHtmlEntities(item.question),
+                  opts,
+                  ans: opts.indexOf(correct),
+                  exp: 'Doğru cevap: ' + correct
+                };
+              });
+              quizPool = shuffleArr([...onlineQs, ...shuffleArr(LOCAL_TR_QUIZ_BANK).slice(0, 10)]);
+              quizIdx = 0;
+              btn.textContent = 'Yeni Sorular ↻';
+              renderQuiz();
+              showToast('İnternetten yeni sorular yüklendi!');
+              return;
+            }
+          }
+        } catch (err) {}
+        // Fallback: fresh shuffled Turkish bank
+        quizPool = shuffleArr(LOCAL_TR_QUIZ_BANK);
+        quizIdx = 0;
+        btn.textContent = 'Yeni Sorular ↻';
+        renderQuiz();
+        showToast('Türkçe soru havuzundan yeni sorular karıştırıldı!');
+      }
 
       function renderQuiz() {
-        if (quizIdx >= QUIZ_QUESTIONS.length) {
-          document.getElementById('quiz-progress-badge').textContent = 'Tamamlandı';
-          document.getElementById('quiz-question-text').textContent = `Tebrikler! 10 sorudan ${quizScore} doğru cevap verdiniz.`;
-          document.getElementById('quiz-options-box').innerHTML = '';
-          document.getElementById('quiz-feedback').textContent = quizScore >= 8 ? 'Harika bir genel kültür skoru!' : 'Yeni bir turda rekorunuzu geliştirebilirsiniz.';
-          document.getElementById('quiz-feedback').className = 'text-xs font-medium text-forest';
-          document.getElementById('quiz-next-btn').classList.add('hidden');
-          return;
+        if (!quizPool.length || quizIdx >= quizPool.length) {
+          quizPool = shuffleArr(LOCAL_TR_QUIZ_BANK);
+          quizIdx = 0;
         }
-        const item = QUIZ_QUESTIONS[quizIdx];
+        const item = quizPool[quizIdx];
         quizAnswered = false;
-        document.getElementById('quiz-progress-badge').textContent = `Soru ${quizIdx + 1} / ${QUIZ_QUESTIONS.length}`;
+        document.getElementById('quiz-progress-badge').textContent = `Soru #${quizTotalAsked + 1}`;
         document.getElementById('quiz-question-text').textContent = item.q;
         document.getElementById('quiz-feedback').textContent = '';
         document.getElementById('quiz-next-btn').classList.add('hidden');
-        document.getElementById('quiz-score-label').innerHTML = `Doğru: <strong class="text-ink tabular">${quizScore}</strong>`;
+        document.getElementById('quiz-score-label').innerHTML = `Doğru: <strong class="text-ink tabular">${quizScore}</strong> / ${quizTotalAsked}`;
         document.getElementById('quiz-options-box').innerHTML = item.opts.map((opt, i) => `
           <button type="button" data-quiz-opt="${i}" class="w-full text-left px-3.5 py-2.5 rounded-lg border border-hairline bg-surface hover:border-plum text-xs font-medium text-ink transition">${escapeHtml(opt)}</button>
         `).join('');
@@ -5670,10 +5825,11 @@
 
       document.addEventListener('click', (e) => {
         const btn = e.target.closest('[data-quiz-opt]');
-        if (!btn || quizAnswered || quizIdx >= QUIZ_QUESTIONS.length) return;
+        if (!btn || quizAnswered || !quizPool[quizIdx]) return;
         quizAnswered = true;
+        quizTotalAsked++;
         const chosen = Number(btn.dataset.quizOpt);
-        const item = QUIZ_QUESTIONS[quizIdx];
+        const item = quizPool[quizIdx];
         const fb = document.getElementById('quiz-feedback');
         document.querySelectorAll('[data-quiz-opt]').forEach((b, i) => {
           if (i === item.ans) b.className = 'w-full text-left px-3.5 py-2.5 rounded-lg border border-forest bg-forestLight text-forest text-xs font-semibold';
@@ -5687,39 +5843,46 @@
           fb.textContent = 'Yanlış. ' + item.exp;
           fb.className = 'text-xs font-medium text-terracotta';
         }
-        document.getElementById('quiz-score-label').innerHTML = `Doğru: <strong class="text-ink tabular">${quizScore}</strong>`;
+        document.getElementById('quiz-score-label').innerHTML = `Doğru: <strong class="text-ink tabular">${quizScore}</strong> / ${quizTotalAsked}`;
         document.getElementById('quiz-next-btn').classList.remove('hidden');
       });
 
       document.getElementById('quiz-next-btn').addEventListener('click', () => { quizIdx++; renderQuiz(); });
-      document.getElementById('quiz-restart-btn').addEventListener('click', () => { quizIdx = 0; quizScore = 0; renderQuiz(); });
+      document.getElementById('quiz-online-btn').addEventListener('click', fetchOnlineTriviaQuestions);
+      document.getElementById('quiz-restart-btn').addEventListener('click', () => { quizScore = 0; quizTotalAsked = 0; quizPool = shuffleArr(LOCAL_TR_QUIZ_BANK); quizIdx = 0; renderQuiz(); });
 
       // =====================================================
-      // READY-TO-USE LIFE & BUSINESS TEMPLATES LIBRARY
+      // EXPANDED 20+ PETITIONS & LIFE TEMPLATES LIBRARY
       // =====================================================
       const LIFE_TEMPLATES = [
-        { id: 'tpl1', cat: 'Dilekçe', mode: 'doc', title: 'Abonelik İptal Dilekçesi', desc: 'İnternet, GSM veya dijital platform aboneliklerini resmi olarak sonlandırma dilekçesi.', content: 'İLGİLİ KURUM MÜDÜRLÜĞÜNE,\n\n... numaralı aboneliğimin işbu dilekçemin tarafınıza ulaştığı tarih itibarıyla herhangi bir ek ücret yansıtılmaksızın iptal edilmesini ve tarafıma yazılı bilgi verilmesini arz ederim.\n\nAd Soyad:\nT.C. Kimlik No:\nTelefon:\nTarih: 21.11.2026\nİmza:' },
-        { id: 'tpl2', cat: 'Dilekçe', mode: 'doc', title: 'Yıllık İzin Talep Dilekçesi', desc: 'İş yeriniz için hazır, kurumsal yıllık ücretli izin başvuru metni.', content: 'İNSAN KAYNAKLARI MÜDÜRLÜĞÜNE,\n\nŞirketinizde yürütmekte olduğum görevim kapsamında hak kazandığım yıllık ücretli iznimin .../.../2026 – .../.../2026 tarihleri arasında toplam ... iş günü olarak kullanılması hususunda gereğini arz ederim.\n\nAd Soyad:\nBölüm / Ünvan:\nİmza:' },
-        { id: 'tpl3', cat: 'Dilekçe', mode: 'doc', title: 'İstifa Dilekçesi (Standart)', desc: 'Yasal ihbar süresine uygun, sade ve profesyonel işten ayrılma dilekçesi.', content: 'İLGİLİ MAKAMA,\n\n.../.../20... tarihinden bu yana şirketinizde sürdürmekte olduğum görevimden kendi isteğimle ayrılmak istiyorum. Yasal bildirim süresine uygun olarak .../.../2026 tarihi itibarıyla iş akdimin sonlandırılmasını arz ederim.\n\nAd Soyad:\nTarih:\nİmza:' },
-        { id: 'tpl4', cat: 'Dilekçe', mode: 'doc', title: 'Tüketici Hakem Heyeti Taslağı', desc: 'Ayıplı ürün veya hizmet iadesi için başvuru özet metni.', content: 'TÜKETİCİ HAKEM HEYETİ BAŞKANLIĞINA,\n\n.../.../2026 tarihinde ... firmasından ... TL bedelle satın aldığım ürün/hizmette yaşanan sorun nedeniyle bedel iadesi / değişim talebimin karşılanmaması üzerine mağduriyetimin giderilmesini arz ederim.\n\nEkler: Fatura, Ödeme Dekontu\nAd Soyad & İmza:' },
-        { id: 'tpl5', cat: 'İş', mode: 'doc', title: 'Freelance Hizmet Teklifi', desc: 'Müşterilerinize gönderebileceğiniz kapsam, süre ve fiyat içeren profesyonel teklif.', content: 'HİZMET VE PROJE TEKLİFİ\n\nMüşteri / Kurum:\nProje Kapsamı:\n1. Analiz ve Tasarım\n2. Uygulama ve Teslim\n\nTeslim Süresi: ... iş günü\nToplam Ücret: ... TL (%50 başlangıç, %50 teslim)\nGeçerlilik Süresi: 15 gün' },
-        { id: 'tpl6', cat: 'İş', mode: 'doc', title: 'Kira Sözleşmesi Kontrol Özeti', desc: 'Ev veya ofis kiralarken depozito, artış oranı ve demirbaş kontrol listesi.', content: 'KİRA SÖZLEŞMESİ ÖZET KONTROL LİSTESİ\n\n• Aylık Kira Bedeli ve Ödeme Günü:\n• Depozito Tutarı (En fazla 3 kira bedeli):\n• Yıllık Artış Oranı (TÜFE 12 aylık ortalama):\n• Demirbaş Durumu (Kombi, klima, mutfak, sayaç fotoğrafı):\n• Aidat ve Ortak Gider Sorumluluğu:' },
+        { id: 'tpl_savci', cat: 'Adliye', mode: 'doc', title: 'Cumhuriyet Başsavcılığına Suç Duyurusu / Şikayet', desc: 'Dolandırıcılık, tehdit, hakaret veya bilişim suçları için savcılık şikayet dilekçesi.', content: '… CUMHURİYET BAŞSAVCILIĞINA\n\nMÜŞTEKİ (ŞİKAYETÇİ): Ad Soyad, T.C. Kimlik No, Adres\nŞÜPHELİ: Ad Soyad / Bilinmiyorsa "Kimliği Meçhul Şüpheli"\nSUÇ: Dolandırıcılık / Tehdit / Hakaret / Bilişim Suçu\nSUÇ TARİHİ: …/…/2026\n\nAÇIKLAMALAR:\n1. … tarihinde … olayını yaşamış bulunmaktayım.\n2. Olayla ilgili ekran görüntüleri, dekontlar ve yazışmalar dilekçem ekinde sunulmuştur.\n\nDELİLLER: Banka dekontu, ekran görüntüsü, tanık beyanları, HTS kayıtları.\nSONUÇ VE İSTEM: Şüpheli hakkında gerekli soruşturmanın yapılarak kamu davası açılmasını saygıyla arz ederim.\n\nTarih: …/…/2026\nAd Soyad — İmza' },
+        { id: 'tpl_icra', cat: 'Adliye', mode: 'doc', title: 'İcra Müdürlüğüne Borca İtiraz Dilekçesi (7 Gün)', desc: 'Haksız veya zamanaşımına uğramış icra ödeme emrine yasal 7 gün içinde itiraz dilekçesi.', content: '… İCRA MÜDÜRLÜĞÜNE\nDOSYA NO: 2026/… E.\n\nBORÇLU (İTİRAZ EDEN): Ad Soyad, T.C. Kimlik No, Adres\nALACAKLI: …\nKONU: Ödeme emrine, borca, faize ve tüm fer’ilerine itirazımın sunulmasıdır.\n\nAÇIKLAMALAR:\nTarafıma …/…/2026 tarihinde tebliğ edilen ödeme emrinde belirtilen borç gerçeği yansıtmamaktadır. Alacaklıya herhangi bir borcum bulunmamaktadır.\n\nSONUÇ VE İSTEM: İİK m.62 uyarınca borcun tamamına, faizine ve fer’ilerine itiraz ediyor, hakkımdaki icra takibinin durdurulmasını talep ederim.\n\nTarih — Ad Soyad — İmza' },
+        { id: 'tpl_veraset', cat: 'Adliye', mode: 'doc', title: 'Veraset İlamı (Mirasçılık Belgesi) Dilekçesi', desc: 'Sulh Hukuk Mahkemesinden mirasçılık belgesi almak için hazır başvuru dilekçesi.', content: '… NÖBETÇİ SULH HUKUK MAHKEMESİNE\n\nDAVACI: Ad Soyad, T.C. Kimlik No, Adres\nDAVALI: Hasımsız\nKONU: Mirasçılık belgesi (veraset ilamı) verilmesi talebidir.\n\nAÇIKLAMALAR:\nMuris … (T.C.: …) …/…/2026 tarihinde vefat etmiştir. Yasal mirasçısı olarak miras paylarımızın tespiti amacıyla mirasçılık belgesi verilmesini saygıyla arz ederim.\n\nTarih — Ad Soyad — İmza' },
+        { id: 'tpl_adliyardim', cat: 'Adliye', mode: 'doc', title: 'Adli Yardım (Ücretsiz Avukat / Harç Muafiyeti)', desc: 'Maddi durumu yetersiz vatandaşların yargılama giderlerinden muafiyet talebi.', content: '… MAHKEMESİ SAYIN HAKİMLİĞİNE\n\nTALEP EDEN: Ad Soyad, T.C., Adres\nKONU: HMK m.334 vd. gereğince adli yardım talebimdir.\n\nAÇIKLAMALAR:\nDüzenli gelirim ve yargılama giderlerini karşılayacak mal varlığım bulunmamaktadır (fakirlik belgesi ve SGK kayıtları ektedir). Hak arama hürriyetimi kullanabilmem için adli yardımdan yararlandırılmamı arz ederim.\n\nTarih — Ad Soyad — İmza' },
+        { id: 'tpl_bosanma', cat: 'Adliye', mode: 'doc', title: 'Anlaşmalı Boşanma Dilekçesi Taslağı', desc: 'Aile Mahkemesi için temel anlaşmalı boşanma başvuru ve protokol çerçevesi.', content: '… NÖBETÇİ AİLE MAHKEMESİNE\n\nDAVACI: Ad Soyad, T.C., Adres\nDAVALI: Ad Soyad, T.C., Adres\nKONU: TMK m.166/3 uyarınca anlaşmalı boşanma talebidir.\n\nAÇIKLAMALAR:\nEşim ile …/…/20… tarihinden beri evliyiz (en az 1 yıl). Evlilik birliğimiz temelinden sarsılmış olup ekte sunduğumuz protokol kapsamında nafaka, tazminat ve mal paylaşımı konularında tam mutabakata vardık.\n\nSONUÇ: Protokolün onaylanarak boşanmamıza karar verilmesini arz ederim.' },
+        { id: 'tpl4', cat: 'Tüketici', mode: 'doc', title: 'Tüketici Hakem Heyetine Ayıplı Mal İade Dilekçesi', desc: 'Arızalı veya ayıplı çıkan ürünlerde 6502 sayılı kanuna göre bedel iadesi/değişim başvurusu.', content: '… TÜKETİCİ HAKEM HEYETİ BAŞKANLIĞINA\n\nBAŞVURAN: Ad Soyad, T.C., Adres, Telefon\nŞİKAYET EDİLEN FİRMA: Firma Ünvanı, Adres\nUYUŞMAZLIK BEDELİ: … TL\n\nAÇIKLAMALAR:\n…/…/2026 tarihinde satın aldığım … markalı ürün ayıplı çıkmıştır. 6502 sayılı TKHK m.11 kapsamındaki seçimlik hakkımı kullanarak bedel iadesi / ayıpsız misli ile değişim talep etmeme rağmen firma talebimi reddetmiştir.\n\nEKLER: Fatura, ödeme dekontu, servis/yazışma kayıtları.\nSONUÇ: … TL bedelin tarafıma iadesine karar verilmesini arz ederim.' },
+        { id: 'tpl_cayma', cat: 'Tüketici', mode: 'doc', title: 'E-Ticaret 14 Gün Cayma Hakkı Bildirimi', desc: 'İnternetten alınan ürünü 14 gün içinde hiçbir gerekçe göstermeden iade bildirimi.', content: '… FİRMASI MÜŞTERİ HİZMETLERİNE\n\nSİPARİŞ NO: …\nTESLİM TARİHİ: …/…/2026\n\n6502 sayılı Tüketicinin Korunması Hakkında Kanun m.48 ve Mesafeli Sözleşmeler Yönetmeliği uyarınca 14 günlük yasal cayma hakkımı kullanarak söz konusu ürünü iade ediyor, ödediğim … TL tutarın 14 gün içinde ödeme aracıma iadesini talep ediyorum.\n\nAd Soyad — İletişim' },
+        { id: 'tpl1', cat: 'Tüketici', mode: 'doc', title: 'Abonelik İptal Dilekçesi (İnternet / GSM / TV)', desc: 'Taahhütsüz veya süresi dolan abonelikleri tek taraflı ve ek ücretsiz sonlandırma.', content: 'İLGİLİ KURUM MÜDÜRLÜĞÜNE,\n\n… numaralı aboneliğimin 6502 sayılı TKHK m.52 uyarınca işbu dilekçemin tarafınıza ulaştığı tarih itibarıyla feshedilmesini ve tarafıma yazılı teyit iletilmesini arz ederim.\n\nAd Soyad:\nT.C. Kimlik No:\nTelefon:\nTarih — İmza' },
+        { id: 'tpl_banka', cat: 'Tüketici', mode: 'doc', title: 'Banka Kart Aidatı / Haksız Kesinti İade Dilekçesi', desc: 'Kredi kartı yıllık aidatı veya haksız hesap işletim kesintisinin iade talebi.', content: '… BANKASI GENEL MÜDÜRLÜĞÜNE\n\nMÜŞTERİ / KART NO: …\n\n…/…/2026 tarihinde hesabımdan/kartımdan bilgim ve açık onayım olmaksızın kesilen … TL tutarındaki aidat/masrafın yasal mevzuat gereğince tarafıma iadesini; aksi halde Tüketici Hakem Heyetine ve BDDK’ya başvuracağımı bildiririm.\n\nAd Soyad — İmza' },
+        { id: 'tpl_kargo', cat: 'Tüketici', mode: 'doc', title: 'Kargo Hasar / Kayıp Tazminat Başvurusu', desc: 'Kargoda kırılan, hasar gören veya kaybolan gönderiler için tazminat talebi.', content: '… KARGO GENEL MÜDÜRLÜĞÜNE\n\nTAKİP NO: …\n\n…/…/2026 tarihinde tarafıma teslim edilmesi gereken / hasarlı teslim edilen (hasar tespit tutanağı ektedir) gönderinin fatura bedeli olan … TL’nin tarafıma tazmin edilmesini arz ederim.\n\nAd Soyad — IBAN — İmza' },
+        { id: 'tpl_belediye', cat: 'Kamu', mode: 'doc', title: 'Belediyeye Yol, Çevre veya Altyapı Şikayet Dilekçesi', desc: 'Mahalledeki bozuk yol, aydınlatma, çöp veya çevre sorunları için resmi belediye başvurusu.', content: '… BELEDİYE BAŞKANLIĞINA\n\nKONU: … Mahallesi … Sokak’ta yaşanan altyapı/çevre sorununun giderilmesi talebidir.\n\nAÇIKLAMALAR:\nBelirtilen adreste uzun süredir devam eden … sorunu mahalle sakinlerinin günlük yaşamını ve güvenliğini olumsuz etkilemektedir. Gerekli incelemenin yapılarak sorunun giderilmesini ve tarafıma bilgi verilmesini arz ederim.\n\nAd Soyad — Adres — Telefon — İmza' },
+        { id: 'tpl_cimer', cat: 'Kamu', mode: 'doc', title: 'CİMER / 4982 Bilgi Edinme Başvuru Taslağı', desc: 'Kamu kurumlarından resmi bilgi veya inceleme talep etmek için düzenli başvuru metni.', content: 'İLGİLİ KAMU KURUMUNA / CİMER BAŞVURUSU\n\n4982 sayılı Bilgi Edinme Hakkı Kanunu ve Anayasa m.74 kapsamında … konusu hakkında kurumunuz nezdinde yapılan işlemlerin ve güncel durumun tarafıma yazılı/elektronik olarak bildirilmesini arz ederim.\n\nAd Soyad — T.C. — İletişim' },
+        { id: 'tpl_kvkk', cat: 'Kamu', mode: 'doc', title: 'KVKK Veri Silme & İstenmeyen SMS İptal Başvurusu', desc: '6698 sayılı KVKK m.11 gereği kişisel verilerinizin silinmesi ve reklam SMS’lerinin durdurulması.', content: '… ŞİRKETİ VERİ SORUMLUSUNA\n\n6698 sayılı Kişisel Verilerin Korunması Kanunu m.11 uyarınca şirketiniz kayıtlarında bulunan telefon numaram, e-posta adresim ve tüm kişisel verilerimin silinmesini/yok edilmesini ve tarafıma ticari ileti gönderilmesinin derhal durdurulmasını talep ederim.\n\nAd Soyad — Telefon — Tarih' },
+        { id: 'tpl2', cat: 'İş', mode: 'doc', title: 'Yıllık İzin Talep Dilekçesi', desc: 'İş yeriniz için hazır, kurumsal yıllık ücretli izin başvuru metni.', content: 'İNSAN KAYNAKLARI MÜDÜRLÜĞÜNE,\n\n4857 sayılı İş Kanunu kapsamında hak kazandığım yıllık ücretli iznimin …/…/2026 – …/…/2026 tarihleri arasında toplam … iş günü olarak kullanılması hususunda gereğini arz ederim.\n\nAd Soyad — Bölüm — İmza' },
+        { id: 'tpl3', cat: 'İş', mode: 'doc', title: 'İstifa Dilekçesi (Standart)', desc: 'Yasal ihbar süresine uygun, sade ve profesyonel işten ayrılma dilekçesi.', content: 'İLGİLİ MAKAMA,\n\n…/…/20… tarihinden bu yana şirketinizde sürdürmekte olduğum görevimden kendi isteğimle ayrılmak istiyorum. Yasal ihbar süresine uygun olarak …/…/2026 tarihi itibarıyla iş akdimin sonlandırılmasını arz ederim.\n\nAd Soyad — Tarih — İmza' },
+        { id: 'tpl_kidem', cat: 'İş', mode: 'doc', title: 'Kıdem / Fazla Mesai Alacağı Talep Taslağı', desc: 'Ödenmeyen işçilik alacakları için işverene ön bildirim ve arabuluculuk hazırlık taslağı.', content: '… ŞİRKETİ YÖNETİMİNE\n\nŞirketinizde …/…/20… – …/…/2026 tarihleri arasında çalıştığım döneme ait ödenmeyen kıdem tazminatı, yıllık izin ücreti ve fazla mesai alacaklarımın 7 iş günü içinde hesabıma ödenmesini; aksi halde yasal arabuluculuk ve dava yoluna başvuracağımı bildiririm.\n\nAd Soyad — IBAN — İmza' },
+        { id: 'tpl5', cat: 'İş', mode: 'doc', title: 'Freelance Hizmet & Proje Teklifi', desc: 'Müşterilerinize gönderebileceğiniz kapsam, süre ve fiyat içeren profesyonel teklif.', content: 'HİZMET VE PROJE TEKLİFİ\n\nMüşteri / Kurum:\nProje Kapsamı:\n1. Analiz ve Tasarım\n2. Uygulama ve Teslim\n\nTeslim Süresi: … iş günü\nToplam Ücret: … TL (%50 başlangıç, %50 teslim)\nGeçerlilik Süresi: 15 gün' },
+        { id: 'tpl6', cat: 'İş', mode: 'doc', title: 'Kira Sözleşmesi Kontrol Özeti', desc: 'Ev veya ofis kiralarken depozito (en fazla 3 kira), TÜFE artış oranı ve demirbaş kontrol listesi.', content: 'KİRA SÖZLEŞMESİ KONTROL LİSTESİ\n\n• Aylık Kira Bedeli ve Ödeme Günü:\n• Depozito (TBK m.342 — En fazla 3 kira):\n• Yıllık Artış Oranı (TBK m.344 — 12 Aylık TÜFE Ortalaması):\n• Demirbaş Fotoğrafları ve Sayaç Okumaları:\n• Aidat ve Ortak Gider Sorumluluğu:' },
         { id: 'tpl7', cat: 'Bütçe', mode: 'sheet', title: '50 / 30 / 20 Aylık Bütçe (Excel)', desc: 'Gelirinizi Zorunlu İhtiyaçlar (%50), İstekler (%30) ve Birikim (%20) olarak planlayın.', rows: [
           { id: 's1', item: 'Kira / Barınma (%50 Zorunlu)', cat: 'Zorunlu', qty: 1, price: 20000 },
           { id: 's2', item: 'Market & Faturalar (%50 Zorunlu)', cat: 'Zorunlu', qty: 1, price: 12000 },
           { id: 's3', item: 'Sosyal Yaşam & Kültür (%30 İstek)', cat: 'İstek', qty: 1, price: 8000 },
           { id: 's4', item: 'Acil Durum & Yatırım (%20 Birikim)', cat: 'Birikim', qty: 1, price: 10000 }
         ] },
-        { id: 'tpl8', cat: 'Bütçe', mode: 'sheet', title: 'Borç Kapatma Planı (Excel)', desc: 'En küçükten büyüğe borçlarınızı sıralayıp aylık ödeme planınızı çıkarın.', rows: [
+        { id: 'tpl8', cat: 'Bütçe', mode: 'sheet', title: 'Borç Kapatma Planı (Excel)', desc: 'Borçlarınızı önceliklendirip aylık ödeme planınızı Excel’e aktarın.', rows: [
           { id: 'd1', item: '1. Öncelik — Küçük Borç', cat: 'Öncelik 1', qty: 1, price: 5000 },
           { id: 'd2', item: '2. Öncelik — Orta Borç', cat: 'Öncelik 2', qty: 1, price: 15000 },
           { id: 'd3', item: '3. Öncelik — Uzun Vadeli Plan', cat: 'Öncelik 3', qty: 1, price: 35000 }
-        ] },
-        { id: 'tpl9', cat: 'Bütçe', mode: 'sheet', title: 'Haftalık Alışveriş & Mutfak Listesi', desc: 'Haftalık market bütçenizi önceden hesaplayıp gereksiz harcamayı önleyin.', rows: [
-          { id: 'm1', item: 'Sebze & Meyve', cat: 'Mutfak', qty: 1, price: 1200 },
-          { id: 'm2', item: 'Kahvaltılık & Süt Ürünleri', cat: 'Mutfak', qty: 1, price: 1400 },
-          { id: 'm3', item: 'Temel Gıda & Bakliyat', cat: 'Mutfak', qty: 1, price: 950 },
-          { id: 'm4', item: 'Temizlik & Kişisel Bakım', cat: 'Ev', qty: 1, price: 650 }
         ] }
       ];
       let tplFilter = 'Tümü';
@@ -5774,9 +5937,191 @@
         }
       });
 
-      init2048();
+      // =====================================================
+      // T.C. KANUN & MEVZUAT ARAMA MERKEZİ
+      // =====================================================
+      const TR_LAWS = [
+        { cat: 'Anayasa', code: 'T.C. Anayasası · Madde 36', title: 'Hak Arama Hürriyeti', text: 'Herkes, meşru vasıta ve yollardan faydalanmak suretiyle yargı mercileri önünde davacı veya davalı olarak iddia ve savunma ile adil yargılanma hakkına sahiptir.', tags: 'anayasa yargı dava mahkeme adil yargılanma hak', tplId: 'tpl_adliyardim' },
+        { cat: 'Anayasa', code: 'T.C. Anayasası · Madde 74', title: 'Dilekçe, Bilgi Edinme ve Kamu Denetçisine Başvurma Hakkı', text: 'Vatandaşlar kendileriyle veya kamu ile ilgili dilek ve şikayetleri hakkında yetkili makamlara ve TBMM’ye yazı ile başvurma hakkına sahiptir; başvuru sonucu gecikmeksizin yazılı olarak bildirilir.', tags: 'dilekçe şikayet cimer kamu başvuru bilgi edinme', tplId: 'tpl_cimer' },
+        { cat: 'Anayasa', code: 'T.C. Anayasası · Madde 21', title: 'Konut Dokunulmazlığı', text: 'Kimsenin konutuna dokunulamaz. Usulüne göre verilmiş hakim kararı olmadıkça veya kanunla yetkili kılınmış merciin yazılı emri bulunmadıkça kimsenin konutuna girilemez ve arama yapılamaz.', tags: 'konut ev polis arama dokunulmazlık', tplId: 'tpl_savci' },
+        { cat: 'Borçlar / Kira', code: 'TBK (6098) · Madde 342', title: 'Kiracının Güvence (Depozito) Vermesi', text: 'Konut ve çatılı işyeri kiralarında kiracıya güvence (depozito) verme borcu getirilmişse, bu güvence üç aylık kira bedelini aşamaz ve vadeli tasarruf hesabına yatırılır.', tags: 'kira depozito güvence ev sahibi ev', tplId: 'tpl6' },
+        { cat: 'Borçlar / Kira', code: 'TBK (6098) · Madde 344', title: 'Kira Bedelinin Belirlenmesi (TÜFE Sınırı)', text: 'Tarafların yenilenen kira dönemlerinde uygulanacak kira bedeline ilişkin anlaşmaları, bir önceki kira yılında tüketici fiyat endeksindeki (TÜFE) oniki aylık ortalamalara göre değişim oranını geçmemek koşuluyla geçerlidir.', tags: 'kira artış zam tüfe oran ev sahibi', tplId: 'tpl6' },
+        { cat: 'Borçlar / Kira', code: 'TBK (6098) · Madde 347', title: 'Kira Sözleşmesinin Feshi ve 10 Yıl Kuralı', text: 'Konut ve çatılı işyeri kiralarında kiracı, belirli süreli sözleşmelerin süresinin bitiminden en az 15 gün önce bildirimde bulunmadıkça sözleşme aynı koşullarla 1 yıl uzatılmış sayılır. Kiraya veren, sözleşme süresinin bitimine dayanarak sözleşmeyi sona erdiremez (10 yıllık uzama süresi sonunda fesih hakkı doğar).', tags: 'kira tahliye çıkış sözleşme uzama 10 yıl', tplId: 'tpl6' },
+        { cat: 'Tüketici', code: 'TKHK (6502) · Madde 11', title: 'Ayıplı Malda Tüketicinin Seçimlik Hakları', text: 'Malın ayıplı olduğunun anlaşılması durumunda tüketici; a) sözleşmeden dönerek bedel iadesi, b) ayıp oranında indirim, c) ücretsiz onarım, d) ayıpsız misli ile değişim haklarından birini seçebilir. Satıcı tüketicinin tercih ettiği bu talebi yerine getirmekle yükümlüdür.', tags: 'ayıplı mal bozuk ürün iade değişim garanti tüketici', tplId: 'tpl4' },
+        { cat: 'Tüketici', code: 'TKHK (6502) · Madde 48', title: 'Mesafeli Sözleşmelerde 14 Gün Cayma Hakkı', text: 'Tüketici, internet veya telefon üzerinden yapılan mesafeli alışverişlerde 14 gün içinde herhangi bir gerekçe göstermeksizin ve cezai şart ödemeksizin sözleşmeden cayma hakkına sahiptir.', tags: 'internet alışveriş e-ticaret cayma 14 gün iade', tplId: 'tpl_cayma' },
+        { cat: 'Tüketici', code: 'TKHK (6502) · Madde 52', title: 'Abonelik Sözleşmelerinin Feshi', text: 'Tüketici, belirsiz süreli veya süresi bir yıl ve daha uzun olan belirli süreli abonelik sözleşmesini herhangi bir gerekçe göstermeksizin ve cezai şart ödemeksizin istediği zaman feshetme hakkına sahiptir.', tags: 'abonelik internet gsm fatura iptal cayma bedeli', tplId: 'tpl1' },
+        { cat: 'İş Hukuku', code: 'İş Kanunu (4857) · Madde 17', title: 'Süreli Fesih ve İhbar Süreleri', text: 'İş sözleşmesinin feshinden önce çalışma süresine göre ihbar süreleri: 6 aydan az 2 hafta, 6 ay-1,5 yıl arası 4 hafta, 1,5-3 yıl arası 6 hafta, 3 yıldan fazla 8 haftadır.', tags: 'işçi istifa ihbar tazminat işten çıkarma', tplId: 'tpl3' },
+        { cat: 'İş Hukuku', code: 'İş Kanunu (4857) · Madde 41', title: 'Fazla Çalışma (%50 Zamlı Ücret)', text: 'Haftalık 45 saati aşan çalışmalar fazla çalışmadır. Her bir saat fazla çalışma için verilecek ücret normal çalışma ücretinin saat başına düşen miktarının yüzde elli yükseltilmesi suretiyle ödenir.', tags: 'fazla mesai ücret maaş çalışma saati', tplId: 'tpl_kidem' },
+        { cat: 'İş Hukuku', code: 'İş Kanunu (4857) · Madde 53', title: 'Yıllık Ücretli İzin Süreleri', text: 'Aynı işyerinde en az 1 yıl çalışan işçilere verilecek yıllık izin süresi; 1-5 yıl (dahil) arası en az 14 gün, 5-15 yıl arası en az 20 gün, 15 yıl ve daha fazla olanlara en az 26 gündür.', tags: 'yıllık izin tatil işçi hak', tplId: 'tpl2' },
+        { cat: 'Ceza (TCK)', code: 'TCK (5237) · Madde 125', title: 'Hakaret Suçu', text: 'Bir kimseye onur, şeref ve saygınlığını rencide edebilecek nitelikte somut bir fiil veya olgu isnat eden veya sövmek suretiyle saldırıda bulunan kişi üç aydan iki yıla kadar hapis veya adli para cezası ile cezalandırılır.', tags: 'hakaret küfür sosyal medya savcılık şikayet', tplId: 'tpl_savci' },
+        { cat: 'Ceza (TCK)', code: 'TCK (5237) · Madde 157-158', title: 'Dolandırıcılık ve Nitelikli Dolandırıcılık', text: 'Hileli davranışlarla bir kimseyi aldatıp, onun veya başkasının zararına olarak kendisine veya başkasına yarar sağlayan kişi cezalandırılır. Bilişim sistemlerinin, banka veya kredi kurumlarının araç olarak kullanılması nitelikli haldir.', tags: 'dolandırıcılık bilişim banka savcılık suç duyurusu', tplId: 'tpl_savci' },
+        { cat: 'Ceza (TCK)', code: 'TCK (5237) · Madde 106', title: 'Tehdit Suçu', text: 'Bir başkasını, kendisinin veya yakınının hayatına, vücut veya cinsel dokunulmazlığına yönelik bir saldırı gerçekleştireceğinden bahisle tehdit eden kişi altı aydan iki yıla kadar hapis cezası ile cezalandırılır.', tags: 'tehdit şantaj savcılık şikayet', tplId: 'tpl_savci' },
+        { cat: 'İcra & KVKK', code: 'İİK (2004) · Madde 62', title: 'İcra Ödeme Emrine İtiraz (7 Gün)', text: 'İtiraz etmek isteyen borçlu, itirazını ödeme emrinin tebliği tarihinden itibaren yedi gün içinde dilekçe ile veya sözlü olarak icra dairesine bildirmeye mecburdur. Süresinde yapılan itiraz takibi durdurur.', tags: 'icra borç itiraz ödeme emri 7 gün', tplId: 'tpl_icra' },
+        { cat: 'İcra & KVKK', code: 'İİK (2004) · Madde 82-83', title: 'Haczedilemeyen Mallar ve Maaş Haczi (1/4 Sınırı)', text: 'Borçlunun haline münasip evi ve yaşamı için zorunlu eşyaları haczedilemez. Maaş ve ücretlerin ise borçlu ve ailesinin geçinmesi için gerekli miktarı düşüldükten sonra en az dörtte biri (1/4) haczedilebilir.', tags: 'icra haciz maaş haczi ev eşya 1/4', tplId: 'tpl_icra' },
+        { cat: 'İcra & KVKK', code: 'KVKK (6698) · Madde 11', title: 'Kişisel Verilerde İlgili Kişinin Hakları', text: 'Herkes veri sorumlusuna başvurarak kendisiyle ilgili kişisel veri işlenip işlenmediğini öğrenme, işlenme amacını sorma ve kişisel verilerinin silinmesini veya yok edilmesini isteme hakkına sahiptir.', tags: 'kvkk kişisel veri sms iptal gizlilik silme', tplId: 'tpl_kvkk' }
+      ];
+      let lawCat = 'Tümü';
+      let lawQuery = '';
+
+      function renderLaws() {
+        const q = lawQuery.trim().toLowerCase();
+        const filtered = TR_LAWS.filter(l => {
+          const matchCat = lawCat === 'Tümü' || l.cat === lawCat;
+          const matchQ = !q || l.title.toLowerCase().includes(q) || l.text.toLowerCase().includes(q) || l.code.toLowerCase().includes(q) || l.tags.toLowerCase().includes(q);
+          return matchCat && matchQ;
+        });
+        const grid = document.getElementById('law-results-grid');
+        if (!filtered.length) {
+          grid.innerHTML = '<div class="col-span-full editorial-card p-8 text-center text-xs text-muted">Aradığınız kelimeyle eşleşen temel madde bulunamadı. Üstteki <strong>Resmi Mevzuat.gov.tr</strong> bağlantısından tüm kanunlarda arama yapabilirsiniz.</div>';
+          return;
+        }
+        grid.innerHTML = filtered.map(l => `
+          <article class="editorial-card accent-top-amber p-5 flex flex-col justify-between space-y-3">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between gap-2 text-[11px]">
+                <span class="px-2 py-0.5 rounded bg-amberLight text-amberwarm font-semibold">${escapeHtml(l.code)}</span>
+                <span class="text-muted">${escapeHtml(l.cat)}</span>
+              </div>
+              <h3 class="font-editorial text-lg text-ink">${escapeHtml(l.title)}</h3>
+              <p class="text-xs text-ink/85 leading-relaxed">${escapeHtml(l.text)}</p>
+            </div>
+            <div class="pt-2 border-t border-hairline flex items-center justify-between text-xs">
+              <button type="button" data-use-tpl="${l.tplId}" class="text-forest font-medium hover:underline">İlgili Dilekçeyi Aç →</button>
+              <button type="button" data-ask-law="${escapeHtml(l.code + ' - ' + l.title + ' hakkında pratik bilgi ver')}" class="text-ocean hover:underline">AI Asistana Sor</button>
+            </div>
+          </article>
+        `).join('');
+      }
+
+      document.getElementById('law-search-input').addEventListener('input', (e) => { lawQuery = e.target.value; renderLaws(); });
+      document.querySelectorAll('.law-cat-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          lawCat = btn.dataset.lawCat;
+          document.querySelectorAll('.law-cat-btn').forEach(b => {
+            const active = b === btn;
+            b.className = 'law-cat-btn px-3 py-1.5 rounded-full text-xs font-medium ' +
+              (active ? 'bg-ink text-paper' : 'bg-surface border border-hairline text-muted');
+          });
+          renderLaws();
+        });
+      });
+
+      document.addEventListener('click', (e) => {
+        const btn = e.target.closest('[data-ask-law]');
+        if (!btn) return;
+        switchView('assistant');
+        askPusulaAssistant(btn.dataset.askLaw);
+      });
+
+      // =====================================================
+      // PUSULA AI ASSISTANT (REAL GEMINI API + SMART BUILT-IN ENGINE)
+      // =====================================================
+      const aiHistory = [
+        { role: 'bot', text: 'Merhaba! Ben Pusula Akıllı Asistan. Kira, tüketici, iş hukuku, icra, kamu başvuruları, dilekçe hazırlama veya günlük herhangi bir sorununuzu yazabilirsiniz — size ilgili kanun maddesini ve hazır dilekçeyi anında sunarım.' }
+      ];
+
+      function renderAiChat() {
+        const box = document.getElementById('ai-chat-messages');
+        box.innerHTML = aiHistory.map(m => `
+          <div class="flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}">
+            <div class="max-w-[85%] rounded-2xl px-4 py-3 text-xs leading-relaxed space-y-2 ${
+              m.role === 'user' ? 'bg-forest text-paper' : 'bg-surface border border-hairline text-ink'
+            }">
+              <p class="whitespace-pre-line">${escapeHtml(m.text)}</p>
+              ${m.tplId ? `<button type="button" data-use-tpl="${m.tplId}" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-forestLight text-forest font-semibold hover:bg-forest hover:text-paper transition">İlgili Dilekçe Şablonunu Aç →</button>` : ''}
+            </div>
+          </div>
+        `).join('');
+        box.scrollTop = box.scrollHeight;
+      }
+
+      function builtInAssistantReply(q) {
+        const t = q.toLowerCase();
+        if (t.includes('kira') || t.includes('ev sahibi') || t.includes('depozito') || t.includes('tahliye')) {
+          return { text: 'Kira hukukunda temel haklarınız (6098 sayılı TBK):\n• Kira artışı yasal olarak 12 aylık TÜFE ortalamasını aşamaz (TBK m.344).\n• Depozito en fazla 3 aylık kira bedeli olabilir (TBK m.342).\n• Ev sahibi yalnızca sözleşme süresi bitti diye kiracıyı çıkaramaz (10 yıl uzama kuralı, TBK m.347).', tplId: 'tpl6' };
+        }
+        if (t.includes('ayıplı') || t.includes('iade') || t.includes('cayma') || t.includes('internetten') || t.includes('kargo') || t.includes('tüketici')) {
+          return { text: 'Tüketici haklarınız (6502 sayılı TKHK):\n• İnternetten alınan ürünlerde 14 gün içinde hiçbir gerekçe göstermeden koşulsuz cayma hakkınız vardır (m.48).\n• Ürün ayıplı çıkarsa bedel iadesi, ücretsiz onarım, değişim veya indirimden birini siz seçersiniz (m.11).\n• Firma reddederse e-Devlet üzerinden Tüketici Hakem Heyetine ücretsiz başvurabilirsiniz.', tplId: 'tpl4' };
+        }
+        if (t.includes('icra') || t.includes('haciz') || t.includes('borç') || t.includes('maaş')) {
+          return { text: 'İcra ve İflas Kanunu (İİK) temel kuralları:\n• İlamsız icra ödeme emrine tebliğden itibaren 7 gün içinde itiraz ederseniz takip durur (İİK m.62).\n• Maaş haczinde kural olarak maaşın en az 1/4’ü haczedilebilir (İİK m.83); borçlunun haline münasip evi ve temel yaşam eşyaları haczedilemez (m.82).', tplId: 'tpl_icra' };
+        }
+        if (t.includes('işten') || t.includes('kıdem') || t.includes('ihbar') || t.includes('istifa') || t.includes('mesai') || t.includes('izin')) {
+          return { text: 'İş Kanunu (4857) temel haklarınız:\n• Haftalık 45 saati aşan çalışmalar %50 zamlı ödenir (m.41).\n• 1 yılı dolduran işçinin kıdemine göre 14 / 20 / 26 gün yıllık izin hakkı vardır (m.53).\n• İşten haksız çıkarılırsanız kıdem ve ihbar tazminatı için zorunlu arabuluculuğa başvurabilirsiniz.', tplId: 'tpl_kidem' };
+        }
+        if (t.includes('savcı') || t.includes('dolandır') || t.includes('hakaret') || t.includes('tehdit') || t.includes('şikayet') || t.includes('suç')) {
+          return { text: 'Adli şikayet ve suç duyurusu rehberi:\n• Tehdit (TCK m.106), hakaret (m.125) veya dolandırıcılık (m.157-158) durumunda delillerinizi (ekran görüntüsü, dekont, yazışma) saklayarak en yakın Cumhuriyet Başsavcılığına veya karakola şikayet dilekçesi verebilirsiniz.\n• Aşağıdaki düğmeyle hazır Savcılık Suç Duyurusu dilekçesini hemen açabilirsiniz.', tplId: 'tpl_savci' };
+        }
+        if (t.includes('abonelik') || t.includes('iptal') || t.includes('fatura') || t.includes('gsm') || t.includes('banka') || t.includes('aidat')) {
+          return { text: 'Abonelik ve banka kesintisi haklarınız:\n• 6502 sayılı TKHK m.52 uyarınca belirsiz süreli veya 1 yıl+ abonelikleri dilediğiniz zaman ek ücret ödemeden feshedebilirsiniz.\n• Haksız kart aidatı veya kesintiler için bankaya yazılı itiraz sonrası Tüketici Hakem Heyetine başvurabilirsiniz.', tplId: 'tpl1' };
+        }
+        if (t.includes('cimer') || t.includes('belediye') || t.includes('kvkk') || t.includes('sms') || t.includes('veraset') || t.includes('miras')) {
+          return { text: 'Kamu başvuru haklarınız:\n• Anayasa m.74 gereği tüm kamu kurumlarına dilekçe ve CİMER üzerinden başvurup yazılı cevap alma hakkınız vardır.\n• İstenmeyen reklam SMS’leri için KVKK m.11 kapsamında veri silme başvurusu yapabilirsiniz.', tplId: 'tpl_cimer' };
+        }
+        return { text: 'Sorunuzu inceledim. Konuyla ilgili temel mevzuat maddelerini sol menüdeki "T.C. Kanun & Mevzuat" sekmesinde arayabilir, 20’den fazla hazır dilekçe arasından uygun olanı "Hazır Şablonlar" bölümünden tek tıkla PDF/Word olarak oluşturabilirsiniz.\n\n(Not: config.js içine ücretsiz bir Gemini API anahtarı eklerseniz, bu asistan tüm genel ve karmaşık sorularınıza canlı yapay zeka ile sınırsız cevap verir.)', tplId: null };
+      }
+
+      async function askPusulaAssistant(question) {
+        const q = String(question || '').trim();
+        if (!q) return;
+        aiHistory.push({ role: 'user', text: q });
+        renderAiChat();
+
+        const apiKey = cfg.GEMINI_API_KEY;
+        if (apiKey && apiKey.length > 10) {
+          document.getElementById('ai-engine-badge').textContent = 'Gemini AI Aktif ✓';
+          aiHistory.push({ role: 'bot', text: 'Düşünüyor...' });
+          renderAiChat();
+          try {
+            const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${encodeURIComponent(apiKey)}`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                contents: [{ parts: [{ text: 'Sen Pusula web platformunun Türkçe akıllı asistanısın. Vatandaşların kamu hakları, T.C. mevzuatı, tüketici/kira/iş/icra hakları, dilekçe rehberliği ve günlük sorularına açık, nazik, maddeli ve pratik Türkçe cevaplar ver. Hukuki konularda genel bilgilendirme olduğunu kısaca belirt. Soru: ' + q }] }]
+              })
+            });
+            if (resp.ok) {
+              const data = await resp.json();
+              const answer = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+              if (answer) {
+                const localMatch = builtInAssistantReply(q);
+                aiHistory[aiHistory.length - 1] = { role: 'bot', text: answer, tplId: localMatch.tplId };
+                renderAiChat();
+                return;
+              }
+            }
+          } catch (err) {}
+          aiHistory.pop();
+        }
+
+        const reply = builtInAssistantReply(q);
+        aiHistory.push({ role: 'bot', text: reply.text, tplId: reply.tplId });
+        renderAiChat();
+      }
+
+      document.getElementById('ai-chat-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const inp = document.getElementById('ai-chat-input');
+        const q = inp.value.trim();
+        if (!q) return;
+        inp.value = '';
+        askPusulaAssistant(q);
+      });
+      document.addEventListener('click', (e) => {
+        const qbtn = e.target.closest('[data-ai-q]');
+        if (qbtn) askPusulaAssistant(qbtn.dataset.aiQ);
+      });
+
+      if (cfg.GEMINI_API_KEY && cfg.GEMINI_API_KEY.length > 10) {
+        document.getElementById('ai-engine-badge').textContent = 'Gemini AI Aktif ✓';
+      }
+
+      renderXox();
+      quizPool = shuffleArr(LOCAL_TR_QUIZ_BANK);
       renderQuiz();
       renderTemplates();
+      renderLaws();
+      renderAiChat();
 
       // =====================================================
       // INITIAL RENDER & AUTO-POLLING TIMERS
