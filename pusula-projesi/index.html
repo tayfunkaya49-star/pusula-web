@@ -16,7 +16,7 @@
   <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.15/dist/hls.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
@@ -43,7 +43,7 @@
             plumLight: '#F3EEF8'
           },
           fontFamily: {
-            serif: ['Newsreader', 'Georgia', 'serif'],
+            serif: ['Plus Jakarta Sans', 'Inter', 'system-ui', 'sans-serif'],
             sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif']
           }
         }
@@ -58,7 +58,9 @@
       -webkit-font-smoothing: antialiased;
     }
     .font-editorial {
-      font-family: 'Newsreader', Georgia, serif;
+      font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+      font-weight: 600;
+      letter-spacing: -0.025em;
     }
     .tabular {
       font-variant-numeric: tabular-nums;
@@ -192,22 +194,22 @@
   <!-- Left Sidebar Navigation -->
   <aside id="sidebar" class="fixed lg:sticky top-0 left-0 z-50 h-screen w-64 shrink-0 bg-paper border-r border-hairline flex flex-col justify-between transform -translate-x-full lg:translate-x-0 transition-transform duration-200 ease-out">
     <div class="flex flex-col h-full overflow-y-auto">
-      <!-- Brand Header -->
-      <div class="px-5 pt-6 pb-5 border-b border-hairline">
+      <!-- Brand Header (Rich Deep Forest Signature Banner) -->
+      <div class="px-5 pt-5 pb-4 bg-forest text-paper border-b border-forest/80">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-2.5">
-            <div class="w-8 h-8 rounded-full bg-forest text-paper flex items-center justify-center">
-              <i data-lucide="compass" class="w-4 h-4"></i>
+            <div class="w-9 h-9 rounded-xl bg-terracotta text-paper flex items-center justify-center shadow-sm">
+              <i data-lucide="compass" class="w-5 h-5"></i>
             </div>
             <div>
               <div class="flex items-center gap-1.5">
-                <h1 class="font-editorial text-2xl leading-none font-medium tracking-tight text-ink">Pusula</h1>
-                <span id="pro-member-badge" class="hidden text-[10px] uppercase tracking-wider px-1.5 py-0.5 rounded bg-forest text-paper font-medium">Pro</span>
+                <h1 class="font-editorial text-2xl leading-none font-semibold tracking-tight text-paper">Pusula</h1>
+                <span id="pro-member-badge" class="hidden text-[10px] uppercase tracking-wider px-1.5 py-0.5 rounded bg-terracotta text-paper font-semibold">Pro</span>
               </div>
-              <p class="text-[11px] text-muted mt-0.5">Kişisel Çalışma ve Yaşam Alanı</p>
+              <p class="text-[11px] text-paper/75 mt-0.5">Kişisel Yaşam &amp; Üretkenlik</p>
             </div>
           </div>
-          <button id="mobile-close-btn" type="button" aria-label="Menüyü kapat" class="lg:hidden p-1.5 text-muted hover:text-ink">
+          <button id="mobile-close-btn" type="button" aria-label="Menüyü kapat" class="lg:hidden p-1.5 text-paper/80 hover:text-paper">
             <i data-lucide="x" class="w-4 h-4"></i>
           </button>
         </div>
@@ -295,13 +297,20 @@
         <button type="button" data-view="games" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-muted hover:bg-stonewarm/60 hover:text-ink relative text-left">
           <span class="nav-indicator opacity-0 absolute left-0 top-2 bottom-2 w-0.5 bg-forest rounded-r"></span>
           <i data-lucide="puzzle" class="w-4 h-4 shrink-0"></i>
-          <span>Zihin Molası &amp; Oyun</span>
-          <span class="ml-auto text-[10px] px-1.5 py-0.5 rounded bg-terracottaLight text-terracotta font-medium">Yeni</span>
+          <span>Oyun Salonu</span>
+          <span class="ml-auto text-[10px] px-1.5 py-0.5 rounded bg-terracotta text-paper font-medium">4 Oyun</span>
         </button>
 
         <div class="pt-3 pb-1">
           <p class="px-3 pb-1.5 text-[11px] uppercase tracking-wider text-muted font-medium">Üretim Araçları</p>
         </div>
+
+        <button type="button" data-view="templates" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-muted hover:bg-stonewarm/60 hover:text-ink relative text-left">
+          <span class="nav-indicator opacity-0 absolute left-0 top-2 bottom-2 w-0.5 bg-plum rounded-r"></span>
+          <i data-lucide="files" class="w-4 h-4 shrink-0 text-plum"></i>
+          <span>Hazır Şablonlar</span>
+          <span class="ml-auto text-[10px] px-1.5 py-0.5 rounded bg-plumLight text-plum font-medium">9 Adet</span>
+        </button>
 
         <button type="button" data-view="office" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-muted hover:bg-stonewarm/60 hover:text-ink relative text-left">
           <span class="nav-indicator opacity-0 absolute left-0 top-2 bottom-2 w-0.5 bg-forest rounded-r"></span>
@@ -394,6 +403,21 @@
       </div>
     </div>
 
+    <!-- Persistent Top Now-Playing Bar (Visible on EVERY page when Radio/MP3/Music plays) -->
+    <div id="top-now-playing-bar" class="hidden sticky top-12 lg:top-[53px] z-30 bg-ocean text-paper px-4 sm:px-8 py-2 flex items-center justify-between gap-3 shadow-sm no-print">
+      <div class="flex items-center gap-3 min-w-0">
+        <span class="w-2 h-2 rounded-full bg-terracotta live-dot shrink-0"></span>
+        <div class="w-16 h-5 shrink-0">
+          <canvas id="topMiniWaveCanvas" class="w-full h-full block"></canvas>
+        </div>
+        <span id="top-np-label" class="text-xs font-medium truncate">Canlı Yayın Çalıyor</span>
+      </div>
+      <div class="flex items-center gap-2 shrink-0">
+        <button type="button" data-jump="radio" class="text-[11px] px-2.5 py-1 rounded bg-paper/15 hover:bg-paper/25 text-paper transition">Radyoya Git</button>
+        <button id="top-np-stop-btn" type="button" class="text-[11px] px-2.5 py-1 rounded bg-paper text-ocean font-semibold hover:opacity-90 transition">Durdur</button>
+      </div>
+    </div>
+
     <!-- Content Container -->
     <div class="flex-1 px-4 sm:px-6 lg:px-10 py-6 lg:py-8 max-w-6xl w-full mx-auto pb-24">
 
@@ -424,6 +448,22 @@
               Belge &amp; Tablo Aç
             </button>
           </div>
+        </div>
+
+        <!-- Quick Bookmarks / Sık Kullandıklarım Strip -->
+        <div id="widget-bookmarks" class="editorial-card p-4 space-y-3">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-xs uppercase tracking-wider text-muted font-semibold flex items-center gap-1.5">
+              <i data-lucide="bookmark" class="w-3.5 h-3.5 text-ocean"></i> Sık Kullandıklarım
+            </span>
+            <button id="toggle-add-bm-btn" type="button" class="text-xs text-ocean font-medium hover:underline">+ Kısayol Ekle</button>
+          </div>
+          <div id="bookmarks-bar" class="flex flex-wrap gap-2"></div>
+          <form id="add-bookmark-form" class="hidden pt-2 border-t border-hairline flex flex-col sm:flex-row gap-2 text-xs">
+            <input id="bm-name-input" type="text" required placeholder="Site adı (Örn: e-Devlet)" class="sm:w-44 bg-paper border border-hairline rounded-lg px-3 py-1.5 text-ink focus:outline-none focus:border-ocean" />
+            <input id="bm-url-input" type="url" required placeholder="https://..." class="flex-1 bg-paper border border-hairline rounded-lg px-3 py-1.5 text-ink focus:outline-none focus:border-ocean" />
+            <button type="submit" class="px-3.5 py-1.5 rounded-lg bg-ocean text-paper font-medium hover:bg-ocean/90 shrink-0">Kaydet</button>
+          </form>
         </div>
 
         <!-- Subtle Editorial Live Market & Day Strip -->
@@ -927,7 +967,7 @@
               <h3 id="radio-now-title" class="font-editorial text-xl text-ink truncate">Bir radyo kanalı seçip dinlemeye başlayın</h3>
             </div>
           </div>
-          <div class="hidden xl:block w-48 h-10 rounded-lg bg-oceanLight/50 border border-ocean/15 overflow-hidden px-1">
+          <div class="w-full md:w-56 h-12 rounded-xl bg-oceanLight/70 border border-ocean/20 overflow-hidden px-2 py-1">
             <canvas id="radioWaveCanvas" class="w-full h-full block"></canvas>
           </div>
           <div class="flex items-center gap-3 shrink-0">
@@ -984,6 +1024,9 @@
               <div class="flex items-center justify-between gap-2">
                 <p id="mp3-current-title" class="text-sm font-medium text-ink truncate">Henüz MP3 seçilmedi</p>
                 <span id="mp3-time-label" class="text-[11px] text-muted tabular shrink-0">00:00 / 00:00</span>
+              </div>
+              <div class="w-full h-14 rounded-lg bg-forestLight/70 border border-forest/20 overflow-hidden px-2 py-1">
+                <canvas id="mp3WaveCanvas" class="w-full h-full block"></canvas>
               </div>
               <input id="mp3-seek" type="range" min="0" max="100" value="0" class="w-full accent-forest" aria-label="Parça konumu" />
               <div class="flex items-center justify-center gap-3 pt-1">
@@ -1413,9 +1456,92 @@
             </div>
           </div>
         </div>
+      
+        <!-- Second Row of Games: 2048 + Daily Turkish Trivia Quiz -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <!-- 2048 Game -->
+          <div class="lg:col-span-6 editorial-card accent-top-amber p-6 space-y-4">
+            <div class="flex items-center justify-between gap-2">
+              <div>
+                <span class="text-[11px] uppercase tracking-wider text-amberwarm font-semibold">Strateji &amp; Odak</span>
+                <h3 class="font-editorial text-2xl text-ink">2048 Sayı Birleştirme</h3>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="px-3 py-1 rounded-lg bg-paper border border-hairline text-center">
+                  <p class="text-[10px] text-muted uppercase">Skor</p>
+                  <p id="g2048-score" class="text-sm font-bold text-ink tabular">0</p>
+                </div>
+                <div class="px-3 py-1 rounded-lg bg-amberLight border border-amberwarm/20 text-center">
+                  <p class="text-[10px] text-amberwarm uppercase">Rekor</p>
+                  <p id="g2048-best" class="text-sm font-bold text-amberwarm tabular">0</p>
+                </div>
+              </div>
+            </div>
+
+            <div id="g2048-board" class="grid grid-cols-4 gap-2 p-2.5 rounded-xl bg-stonewarm max-w-[300px] mx-auto select-none"></div>
+
+            <div class="flex items-center justify-between gap-2 pt-1">
+              <div class="flex items-center gap-1.5">
+                <button type="button" data-2048-dir="left" class="px-2.5 py-1.5 rounded-lg border border-hairline bg-paper hover:border-ink text-xs font-medium" aria-label="Sola">←</button>
+                <button type="button" data-2048-dir="up" class="px-2.5 py-1.5 rounded-lg border border-hairline bg-paper hover:border-ink text-xs font-medium" aria-label="Yukarı">↑</button>
+                <button type="button" data-2048-dir="down" class="px-2.5 py-1.5 rounded-lg border border-hairline bg-paper hover:border-ink text-xs font-medium" aria-label="Aşağı">↓</button>
+                <button type="button" data-2048-dir="right" class="px-2.5 py-1.5 rounded-lg border border-hairline bg-paper hover:border-ink text-xs font-medium" aria-label="Sağa">→</button>
+              </div>
+              <button id="g2048-restart-btn" type="button" class="px-3.5 py-1.5 rounded-lg bg-ink text-paper text-xs font-medium hover:bg-ink/90">Yeniden Başlat</button>
+            </div>
+          </div>
+
+          <!-- Daily Turkish General Knowledge Quiz -->
+          <div class="lg:col-span-6 editorial-card accent-top-plum p-6 flex flex-col justify-between space-y-4">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between gap-2">
+                <div>
+                  <span class="text-[11px] uppercase tracking-wider text-plum font-semibold">Genel Kültür</span>
+                  <h3 class="font-editorial text-2xl text-ink">Günün Bilgi Yarışması</h3>
+                </div>
+                <span id="quiz-progress-badge" class="text-xs px-2.5 py-1 rounded-full bg-plumLight text-plum font-semibold tabular">Soru 1 / 10</span>
+              </div>
+
+              <div class="p-4 rounded-xl bg-paper border border-hairline space-y-3">
+                <p id="quiz-question-text" class="text-sm font-medium text-ink leading-relaxed"></p>
+                <div id="quiz-options-box" class="space-y-2"></div>
+              </div>
+              <p id="quiz-feedback" class="text-xs font-medium min-h-[18px]"></p>
+            </div>
+
+            <div class="flex items-center justify-between pt-2 border-t border-hairline">
+              <span id="quiz-score-label" class="text-xs text-muted">Doğru: <strong class="text-ink tabular">0</strong></span>
+              <div class="flex gap-2">
+                <button id="quiz-next-btn" type="button" class="hidden px-4 py-1.5 rounded-lg bg-plum text-paper text-xs font-medium hover:bg-plum/90">Sonraki Soru →</button>
+                <button id="quiz-restart-btn" type="button" class="px-3.5 py-1.5 rounded-lg border border-hairline bg-surface text-xs font-medium text-ink hover:border-plum">Baştan Başla</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <!-- ========================================================= -->
+      <!-- ========================================================= -->
+      <!-- VIEW: HAZIR ŞABLONLAR MERKEZİ (TEMPLATES)                 -->
+      <!-- ========================================================= -->
+      <section id="view-templates" class="view-panel space-y-7">
+        <div class="p-6 rounded-2xl bg-plumLight/70 border border-plum/20 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <span class="text-xs uppercase tracking-widest text-plum font-semibold">Hayatı Kolaylaştıran Hazır Şablonlar</span>
+            <h2 class="font-editorial text-3xl text-ink mt-1">Dilekçe, İş &amp; Bütçe Şablon Kütüphanesi</h2>
+            <p class="text-xs text-muted mt-1">Tek tıkla belge veya Excel stüdyosuna aktarın, kendi bilgilerinizi doldurup PDF, Word veya Excel olarak indirin.</p>
+          </div>
+          <div class="flex flex-wrap gap-1.5" id="tpl-cat-bar">
+            <button type="button" data-tpl-cat="Tümü" class="tpl-cat-btn px-3 py-1.5 rounded-full text-xs font-medium bg-plum text-paper">Tümü</button>
+            <button type="button" data-tpl-cat="Dilekçe" class="tpl-cat-btn px-3 py-1.5 rounded-full text-xs font-medium bg-surface border border-hairline text-muted">Resmi Dilekçe</button>
+            <button type="button" data-tpl-cat="İş" class="tpl-cat-btn px-3 py-1.5 rounded-full text-xs font-medium bg-surface border border-hairline text-muted">İş &amp; Freelance</button>
+            <button type="button" data-tpl-cat="Bütçe" class="tpl-cat-btn px-3 py-1.5 rounded-full text-xs font-medium bg-surface border border-hairline text-muted">Bütçe &amp; Yaşam</button>
+          </div>
+        </div>
+
+        <div id="templates-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+      </section>
+
       <!-- VIEW 8: OFİS, EXCEL & PDF STÜDYOSU (OFFICE)               -->
       <!-- ========================================================= -->
       <section id="view-office" class="view-panel space-y-7">
@@ -1774,6 +1900,19 @@
         </div>
       </section>
 
+      <!-- Clean Editorial Footer: Feedback & Legal Trust Links -->
+      <footer class="mt-12 pt-6 border-t border-hairline flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-muted no-print">
+        <div class="flex items-center gap-2">
+          <span class="font-editorial text-sm text-ink">Pusula</span>
+          <span>·</span>
+          <span>Kişisel Yaşam ve Üretkenlik Merkezi</span>
+        </div>
+        <div class="flex flex-wrap items-center gap-4">
+          <button id="open-feedback-btn" type="button" class="text-ocean hover:underline font-medium">Geri Bildirim / Öneri Gönder</button>
+          <button id="open-privacy-btn" type="button" class="hover:text-ink transition">Gizlilik Politikası</button>
+          <button id="open-terms-btn" type="button" class="hover:text-ink transition">Kullanım Koşulları</button>
+        </div>
+      </footer>
     </div>
   </main>
 
@@ -2046,6 +2185,53 @@
       <div class="pt-2 flex justify-end">
         <button id="save-customize-btn" type="button" class="px-4 py-2 rounded-lg bg-forest text-paper text-xs font-medium hover:bg-forest/90">Tamam</button>
       </div>
+    </div>
+  </div>
+
+  <!-- Feedback & Feature Request Modal -->
+  <div id="feedback-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-ink/45 p-4">
+    <div class="bg-surface border border-hairline rounded-xl max-w-md w-full p-6 space-y-4">
+      <div class="flex items-start justify-between gap-3">
+        <div>
+          <span class="text-[11px] uppercase tracking-wider text-ocean font-semibold">Görüşünüz Değerli</span>
+          <h3 class="font-editorial text-2xl text-ink mt-0.5">Geri Bildirim &amp; Öneri</h3>
+        </div>
+        <button id="close-feedback-modal" type="button" class="p-1.5 text-muted hover:text-ink" aria-label="Kapat">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      <form id="feedback-form" class="space-y-3 text-xs">
+        <div>
+          <label for="fb-type" class="block text-muted mb-1">Konu</label>
+          <select id="fb-type" class="w-full bg-paper border border-hairline rounded-lg px-3 py-2 text-ink">
+            <option value="Özellik Önerisi">Yeni Özellik Önerisi</option>
+            <option value="Hata Bildirimi">Hata / Sorun Bildirimi</option>
+            <option value="İş Birliği">İş Birliği &amp; İletişim</option>
+          </select>
+        </div>
+        <div>
+          <label for="fb-email" class="block text-muted mb-1">E-posta Adresiniz (isteğe bağlı)</label>
+          <input id="fb-email" type="email" placeholder="ornek@eposta.com" class="w-full bg-paper border border-hairline rounded-lg px-3 py-2 text-ink focus:outline-none focus:border-ocean" />
+        </div>
+        <div>
+          <label for="fb-message" class="block text-muted mb-1">Mesajınız</label>
+          <textarea id="fb-message" rows="4" required placeholder="Pusula'da neleri geliştirmemizi istersiniz?" class="w-full bg-paper border border-hairline rounded-lg p-3 text-ink focus:outline-none focus:border-ocean resize-none"></textarea>
+        </div>
+        <button type="submit" class="w-full py-2.5 rounded-lg bg-ocean hover:bg-ocean/90 text-paper font-medium transition">Mesajı Gönder</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Privacy & Terms Modal -->
+  <div id="legal-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-ink/45 p-4">
+    <div class="bg-surface border border-hairline rounded-xl max-w-lg w-full p-6 space-y-4 max-h-[80vh] overflow-y-auto">
+      <div class="flex items-start justify-between gap-3">
+        <h3 id="legal-modal-title" class="font-editorial text-2xl text-ink">Gizlilik Politikası</h3>
+        <button id="close-legal-modal" type="button" class="p-1.5 text-muted hover:text-ink" aria-label="Kapat">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      <div id="legal-modal-body" class="text-xs text-ink/90 leading-relaxed space-y-3"></div>
     </div>
   </div>
 
@@ -2493,6 +2679,7 @@
         music: 'Müzik & Odak',
         media: 'TV, Film & Kültür',
         social: 'Sosyal & Şehir',
+        templates: 'Hazır Şablonlar Merkezi',
         office: 'Ofis, Excel & PDF',
         toolbox: 'Akıllı Araç Kutusu',
         mobile: 'Mobil Uygulama (Android & iOS)'
@@ -2500,6 +2687,10 @@
 
       function switchView(viewId) {
         if (!VIEW_META[viewId]) return;
+        // Yalnızca TV sekmesinden çıkınca TV yayınını durdur (Radyo ve MP3 çalmaya devam eder!)
+        if (state.activeView === 'tv' && viewId !== 'tv' && !document.pictureInPictureElement) {
+          stopTvStreams();
+        }
         state.activeView = viewId;
         document.querySelectorAll('.view-panel').forEach(p => p.classList.remove('active'));
         const target = document.getElementById('view-' + viewId);
@@ -3183,6 +3374,7 @@
           stopRainNoise();
         }
         updateAudioUI();
+        updateFloatingMediaBar();
       }
 
       function updateRainButton() {
@@ -3639,6 +3831,7 @@
           { label: 'Sosyal & Şehir Hayatı', sub: 'İstanbul kültür-sanat etkinlikleri', view: 'social' },
           { label: 'Akıllı Araç Kutusu & Hava Durumu', sub: 'Canlı hava durumu, QR kod, KDV ve şifre üretici', view: 'toolbox' },
           { label: 'Mobil Uygulama (Android & iOS)', sub: 'Telefonunuza uygulama olarak tek tıkla kurun', view: 'mobile' },
+          { label: 'Hazır Şablonlar Merkezi (Dilekçe, Bütçe, İş)', sub: '9 hazır PDF, Word ve Excel şablonu', view: 'templates' },
           { label: 'Ofis, Excel & PDF Stüdyosu', sub: 'Canlı tablo, Excel (.xls) ve PDF baskı', view: 'office' }
         ];
         const filtered = items.filter(i => !term || i.label.toLowerCase().includes(term) || i.sub.toLowerCase().includes(term));
@@ -4077,22 +4270,28 @@
 
       function updateFloatingMediaBar() {
         const bar = document.getElementById('floating-media-bar');
+        const topBar = document.getElementById('top-now-playing-bar');
+        const topLabel = document.getElementById('top-np-label');
         const label = document.getElementById('floating-media-title');
         const dot = document.getElementById('sidebar-radio-dot');
+        let activeText = '';
         if (radioState.playing && radioState.activeStation) {
-          label.textContent = 'Radyo: ' + radioState.activeStation.name;
-          bar.classList.remove('hidden');
-          bar.classList.add('flex');
-          dot.classList.remove('hidden');
+          activeText = 'Canlı Radyo · ' + radioState.activeStation.name;
         } else if (radioState.mp3Playing && radioState.mp3Files[radioState.mp3Index]) {
-          label.textContent = 'MP3: ' + radioState.mp3Files[radioState.mp3Index].name;
-          bar.classList.remove('hidden');
-          bar.classList.add('flex');
-          dot.classList.remove('hidden');
+          activeText = 'MP3 Çalıyor · ' + radioState.mp3Files[radioState.mp3Index].name;
+        } else if (state.audioPlaying) {
+          activeText = 'Odak Müziği Çalıyor';
+        }
+        if (activeText) {
+          if (label) label.textContent = activeText;
+          if (topLabel) topLabel.textContent = activeText;
+          if (topBar) { topBar.classList.remove('hidden'); topBar.classList.add('flex'); }
+          if (bar) { bar.classList.add('hidden'); bar.classList.remove('flex'); }
+          if (dot) dot.classList.remove('hidden');
         } else {
-          bar.classList.add('hidden');
-          bar.classList.remove('flex');
-          dot.classList.add('hidden');
+          if (topBar) { topBar.classList.add('hidden'); topBar.classList.remove('flex'); }
+          if (bar) { bar.classList.add('hidden'); bar.classList.remove('flex'); }
+          if (dot) dot.classList.add('hidden');
         }
       }
 
@@ -4101,13 +4300,17 @@
         radioState.playing = false;
         mp3Audio.pause();
         radioState.mp3Playing = false;
+        if (state.audioPlaying) toggleAudio();
         document.getElementById('radio-play-text').textContent = 'Oynat';
         document.getElementById('radio-play-icon').setAttribute('data-lucide', 'play');
         document.getElementById('mp3-play-icon').setAttribute('data-lucide', 'play');
+        renderRadioStations();
+        renderMp3Playlist();
         updateFloatingMediaBar();
         lucide.createIcons();
       }
 
+      document.getElementById('top-np-stop-btn').addEventListener('click', stopAllStreamAudio);
       document.getElementById('floating-media-stop').addEventListener('click', stopAllStreamAudio);
 
       async function fetchRadioStations(query = '', tag = '') {
@@ -4369,17 +4572,21 @@
       // LIVE TV CHANNELS (100% SITE-ICI OYNATICI — YONLENDIRMESIZ)
       // =====================================================
       const TV_CHANNELS = [
-        { id: 'trt1', name: 'TRT 1', cat: 'Ulusal · HD Canlı', type: 'hls', src: 'https://tv-trt1.medya.trt.com.tr/master.m3u8' },
-        { id: 'trthaber', name: 'TRT Haber', cat: 'Haber · HD Canlı', type: 'hls', src: 'https://tv-trthaber.medya.trt.com.tr/master.m3u8', fallbackEmbed: 'https://www.youtube.com/embed/live_stream?channel=UCBgTP2LOFVPmq15W-RH-WXA&autoplay=1' },
-        { id: 'trt2', name: 'TRT 2', cat: 'Kültür & Sanat · HD Canlı', type: 'hls', src: 'https://tv-trt2.medya.trt.com.tr/master.m3u8' },
-        { id: 'trtbelgesel', name: 'TRT Belgesel', cat: 'Belgesel · HD Canlı', type: 'hls', src: 'https://tv-trtbelgesel.medya.trt.com.tr/master.m3u8' },
-        { id: 'bloomberght', name: 'Bloomberg HT', cat: 'Ekonomi & Piyasa · Canlı', type: 'embed', src: 'https://www.youtube.com/embed/live_stream?channel=UCApLxl6oYQafxvykuoC2uxQ&autoplay=1' },
-        { id: 'ntv', name: 'NTV', cat: 'Haber · Canlı', type: 'embed', src: 'https://www.youtube.com/embed/live_stream?channel=UC9TDTjbOjFB9jADmPhSAPsw&autoplay=1' },
-        { id: 'cnnturk', name: 'CNN TÜRK', cat: 'Haber · Canlı', type: 'embed', src: 'https://www.youtube.com/embed/live_stream?channel=UCV6zcRug6Hqp1UX_FdyUeBg&autoplay=1' },
-        { id: 'haberturk', name: 'Habertürk TV', cat: 'Haber & Gündem · Canlı', type: 'embed', src: 'https://www.youtube.com/embed/live_stream?channel=UCn6dNfiRE_Xunu7iMyvD7AA&autoplay=1' },
-        { id: 'atv', name: 'ATV', cat: 'Ulusal · Canlı', type: 'embed', src: 'https://www.youtube.com/embed/live_stream?channel=UCUVZ7T_kwkxDOGFcDlFI-hg&autoplay=1' },
-        { id: 'halktv', name: 'Halk TV', cat: 'Haber · Canlı', type: 'embed', src: 'https://www.youtube.com/embed/live_stream?channel=UCf_ResXZzE-o18zACUEmyvQ&autoplay=1' },
-        { id: 'trtspor', name: 'TRT Spor', cat: 'Spor · HD Canlı', type: 'hls', src: 'https://tv-trtspor1.medya.trt.com.tr/master.m3u8' },
+        { id: 'trt1', name: 'TRT 1', cat: 'Ulusal · HD', type: 'hls', src: 'https://tv-trt1.medya.trt.com.tr/master.m3u8' },
+        { id: 'showtv', name: 'Show TV', cat: 'Ulusal · HD', type: 'hls', src: 'https://ciner-live.daioncdn.net/showtv/showtv.m3u8' },
+        { id: 'kanald', name: 'Kanal D', cat: 'Ulusal · HD', type: 'hls', src: 'https://demiroren.daioncdn.net/kanald/kanald.m3u8?app=kanald_web&ce=3' },
+        { id: 'kanal7', name: 'Kanal 7', cat: 'Ulusal · HD', type: 'hls', src: 'https://live.kanal7.com/live/kanal7LiveDesktop/index.m3u8' },
+        { id: 'beyaztv', name: 'Beyaz TV', cat: 'Ulusal · HD', type: 'hls', src: 'https://beyaztv-live.daioncdn.net/beyaztv/beyaztv.m3u8' },
+        { id: 'trthaber', name: 'TRT Haber', cat: 'Haber · HD', type: 'hls', src: 'https://tv-trthaber.medya.trt.com.tr/master.m3u8' },
+        { id: 'haberturk', name: 'Habertürk TV', cat: 'Haber · HD', type: 'hls', src: 'https://ensonhaber-live.ercdn.net/haberturk/haberturk.m3u8' },
+        { id: 'bloomberght', name: 'Bloomberg HT', cat: 'Haber · Ekonomi HD', type: 'hls', src: 'https://ciner.daioncdn.net/bloomberght/bloomberght.m3u8', altSrc: 'https://ensonhaber-live.ercdn.net/bloomberght/bloomberght.m3u8' },
+        { id: 'haberglobal', name: 'Haber Global', cat: 'Haber · HD', type: 'hls', src: 'https://ensonhaber-live.ercdn.net/haberglobal/haberglobal.m3u8' },
+        { id: 'halktv', name: 'Halk TV', cat: 'Haber · HD', type: 'hls', src: 'https://halktv-live.daioncdn.net/halktv/halktv.m3u8' },
+        { id: 'tele1', name: 'Tele1', cat: 'Haber · HD', type: 'hls', src: 'https://tele1-live.ercdn.net/tele1/tele1.m3u8' },
+        { id: 'ulketv', name: 'Ülke TV', cat: 'Haber · HD', type: 'hls', src: 'https://ulketv.blutv.com/blutv_ulketv2/live_720p2000000kbps/index.m3u8' },
+        { id: 'trtspor', name: 'TRT Spor', cat: 'Spor · HD', type: 'hls', src: 'https://tv-trtspor1.medya.trt.com.tr/master.m3u8' },
+        { id: 'trt2', name: 'TRT 2', cat: 'Belgesel · Kültür HD', type: 'hls', src: 'https://tv-trt2.medya.trt.com.tr/master.m3u8' },
+        { id: 'trtbelgesel', name: 'TRT Belgesel', cat: 'Belgesel · HD', type: 'hls', src: 'https://tv-trtbelgesel.medya.trt.com.tr/master.m3u8' },
         { id: 'trtmuzik', name: 'TRT Müzik', cat: 'Belgesel · Müzik HD', type: 'hls', src: 'https://tv-trtmuzik.medya.trt.com.tr/master.m3u8' },
         { id: 'trtcocuk', name: 'TRT Çocuk', cat: 'Ulusal · Çocuk HD', type: 'hls', src: 'https://tv-trtcocuk.medya.trt.com.tr/master.m3u8' },
         { id: 'trtavaz', name: 'TRT Avaz', cat: 'Belgesel · Kültür HD', type: 'hls', src: 'https://tv-trtavaz.medya.trt.com.tr/master.m3u8' }
@@ -4425,8 +4632,13 @@
               video.play().catch(() => {});
             });
             hlsInstance.on(window.Hls.Events.ERROR, (ev, data) => {
-              if (data.fatal && ch.fallbackEmbed) {
-                playTvChannel({ ...ch, type: 'embed', src: ch.fallbackEmbed });
+              if (data.fatal) {
+                if (ch.altSrc && ch.src !== ch.altSrc) {
+                  playTvChannel({ ...ch, src: ch.altSrc, altSrc: '' });
+                } else {
+                  document.getElementById('tv-stream-mode-badge').textContent = 'Yayın geçici olarak kapalı';
+                  showToast(ch.name + ' yayını şu an yanıt vermiyor, başka bir HD kanala geçebilirsiniz.');
+                }
               }
             });
           } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
@@ -4565,6 +4777,7 @@
       }
 
       // Auto-load community Turkey Free-TV M3U8 list (HTTPS, CORS-enabled)
+      fetch('https://iptv-org.github.io/iptv/countries/tr.m3u').then(r => r.ok ? r.text() : '').then(txt => { if (txt) parseM3uText(txt); }).catch(() => {});
       fetch('https://raw.githubusercontent.com/Free-TV/IPTV/master/playlists/playlist_turkey.m3u8')
         .then(r => r.ok ? r.text() : '')
         .then(txt => { if (txt) parseM3uText(txt); })
@@ -5022,7 +5235,9 @@
         const anyPlaying = radioState.playing || radioState.mp3Playing || state.audioPlaying;
         wavePhase += anyPlaying ? 0.085 : 0.02;
         drawWaveOnCanvas('ovWaveCanvas', anyPlaying, '#2B4C7E');
-        drawWaveOnCanvas('radioWaveCanvas', radioState.playing || radioState.mp3Playing, '#26463B');
+        drawWaveOnCanvas('radioWaveCanvas', radioState.playing, '#2B4C7E');
+        drawWaveOnCanvas('mp3WaveCanvas', radioState.mp3Playing, '#26463B');
+        drawWaveOnCanvas('topMiniWaveCanvas', anyPlaying, '#FFFFFF');
 
         const ovIcon = document.getElementById('ov-smart-play-icon');
         const ovStat = document.getElementById('ov-wave-status');
@@ -5173,6 +5388,395 @@
       updateKdvCalc();
       generateStrongPwd();
       requestAnimationFrame(animateAudioWaves);
+
+      // =====================================================
+      // QUICK BOOKMARKS (SIK KULLANDIKLARIM)
+      // =====================================================
+      const DEFAULT_BOOKMARKS = [
+        { id: 'b1', name: 'Google', url: 'https://www.google.com' },
+        { id: 'b2', name: 'YouTube', url: 'https://www.youtube.com' },
+        { id: 'b3', name: 'e-Devlet', url: 'https://www.turkiye.gov.tr' },
+        { id: 'b4', name: 'Gmail', url: 'https://mail.google.com' },
+        { id: 'b5', name: 'X (Twitter)', url: 'https://x.com' },
+        { id: 'b6', name: 'TradingView', url: 'https://tr.tradingview.com' }
+      ];
+      let userBookmarks = DEFAULT_BOOKMARKS;
+      try {
+        const rawBm = localStorage.getItem('pusula_bookmarks');
+        if (rawBm) {
+          const parsedBm = JSON.parse(rawBm);
+          if (Array.isArray(parsedBm) && parsedBm.length) userBookmarks = parsedBm;
+        }
+      } catch (e) {}
+
+      function saveBookmarks() {
+        try { localStorage.setItem('pusula_bookmarks', JSON.stringify(userBookmarks)); } catch (e) {}
+      }
+
+      function renderBookmarks() {
+        const bar = document.getElementById('bookmarks-bar');
+        bar.innerHTML = userBookmarks.map(b => `
+          <div class="inline-flex items-center gap-1.5 pl-3 pr-1.5 py-1.5 rounded-lg bg-paper border border-hairline hover:border-ocean/40 transition text-xs">
+            <a href="${escapeHtml(b.url)}" target="_blank" rel="noopener noreferrer" class="font-medium text-ink hover:text-ocean">${escapeHtml(b.name)}</a>
+            <button type="button" data-del-bm="${escapeHtml(b.id)}" class="p-0.5 text-muted hover:text-terracotta" aria-label="Kısayolu kaldır">
+              <i data-lucide="x" class="w-3 h-3"></i>
+            </button>
+          </div>
+        `).join('');
+        lucide.createIcons();
+      }
+
+      document.getElementById('toggle-add-bm-btn').addEventListener('click', () => {
+        document.getElementById('add-bookmark-form').classList.toggle('hidden');
+      });
+
+      document.getElementById('add-bookmark-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('bm-name-input').value.trim();
+        const url = document.getElementById('bm-url-input').value.trim();
+        if (!name || !url) return;
+        userBookmarks.push({ id: 'b' + Date.now(), name, url });
+        saveBookmarks();
+        renderBookmarks();
+        e.target.reset();
+        e.target.classList.add('hidden');
+        showToast(name + ' sık kullanılanlara eklendi.');
+      });
+
+      document.addEventListener('click', (e) => {
+        const delBm = e.target.closest('[data-del-bm]');
+        if (delBm) {
+          userBookmarks = userBookmarks.filter(x => x.id !== delBm.dataset.delBm);
+          saveBookmarks();
+          renderBookmarks();
+        }
+      });
+
+      // =====================================================
+      // FEEDBACK & LEGAL MODALS
+      // =====================================================
+      const fbModal = document.getElementById('feedback-modal');
+      const legalModal = document.getElementById('legal-modal');
+
+      document.getElementById('open-feedback-btn').addEventListener('click', () => {
+        if (currentUser && !document.getElementById('fb-email').value) {
+          document.getElementById('fb-email').value = currentUser.email;
+        }
+        fbModal.classList.remove('hidden');
+        fbModal.classList.add('flex');
+      });
+      document.getElementById('close-feedback-modal').addEventListener('click', () => {
+        fbModal.classList.add('hidden');
+        fbModal.classList.remove('flex');
+      });
+
+      document.getElementById('feedback-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const type = document.getElementById('fb-type').value;
+        const email = document.getElementById('fb-email').value.trim();
+        const msg = document.getElementById('fb-message').value.trim();
+        if (!msg) return;
+        if (sbClient) {
+          try {
+            await sbClient.from('payment_requests').insert({
+              user_id: currentUser && currentUser.id !== 'local' ? currentUser.id : null,
+              email: email || 'anonim@pusula',
+              sender_name: 'GERİ BİLDİRİM: ' + type,
+              plan: 'Geri Bildirim',
+              note: msg,
+              status: 'mesaj'
+            });
+          } catch (err) {}
+        }
+        e.target.reset();
+        fbModal.classList.add('hidden');
+        fbModal.classList.remove('flex');
+        showToast('Geri bildiriminiz iletildi, teşekkür ederiz!');
+      });
+
+      function openLegal(type) {
+        const titleEl = document.getElementById('legal-modal-title');
+        const bodyEl = document.getElementById('legal-modal-body');
+        if (type === 'privacy') {
+          titleEl.textContent = 'Gizlilik Politikası';
+          bodyEl.innerHTML = `
+            <p><strong>1. Toplanan Veriler:</strong> Pusula’yı hesap açmadan kullandığınızda notlarınız, görevleriniz ve kısayollarınız yalnızca kendi tarayıcınızda saklanır. Hesap oluşturduğunuzda e-posta adresiniz ve çalışma verileriniz cihazlar arası senkronizasyon amacıyla güvenli bulut veritabanında (Supabase) şifreli bağlantıyla saklanır.</p>
+            <p><strong>2. Veri Paylaşımı:</strong> Kişisel verileriniz hiçbir üçüncü taraf reklam ağına satılmaz veya paylaşılmaz.</p>
+            <p><strong>3. Veri Silme Hakkı:</strong> Dilediğiniz zaman hesabınızın ve verilerinizin silinmesini geri bildirim kanalı üzerinden talep edebilirsiniz.</p>
+          `;
+        } else {
+          titleEl.textContent = 'Kullanım Koşulları';
+          bodyEl.innerHTML = `
+            <p><strong>1. Hizmet Kapsamı:</strong> Pusula, günlük planlama, haber/piyasa takibi, medya ve belge üretimi araçlarını bir araya getiren kişisel üretkenlik platformudur.</p>
+            <p><strong>2. Bilgilendirme Niteliği:</strong> Piyasalar, finansal simülatör ve haber bölümlerinde yer alan veriler yalnızca genel bilgilendirme amaçlıdır; yatırım tavsiyesi niteliği taşımaz.</p>
+            <p><strong>3. Pusula Pro Üyeliği:</strong> Pro üyelik, ödeme onayı sonrasında hesap bazlı olarak tanımlanır ve seçilen dönem boyunca geçerlidir.</p>
+          `;
+        }
+        legalModal.classList.remove('hidden');
+        legalModal.classList.add('flex');
+      }
+
+      document.getElementById('open-privacy-btn').addEventListener('click', () => openLegal('privacy'));
+      document.getElementById('open-terms-btn').addEventListener('click', () => openLegal('terms'));
+      document.getElementById('close-legal-modal').addEventListener('click', () => {
+        legalModal.classList.add('hidden');
+        legalModal.classList.remove('flex');
+      });
+
+      renderBookmarks();
+
+      // =====================================================
+      // 2048 GAME (FULL PLAYABLE)
+      // =====================================================
+      let g2048Grid = [];
+      let g2048Score = 0;
+      let g2048Best = 0;
+      try { g2048Best = Number(localStorage.getItem('pusula_2048_best')) || 0; } catch (e) {}
+
+      const TILE_COLORS = {
+        0: 'bg-paper/70 text-transparent',
+        2: 'bg-surface text-ink',
+        4: 'bg-amberLight text-ink',
+        8: 'bg-terracottaLight text-terracotta',
+        16: 'bg-terracotta/85 text-paper',
+        32: 'bg-terracotta text-paper',
+        64: 'bg-amberwarm text-paper',
+        128: 'bg-forestLight text-forest',
+        256: 'bg-forest/85 text-paper',
+        512: 'bg-forest text-paper',
+        1024: 'bg-ocean text-paper',
+        2048: 'bg-plum text-paper'
+      };
+
+      function add2048Tile() {
+        const empty = [];
+        for (let r = 0; r < 4; r++) for (let c = 0; c < 4; c++) if (g2048Grid[r][c] === 0) empty.push([r, c]);
+        if (!empty.length) return;
+        const [r, c] = empty[Math.floor(Math.random() * empty.length)];
+        g2048Grid[r][c] = Math.random() < 0.9 ? 2 : 4;
+      }
+
+      function render2048() {
+        const board = document.getElementById('g2048-board');
+        board.innerHTML = g2048Grid.flat().map(val => {
+          const cls = TILE_COLORS[val] || 'bg-ink text-paper';
+          return `<div class="aspect-square rounded-lg flex items-center justify-center font-bold text-lg tabular shadow-sm ${cls}">${val || ''}</div>`;
+        }).join('');
+        document.getElementById('g2048-score').textContent = g2048Score;
+        if (g2048Score > g2048Best) {
+          g2048Best = g2048Score;
+          try { localStorage.setItem('pusula_2048_best', String(g2048Best)); } catch (e) {}
+        }
+        document.getElementById('g2048-best').textContent = g2048Best;
+      }
+
+      function init2048() {
+        g2048Grid = Array.from({ length: 4 }, () => [0, 0, 0, 0]);
+        g2048Score = 0;
+        add2048Tile();
+        add2048Tile();
+        render2048();
+      }
+
+      function slideRow(row) {
+        let arr = row.filter(v => v !== 0);
+        for (let i = 0; i < arr.length - 1; i++) {
+          if (arr[i] === arr[i + 1]) {
+            arr[i] *= 2;
+            g2048Score += arr[i];
+            arr.splice(i + 1, 1);
+          }
+        }
+        while (arr.length < 4) arr.push(0);
+        return arr;
+      }
+
+      function move2048(dir) {
+        const before = JSON.stringify(g2048Grid);
+        if (dir === 'left') {
+          g2048Grid = g2048Grid.map(slideRow);
+        } else if (dir === 'right') {
+          g2048Grid = g2048Grid.map(r => slideRow(r.slice().reverse()).reverse());
+        } else if (dir === 'up') {
+          for (let c = 0; c < 4; c++) {
+            const col = slideRow([g2048Grid[0][c], g2048Grid[1][c], g2048Grid[2][c], g2048Grid[3][c]]);
+            for (let r = 0; r < 4; r++) g2048Grid[r][c] = col[r];
+          }
+        } else if (dir === 'down') {
+          for (let c = 0; c < 4; c++) {
+            const col = slideRow([g2048Grid[3][c], g2048Grid[2][c], g2048Grid[1][c], g2048Grid[0][c]]).reverse();
+            for (let r = 0; r < 4; r++) g2048Grid[r][c] = col[r];
+          }
+        }
+        if (JSON.stringify(g2048Grid) !== before) {
+          add2048Tile();
+          render2048();
+        }
+      }
+
+      document.querySelectorAll('[data-2048-dir]').forEach(btn => {
+        btn.addEventListener('click', () => move2048(btn.dataset['2048Dir']));
+      });
+      document.getElementById('g2048-restart-btn').addEventListener('click', init2048);
+      document.addEventListener('keydown', (e) => {
+        if (state.activeView !== 'games') return;
+        if (['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)) {
+          e.preventDefault();
+          const map = { ArrowLeft: 'left', ArrowRight: 'right', ArrowUp: 'up', ArrowDown: 'down' };
+          move2048(map[e.key]);
+        }
+      });
+
+      // =====================================================
+      // DAILY TURKISH GENERAL KNOWLEDGE QUIZ
+      // =====================================================
+      const QUIZ_QUESTIONS = [
+        { q: 'Türkiye’nin en uzun kara sınırına sahip olduğu komşu ülke hangisidir?', opts: ['İran', 'Suriye', 'Yunanistan', 'Irak'], ans: 1, exp: 'Türkiye’nin en uzun kara sınırı yaklaşık 911 km ile Suriye iledir.' },
+        { q: 'Bir şirketin halka arz edilerek borsada işlem görmeye başlamasına ne ad verilir?', opts: ['Enflasyon', 'IPO (İlk Halka Arz)', 'Deflasyon', 'Arbitraj'], ans: 1, exp: 'IPO (Initial Public Offering), bir şirketin hisselerini ilk kez halka açmasıdır.' },
+        { q: 'Güneş sisteminde kendi ekseni etrafında diğer gezegenlerin tersine dönen gezegen hangisidir?', opts: ['Mars', 'Venüs', 'Jüpiter', 'Merkür'], ans: 1, exp: 'Venüs, güneş sistemindeki çoğu gezegenin aksine doğudan batıya doğru döner.' },
+        { q: '“Kürk Mantolu Madonna” romanının yazarı kimdir?', opts: ['Yaşar Kemal', 'Sabahattin Ali', 'Ahmet Hamdi Tanpınar', 'Oğuz Atay'], ans: 1, exp: 'Kürk Mantolu Madonna, Sabahattin Ali tarafından 1943 yılında yayımlanmıştır.' },
+        { q: 'Bileşik faiz/getiri ile basit getiri arasındaki temel fark nedir?', opts: ['Yalnızca dövizde uygulanır', 'Kazanılan getirinin de zamanla getiri üretmesi', 'Sadece 1 yıllık olması', 'Vergisiz olması'], ans: 1, exp: 'Bileşik getiride her dönem elde edilen kazanç ana paraya eklenerek kartopu etkisi oluşturur.' },
+        { q: 'İstanbul Boğazı’ndaki ilk asma köprü (15 Temmuz Şehitler Köprüsü) hangi yıl açılmıştır?', opts: ['1968', '1973', '1980', '1988'], ans: 1, exp: 'Boğaziçi Köprüsü Cumhuriyetin 50. yılında, 30 Ekim 1973 tarihinde açılmıştır.' },
+        { q: 'İnsan vücudundaki en büyük organ hangisidir?', opts: ['Karaciğer', 'Akciğer', 'Deri', 'Beyin'], ans: 2, exp: 'Deri, hem yüzey alanı hem de ağırlık bakımından insan vücudunun en büyük organıdır.' },
+        { q: 'Web adreslerinin başındaki “HTTPS” kısaltmasındaki “S” harfi neyi ifade eder?', opts: ['Speed (Hız)', 'Secure (Güvenli / Şifreli)', 'Server (Sunucu)', 'System (Sistem)'], ans: 1, exp: 'HTTPS, tarayıcı ile sunucu arasındaki verinin şifrelenerek güvenle iletildiğini gösterir.' },
+        { q: 'UNESCO Dünya Mirası Listesi’ndeki Göbeklitepe hangi ilimizdedir?', opts: ['Mardin', 'Gaziantep', 'Şanlıurfa', 'Adıyaman'], ans: 2, exp: 'Göbeklitepe, Şanlıurfa il merkezinin yaklaşık 18 km kuzeydoğusunda yer alır.' },
+        { q: 'Müzikte bir oktavda kaç temel nota (do’dan bir sonraki do’ya kadar) bulunur?', opts: ['6', '7', '8', '12'], ans: 2, exp: 'Oktav Latince “sekiz” demektir; do-re-mi-fa-sol-la-si-do dizisi 8 ses aralığıdır.' }
+      ];
+      let quizIdx = 0;
+      let quizScore = 0;
+      let quizAnswered = false;
+
+      function renderQuiz() {
+        if (quizIdx >= QUIZ_QUESTIONS.length) {
+          document.getElementById('quiz-progress-badge').textContent = 'Tamamlandı';
+          document.getElementById('quiz-question-text').textContent = `Tebrikler! 10 sorudan ${quizScore} doğru cevap verdiniz.`;
+          document.getElementById('quiz-options-box').innerHTML = '';
+          document.getElementById('quiz-feedback').textContent = quizScore >= 8 ? 'Harika bir genel kültür skoru!' : 'Yeni bir turda rekorunuzu geliştirebilirsiniz.';
+          document.getElementById('quiz-feedback').className = 'text-xs font-medium text-forest';
+          document.getElementById('quiz-next-btn').classList.add('hidden');
+          return;
+        }
+        const item = QUIZ_QUESTIONS[quizIdx];
+        quizAnswered = false;
+        document.getElementById('quiz-progress-badge').textContent = `Soru ${quizIdx + 1} / ${QUIZ_QUESTIONS.length}`;
+        document.getElementById('quiz-question-text').textContent = item.q;
+        document.getElementById('quiz-feedback').textContent = '';
+        document.getElementById('quiz-next-btn').classList.add('hidden');
+        document.getElementById('quiz-score-label').innerHTML = `Doğru: <strong class="text-ink tabular">${quizScore}</strong>`;
+        document.getElementById('quiz-options-box').innerHTML = item.opts.map((opt, i) => `
+          <button type="button" data-quiz-opt="${i}" class="w-full text-left px-3.5 py-2.5 rounded-lg border border-hairline bg-surface hover:border-plum text-xs font-medium text-ink transition">${escapeHtml(opt)}</button>
+        `).join('');
+      }
+
+      document.addEventListener('click', (e) => {
+        const btn = e.target.closest('[data-quiz-opt]');
+        if (!btn || quizAnswered || quizIdx >= QUIZ_QUESTIONS.length) return;
+        quizAnswered = true;
+        const chosen = Number(btn.dataset.quizOpt);
+        const item = QUIZ_QUESTIONS[quizIdx];
+        const fb = document.getElementById('quiz-feedback');
+        document.querySelectorAll('[data-quiz-opt]').forEach((b, i) => {
+          if (i === item.ans) b.className = 'w-full text-left px-3.5 py-2.5 rounded-lg border border-forest bg-forestLight text-forest text-xs font-semibold';
+          else if (i === chosen) b.className = 'w-full text-left px-3.5 py-2.5 rounded-lg border border-terracotta bg-terracottaLight text-terracotta text-xs font-medium';
+        });
+        if (chosen === item.ans) {
+          quizScore++;
+          fb.textContent = 'Doğru! ' + item.exp;
+          fb.className = 'text-xs font-medium text-forest';
+        } else {
+          fb.textContent = 'Yanlış. ' + item.exp;
+          fb.className = 'text-xs font-medium text-terracotta';
+        }
+        document.getElementById('quiz-score-label').innerHTML = `Doğru: <strong class="text-ink tabular">${quizScore}</strong>`;
+        document.getElementById('quiz-next-btn').classList.remove('hidden');
+      });
+
+      document.getElementById('quiz-next-btn').addEventListener('click', () => { quizIdx++; renderQuiz(); });
+      document.getElementById('quiz-restart-btn').addEventListener('click', () => { quizIdx = 0; quizScore = 0; renderQuiz(); });
+
+      // =====================================================
+      // READY-TO-USE LIFE & BUSINESS TEMPLATES LIBRARY
+      // =====================================================
+      const LIFE_TEMPLATES = [
+        { id: 'tpl1', cat: 'Dilekçe', mode: 'doc', title: 'Abonelik İptal Dilekçesi', desc: 'İnternet, GSM veya dijital platform aboneliklerini resmi olarak sonlandırma dilekçesi.', content: 'İLGİLİ KURUM MÜDÜRLÜĞÜNE,\n\n... numaralı aboneliğimin işbu dilekçemin tarafınıza ulaştığı tarih itibarıyla herhangi bir ek ücret yansıtılmaksızın iptal edilmesini ve tarafıma yazılı bilgi verilmesini arz ederim.\n\nAd Soyad:\nT.C. Kimlik No:\nTelefon:\nTarih: 21.11.2026\nİmza:' },
+        { id: 'tpl2', cat: 'Dilekçe', mode: 'doc', title: 'Yıllık İzin Talep Dilekçesi', desc: 'İş yeriniz için hazır, kurumsal yıllık ücretli izin başvuru metni.', content: 'İNSAN KAYNAKLARI MÜDÜRLÜĞÜNE,\n\nŞirketinizde yürütmekte olduğum görevim kapsamında hak kazandığım yıllık ücretli iznimin .../.../2026 – .../.../2026 tarihleri arasında toplam ... iş günü olarak kullanılması hususunda gereğini arz ederim.\n\nAd Soyad:\nBölüm / Ünvan:\nİmza:' },
+        { id: 'tpl3', cat: 'Dilekçe', mode: 'doc', title: 'İstifa Dilekçesi (Standart)', desc: 'Yasal ihbar süresine uygun, sade ve profesyonel işten ayrılma dilekçesi.', content: 'İLGİLİ MAKAMA,\n\n.../.../20... tarihinden bu yana şirketinizde sürdürmekte olduğum görevimden kendi isteğimle ayrılmak istiyorum. Yasal bildirim süresine uygun olarak .../.../2026 tarihi itibarıyla iş akdimin sonlandırılmasını arz ederim.\n\nAd Soyad:\nTarih:\nİmza:' },
+        { id: 'tpl4', cat: 'Dilekçe', mode: 'doc', title: 'Tüketici Hakem Heyeti Taslağı', desc: 'Ayıplı ürün veya hizmet iadesi için başvuru özet metni.', content: 'TÜKETİCİ HAKEM HEYETİ BAŞKANLIĞINA,\n\n.../.../2026 tarihinde ... firmasından ... TL bedelle satın aldığım ürün/hizmette yaşanan sorun nedeniyle bedel iadesi / değişim talebimin karşılanmaması üzerine mağduriyetimin giderilmesini arz ederim.\n\nEkler: Fatura, Ödeme Dekontu\nAd Soyad & İmza:' },
+        { id: 'tpl5', cat: 'İş', mode: 'doc', title: 'Freelance Hizmet Teklifi', desc: 'Müşterilerinize gönderebileceğiniz kapsam, süre ve fiyat içeren profesyonel teklif.', content: 'HİZMET VE PROJE TEKLİFİ\n\nMüşteri / Kurum:\nProje Kapsamı:\n1. Analiz ve Tasarım\n2. Uygulama ve Teslim\n\nTeslim Süresi: ... iş günü\nToplam Ücret: ... TL (%50 başlangıç, %50 teslim)\nGeçerlilik Süresi: 15 gün' },
+        { id: 'tpl6', cat: 'İş', mode: 'doc', title: 'Kira Sözleşmesi Kontrol Özeti', desc: 'Ev veya ofis kiralarken depozito, artış oranı ve demirbaş kontrol listesi.', content: 'KİRA SÖZLEŞMESİ ÖZET KONTROL LİSTESİ\n\n• Aylık Kira Bedeli ve Ödeme Günü:\n• Depozito Tutarı (En fazla 3 kira bedeli):\n• Yıllık Artış Oranı (TÜFE 12 aylık ortalama):\n• Demirbaş Durumu (Kombi, klima, mutfak, sayaç fotoğrafı):\n• Aidat ve Ortak Gider Sorumluluğu:' },
+        { id: 'tpl7', cat: 'Bütçe', mode: 'sheet', title: '50 / 30 / 20 Aylık Bütçe (Excel)', desc: 'Gelirinizi Zorunlu İhtiyaçlar (%50), İstekler (%30) ve Birikim (%20) olarak planlayın.', rows: [
+          { id: 's1', item: 'Kira / Barınma (%50 Zorunlu)', cat: 'Zorunlu', qty: 1, price: 20000 },
+          { id: 's2', item: 'Market & Faturalar (%50 Zorunlu)', cat: 'Zorunlu', qty: 1, price: 12000 },
+          { id: 's3', item: 'Sosyal Yaşam & Kültür (%30 İstek)', cat: 'İstek', qty: 1, price: 8000 },
+          { id: 's4', item: 'Acil Durum & Yatırım (%20 Birikim)', cat: 'Birikim', qty: 1, price: 10000 }
+        ] },
+        { id: 'tpl8', cat: 'Bütçe', mode: 'sheet', title: 'Borç Kapatma Planı (Excel)', desc: 'En küçükten büyüğe borçlarınızı sıralayıp aylık ödeme planınızı çıkarın.', rows: [
+          { id: 'd1', item: '1. Öncelik — Küçük Borç', cat: 'Öncelik 1', qty: 1, price: 5000 },
+          { id: 'd2', item: '2. Öncelik — Orta Borç', cat: 'Öncelik 2', qty: 1, price: 15000 },
+          { id: 'd3', item: '3. Öncelik — Uzun Vadeli Plan', cat: 'Öncelik 3', qty: 1, price: 35000 }
+        ] },
+        { id: 'tpl9', cat: 'Bütçe', mode: 'sheet', title: 'Haftalık Alışveriş & Mutfak Listesi', desc: 'Haftalık market bütçenizi önceden hesaplayıp gereksiz harcamayı önleyin.', rows: [
+          { id: 'm1', item: 'Sebze & Meyve', cat: 'Mutfak', qty: 1, price: 1200 },
+          { id: 'm2', item: 'Kahvaltılık & Süt Ürünleri', cat: 'Mutfak', qty: 1, price: 1400 },
+          { id: 'm3', item: 'Temel Gıda & Bakliyat', cat: 'Mutfak', qty: 1, price: 950 },
+          { id: 'm4', item: 'Temizlik & Kişisel Bakım', cat: 'Ev', qty: 1, price: 650 }
+        ] }
+      ];
+      let tplFilter = 'Tümü';
+
+      function renderTemplates() {
+        const grid = document.getElementById('templates-grid');
+        const list = tplFilter === 'Tümü' ? LIFE_TEMPLATES : LIFE_TEMPLATES.filter(t => t.cat === tplFilter);
+        grid.innerHTML = list.map(t => `
+          <div class="editorial-card ${t.mode === 'sheet' ? 'accent-top-forest' : 'accent-top-plum'} p-5 flex flex-col justify-between space-y-4">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between text-[11px]">
+                <span class="px-2 py-0.5 rounded font-medium ${t.mode === 'sheet' ? 'bg-forestLight text-forest' : 'bg-plumLight text-plum'}">${escapeHtml(t.cat)}</span>
+                <span class="text-muted">${t.mode === 'sheet' ? 'Excel / CSV' : 'PDF / Word'}</span>
+              </div>
+              <h3 class="font-editorial text-lg text-ink">${escapeHtml(t.title)}</h3>
+              <p class="text-xs text-muted leading-relaxed">${escapeHtml(t.desc)}</p>
+            </div>
+            <button type="button" data-use-tpl="${t.id}" class="w-full py-2 rounded-lg text-xs font-medium transition ${t.mode === 'sheet' ? 'bg-forest hover:bg-forest/90 text-paper' : 'bg-plum hover:bg-plum/90 text-paper'}">
+              Şablonu Aç &amp; Düzenle →
+            </button>
+          </div>
+        `).join('');
+      }
+
+      document.querySelectorAll('.tpl-cat-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          tplFilter = btn.dataset.tplCat;
+          document.querySelectorAll('.tpl-cat-btn').forEach(b => {
+            const active = b === btn;
+            b.className = 'tpl-cat-btn px-3 py-1.5 rounded-full text-xs font-medium ' +
+              (active ? 'bg-plum text-paper' : 'bg-surface border border-hairline text-muted');
+          });
+          renderTemplates();
+        });
+      });
+
+      document.addEventListener('click', (e) => {
+        const btn = e.target.closest('[data-use-tpl]');
+        if (!btn) return;
+        const tpl = LIFE_TEMPLATES.find(x => x.id === btn.dataset.useTpl);
+        if (!tpl) return;
+        switchView('office');
+        if (tpl.mode === 'sheet' && tpl.rows) {
+          state.sheetRows = JSON.parse(JSON.stringify(tpl.rows));
+          renderSheet();
+          showToast(tpl.title + ' Excel tablosuna yüklendi!');
+        } else {
+          document.getElementById('doc-title-input').value = tpl.title;
+          document.getElementById('doc-body-input').value = tpl.content;
+          updateDocWordCount();
+          showToast(tpl.title + ' belge editörüne yüklendi — düzenleyip PDF/Word alabilirsiniz.');
+        }
+      });
+
+      init2048();
+      renderQuiz();
+      renderTemplates();
 
       // =====================================================
       // INITIAL RENDER & AUTO-POLLING TIMERS
